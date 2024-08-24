@@ -1,25 +1,22 @@
-import { DA, KeyPurpose, SignatureScheme } from '@stackr/sdk';
+import { DA, KeyPurpose, SignatureScheme, StackrConfig } from '@stackr/sdk';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-/**
- * @type {import('@stackr/sdk').StackrConfig}
- */
-const stackrConfig = {
-  isSandbox: true,
+const stackrConfig: StackrConfig = {
+  // isSandbox: true,
   sequencer: {
     blockSize: 16,
     blockTime: 10,
   },
   syncer: {
-    vulcanRPC: process.env.VULCAN_RPC,
-    L1RPC: process.env.L1_RPC,
+    vulcanRPC: process.env.VULCAN_RPC as string,
+    L1RPC: process.env.L1_RPC as string,
   },
   operator: {
     accounts: [
       {
-        privateKey: process.env.PRIVATE_KEY,
+        privateKey: process.env.PRIVATE_KEY as string,
         purpose: KeyPurpose.BATCH,
         scheme: SignatureScheme.ECDSA,
       },
@@ -32,10 +29,10 @@ const stackrConfig = {
   },
   datastore: {
     type: 'sqlite',
-    uri: process.env.DATABASE_URI,
+    uri: process.env.DATABASE_URI as string,
   },
   preferredDA: DA.AVAIL,
-  registryContract: process.env.REGISTRY_CONTRACT,
+  registryContract: process.env.REGISTRY_CONTRACT as string,
   logLevel: 'log',
 };
 

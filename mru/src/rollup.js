@@ -1,5 +1,5 @@
 import { MicroRollup } from '@stackr/sdk';
-import { stackrConfig } from '../stackr.config.js';
+import { stackrConfig } from '../stackr.config.ts';
 import { machine } from './machine.js';
 import {
   createCampaignSchema,
