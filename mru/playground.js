@@ -1,5 +1,5 @@
 import { Playground } from '@stackr/sdk/plugins';
-import { Wallet } from 'ethers';
+import { ZeroAddress, Wallet } from 'ethers';
 import { createCampaignSchema, rollup } from './index.js';
 
 const wallet = Wallet.createRandom();
@@ -28,19 +28,12 @@ const main = async () => {
   // Action inputs
   const inputs = {
     name: `Campaign #${Date.now()}`,
-    token: '0x0',
-    grants: [{ sku: '12345678', amount: 1 }],
-    burner: {
-      reward: 'xxx',
-      retailer: '0x0',
-      requirements: [
-        {
-          token: '0x0',
-          amount: 1,
-        },
-      ],
-    },
-    active: true,
+    sku: '12345678',
+    token: ZeroAddress,
+    amount: 1,
+    rewardKind: 'xxx',
+    rewardForToken: ZeroAddress,
+    rewardForAmount: 1,
   };
   // Sign transaction
   const signature = await signMessage(wallet, createCampaignSchema, inputs);

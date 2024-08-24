@@ -1,18 +1,21 @@
 import { State, StateMachine } from '@stackr/sdk/machine';
-import { solidityPackedKeccak256 } from 'ethers';
-import genesis from '../genesis-state.json';
-import { transitions } from './transitions';
+import { ZeroHash, solidityPackedKeccak256 } from 'ethers';
+import genesis from '../genesis-state.json' assert { type: 'json' };
+import { transitions } from './transitions.js';
 
 /**
  * @typedef CampaignStateSchema
  * @property {string} manager
  * @property {string} name
+ * @property {string} sku
  * @property {string} token
- * @property {object[]} grants
- * @property {object} burner
- * @property {string} burner.reward
- * @property {string[]} burner.retailers
- * @property {object[]} burner.requirements
+ * @property {number} amount
+ * @property {object} reward
+ * @property {object} reward.kind
+ * @property {string} reward.token
+ * @property {number} reward.amount
+ * @property {string[]} reward.retailers
+ * @property {boolean} active
  */
 
 /**
@@ -33,11 +36,13 @@ import { transitions } from './transitions';
  */
 export class LoyalzState extends State {
   getRootHash() {
+    const { campaigns, receipts } = this.state;
+    const tokens = this.state.campaigns.map(({ token }) => token);
+    if (tokens.length === 0) {
+      return ZeroHash;
+    }
     //TODO: Proper implementation
-    return solidityPackedKeccak256(
-      ['address[]'],
-      [this.state.campaigns.map(({ token }) => token)],
-    );
+    return solidityPackedKeccak256(['address[]'], [tokens]);
   }
 }
 
