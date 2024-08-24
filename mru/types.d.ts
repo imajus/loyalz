@@ -1,29 +1,38 @@
 // State schemas
 
-interface CampaignStateSchema {
+interface CampaignState {
   manager: string;
   name: string;
   sku: string;
-  token: string;
-  amount: number;
-  reward: {
-    kind: string;
-    token: string;
-    amount: number;
-    retailers: string[];
-  };
+  mintToken: string;
+  mintAmount: number;
+  reward: string;
+  otherToken?: string;
+  otherAmount?: number;
+  retailers: string[];
   active: boolean;
 }
 
-interface ReceiptStateSchema {
+interface ReceiptState {
+  id: string;
   customer: string;
   sku: string;
   quantity: number;
 }
 
-interface LoyalzStateSchema {
-  campaigns: CampaignStateSchema[];
-  receipts: ReceiptStateSchema[];
+interface LoyalzState {
+  campaigns: CampaignState[];
+  receipts: ReceiptState[];
+  mints: {
+    customer: string;
+    token: string;
+    amount: number;
+  }[];
+  burns: {
+    customer: string;
+    token: string;
+    amount: number;
+  }[];
 }
 
 // Action schemas
@@ -31,11 +40,11 @@ interface LoyalzStateSchema {
 type CreateCampaignInputs = {
   name: string;
   sku: string;
-  token: string;
-  amount: number;
-  rewardKind: string;
-  rewardForToken: string;
-  rewardForAmount: number;
+  mintToken: string;
+  mintAmount: number;
+  reward: string;
+  otherToken: string;
+  otherAmount: number;
 } & import('@stackr/sdk').AllowedInputTypes;
 
 type AlterRetailerInputs = {
@@ -44,6 +53,7 @@ type AlterRetailerInputs = {
 } & import('@stackr/sdk').AllowedInputTypes;
 
 type AddReceiptInputs = {
+  id: string;
   sku: string;
   quantity: number;
 } & import('@stackr/sdk').AllowedInputTypes;

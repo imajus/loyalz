@@ -1,6 +1,8 @@
 {
   "state": {
     "campaigns": [],
-    "receipts": []
+    "receipts": [],
+    "mints": [],
+    "burns": []
   }
 }

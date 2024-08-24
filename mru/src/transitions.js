@@ -1,11 +1,11 @@
 import { without } from 'lodash';
 import { REQUIRE } from '@stackr/sdk/machine';
-import { LoyalzState } from './machine.js';
+import { LoyalzStateWrapper } from './machine.js';
 
 /**
  * @template T
  * @typedef LoyalzStateSTF
- * @type {import('@stackr/sdk/machine').STF<LoyalzState, T>}
+ * @type {import('@stackr/sdk/machine').STF<LoyalzStateWrapper, T>}
  */
 
 /**
@@ -14,17 +14,9 @@ import { LoyalzState } from './machine.js';
 const createCampaign = {
   handler: ({ inputs, state, msgSender }) => {
     state.campaigns.push({
+      ...inputs,
       manager: msgSender,
-      name: inputs.name,
-      sku: inputs.sku,
-      token: inputs.token,
-      amount: inputs.amount,
-      reward: {
-        kind: inputs.rewardKind,
-        token: inputs.rewardForToken,
-        amount: inputs.rewardForAmount,
-        retailers: [],
-      },
+      retailers: [],
       active: true,
     });
     return state;
@@ -38,7 +30,7 @@ const whitelistRetailer = {
   handler: ({ inputs, state, msgSender }) => {
     const campaign = state.campaigns[inputs.campaign];
     REQUIRE(campaign.manager === msgSender, 'Access denied to campaign');
-    campaign.reward.retailers.push(inputs.address);
+    campaign.retailers.push(inputs.address);
     return state;
   },
 };
@@ -51,13 +43,10 @@ const delistRetailer = {
     const campaign = state.campaigns[inputs.campaign];
     REQUIRE(campaign.manager === msgSender, 'Access denied to campaign');
     REQUIRE(
-      campaign.reward.retailers.includes(inputs.address),
+      campaign.retailers.includes(inputs.address),
       'Retailer is not whitelisted',
     );
-    campaign.reward.retailers = without(
-      campaign.reward.retailers,
-      inputs.address,
-    );
+    campaign.retailers = without(campaign.retailers, inputs.address);
     return state;
   },
 };
@@ -68,7 +57,16 @@ const delistRetailer = {
 const addReceipt = {
   handler: ({ inputs, state, msgSender }) => {
     //TODO: Prevent duplicates
+    const campaign = state.campaigns.find(({ sku }) => sku === inputs.sku);
+    if (campaign) {
+      state.mints.push({
+        customer: msgSender,
+        token: campaign.mintToken,
+        amount: campaign.mintAmount * inputs.quantity,
+      });
+    }
     state.receipts.push({
+      id: inputs.id,
       customer: msgSender,
       sku: inputs.sku,
       quantity: inputs.quantity,
@@ -82,14 +80,31 @@ const addReceipt = {
  */
 const claimReward = {
   handler: ({ inputs, state, msgSender }) => {
-    //TODO: Implement
-    REQUIRE(false, 'Access denied to claiming');
+    const campaign = state.campaigns[inputs.campaign];
+    const isManager = msgSender === campaign.manager;
+    const isRetailer = campaign.retailers.includes(msgSender);
+    // const hasToken = campaign.reward.token === '???';
+    // const hasAmount = campaign.reward.amount === '???';
+    REQUIRE(isManager || isRetailer, 'Access denied to claiming');
+    // REQUIRE(hasToken && hasAmount, 'Does not meet token requirements');
+    state.burns.push(
+      {
+        customer: inputs.customer,
+        token: campaign.mintToken,
+        amount: campaign.mintAmount,
+      },
+      {
+        customer: inputs.customer,
+        token: campaign.otherToken,
+        amount: campaign.otherAmount,
+      },
+    );
     return state;
   },
 };
 
 /**
- * @type {import('@stackr/sdk/machine').Transitions<LoyalzState>}
+ * @type {import('@stackr/sdk/machine').Transitions<LoyalzStateWrapper>}
  */
 export const transitions = {
   createCampaign,
