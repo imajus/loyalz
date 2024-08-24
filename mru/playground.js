@@ -1,6 +1,6 @@
 import { Playground } from '@stackr/sdk/plugins';
 import { Wallet } from 'ethers';
-import { rollup } from './index.js';
+import { createCampaignSchema, rollup } from './index.js';
 
 const wallet = Wallet.createRandom();
 
@@ -15,7 +15,7 @@ const signMessage = async (wallet, schema, payload) => {
   const signature = await wallet.signTypedData(
     schema.domain,
     schema.EIP712TypedData.types,
-    payload
+    payload,
   );
   return signature;
 };
@@ -26,18 +26,36 @@ const main = async () => {
   // Connect to playground
   Playground.init(rollup);
   // Action inputs
-  const inputs = {};
+  const inputs = {
+    name: `Campaign #${Date.now()}`,
+    token: '0x0',
+    grants: [{ sku: '12345678', amount: 1 }],
+    burner: {
+      reward: 'xxx',
+      retailer: '0x0',
+      requirements: [
+        {
+          token: '0x0',
+          amount: 1,
+        },
+      ],
+    },
+    active: true,
+  };
   // Sign transaction
-  // const signature = await signMessage(wallet, SampleSchema, inputs);
+  const signature = await signMessage(wallet, createCampaignSchema, inputs);
   // Prepare transaction
-  // const incrementAction = SampleSchema.actionFrom({
-  //   inputs,
-  //   signature,
-  //   msgSender: wallet.address,
-  // });
+  const action = createCampaignSchema.actionFrom({
+    inputs,
+    signature,
+    msgSender: wallet.address,
+  });
   // Send transaction
-  // const ack = await rollup.submitAction('sample', incrementAction);
-  // console.log(ack);
+  const ack = await rollup.submitAction(
+    createCampaignSchema.identifier,
+    action,
+  );
+  console.log(ack);
 };
 
 main();
