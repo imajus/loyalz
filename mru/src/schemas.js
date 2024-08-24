@@ -15,12 +15,12 @@ export const createCampaignSchema = new ActionSchema('createCampaign', {
 
 export const whitelistRetailerSchema = new ActionSchema('whitelistRetailer', {
   campaign: SolidityType.UINT,
-  retailer: SolidityType.ADDRESS,
+  address: SolidityType.ADDRESS,
 });
 
 export const delistRetailerSchema = new ActionSchema('delistRetailer', {
   campaign: SolidityType.UINT,
-  retailer: SolidityType.ADDRESS,
+  address: SolidityType.ADDRESS,
 });
 
 export const addReceiptSchema = new ActionSchema('addReceipt', {

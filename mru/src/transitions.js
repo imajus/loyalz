@@ -3,11 +3,7 @@ import { REQUIRE } from '@stackr/sdk/machine';
 import { LoyalzState } from './machine.js';
 
 /**
- * @typedef {import('@stackr/sdk/machine').STF<LoyalzState>} LoyalzSTF
- */
-
-/**
- * @type {LoyalzSTF}
+ * @type {import('@stackr/sdk/machine').STF<LoyalzState, CreateCampaignInputs>}
  */
 const createCampaign = {
   handler: ({ inputs, state, msgSender }) => {
@@ -30,22 +26,7 @@ const createCampaign = {
 };
 
 /**
- * @type {LoyalzSTF}
- */
-const addReceipt = {
-  handler: ({ inputs, state, msgSender }) => {
-    //TODO: Prevent duplicates
-    state.receipts.push({
-      customer: msgSender,
-      sku: inputs.sku,
-      quantity: inputs.quantity,
-    });
-    return state;
-  },
-};
-
-/**
- * @type {LoyalzSTF}
+ * @type {import('@stackr/sdk/machine').STF<LoyalzState, AlterRetailerInputs>}
  */
 const whitelistRetailer = {
   handler: ({ inputs, state, msgSender }) => {
@@ -57,7 +38,7 @@ const whitelistRetailer = {
 };
 
 /**
- * @type {LoyalzSTF}
+ * @type {import('@stackr/sdk/machine').STF<LoyalzState, AlterRetailerInputs>}
  */
 const delistRetailer = {
   handler: ({ inputs, state, msgSender }) => {
@@ -76,7 +57,22 @@ const delistRetailer = {
 };
 
 /**
- * @type {LoyalzSTF}
+ * @type {import('@stackr/sdk/machine').STF<LoyalzState, AddReceiptInputs>}
+ */
+const addReceipt = {
+  handler: ({ inputs, state, msgSender }) => {
+    //TODO: Prevent duplicates
+    state.receipts.push({
+      customer: msgSender,
+      sku: inputs.sku,
+      quantity: inputs.quantity,
+    });
+    return state;
+  },
+};
+
+/**
+ * @type {import('@stackr/sdk/machine').STF<LoyalzState, ClaimRewardInputs>}
  */
 const claimReward = {
   handler: ({ inputs, state, msgSender }) => {

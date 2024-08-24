@@ -9,7 +9,7 @@
     "noEmit": true,
     "composite": true,
     "esModuleInterop": true,
-    "strict": true,
+    "strict": false,
     "downlevelIteration": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
@@ -18,13 +18,17 @@
     "types": [
       "bun-types", // add Bun global
       "mocha"
-    ]
+    ],
+    "baseUrl": "./"
   },
   "include": [
+    "types.d.ts",
     "src/**/*",
     "tests/**/*",
+    "index.js",
+    "playground.js",
     "deployment.json",
-    "stackr.config.ts",
+    "stackr.config.js",
     "genesis-state.json"
   ]
 }
