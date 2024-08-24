@@ -1,11 +1,6 @@
 {
   "name": "starter-mru",
-  "module": "index.ts",
-  "type": "module",
-  "scripts": {
-    "start": "bun run src/index.ts",
-    "test": "mocha --require ts-node/register src/**/*.test.ts"
-  },
+  "module": "index.js",
   "dependencies": {
     "@stackr/sdk": "latest",
     "ethers": "^6.7.1",
@@ -20,7 +15,9 @@
     "bun-types": "latest",
     "chai": "^5.1.0"
   },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  }
+  "scripts": {
+    "start": "bun run playground.js",
+    "test": "mocha src/**/*.test.js"
+  },
+  "type": "module"
 }

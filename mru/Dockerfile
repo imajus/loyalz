@@ -9,12 +9,12 @@ WORKDIR /app
 
 # Copy package.json and tsconfig.json
 COPY package.json package.json
-COPY tsconfig.json tsconfig.json
+COPY jsconfig.json jsconfig.json
 
 # Copy Stackr files
 COPY deployment.json deployment.json
 COPY genesis-state.json genesis-state.json
-COPY stackr.config.ts stackr.config.ts
+COPY stackr.config.js stackr.config.js
 
 # Copy source code
 COPY src src
