@@ -117,6 +117,24 @@ export const Home = () => {
     uiConsole(transactionReceipt);
   };
 
+  const signRollupMessage = async () => {
+    if (!provider) {
+      uiConsole('provider not initialized yet');
+      return;
+    }
+    const signedMessage = await RPC.signRollupMessage(provider);
+    uiConsole(signedMessage);
+  };
+
+  const sendRollupMessage = async () => {
+    if (!provider) {
+      uiConsole('provider not initialized yet');
+      return;
+    }
+    const signedMessage = await RPC.sendRollupMessage(provider);
+    uiConsole(signedMessage);
+  };
+
   function uiConsole(...args: any[]): void {
     const el = document.querySelector('#console>p');
     if (el) {
@@ -127,7 +145,7 @@ export const Home = () => {
 
   const loggedInView = (
     <>
-      <div className="flex-container">
+      <div className="flex flex-col">
         <div>
           <button onClick={getUserInfo} className="card">
             Get User Info
@@ -151,6 +169,17 @@ export const Home = () => {
         <div>
           <button onClick={sendTransaction} className="card">
             Send Transaction
+          </button>
+        </div>
+        <hr />
+        <div>
+          <button onClick={signRollupMessage} className="card">
+            Sign Rollup Message
+          </button>
+        </div>
+        <div>
+          <button onClick={sendRollupMessage} className="card">
+            Send Rollup Message
           </button>
         </div>
         <div>
