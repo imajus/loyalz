@@ -6,8 +6,8 @@ import StoreProvider from '@/shared/store/provider';
 
 import type { Metadata } from 'next';
 export const metadata: Metadata = {
-  title: 'Napkin Contract',
-  description: 'Greatest app for signing contracts in blockchain world',
+  title: 'Loyalz',
+  description: 'Loyalty programs management platform for web3',
 };
 
 export default function RootLayout({
@@ -18,9 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-col gap-3 items-center justify-center h-[100dvh] w-screen">
-          <StoreProvider>
-            {children}
-         </StoreProvider>
+        <StoreProvider>{children}</StoreProvider>
       </body>
     </html>
   );

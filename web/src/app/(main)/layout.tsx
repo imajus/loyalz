@@ -7,8 +7,8 @@ import { Header } from '@/widgets';
 
 import type { Metadata } from 'next';
 export const metadata: Metadata = {
-  title: 'Napkin Contract',
-  description: 'Greatest app for signing contracts in blockchain world',
+  title: 'Loyalz',
+  description: 'Loyalty programs management platform for web3',
 };
 
 export default function MainLayout({
