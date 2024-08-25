@@ -1,8 +1,7 @@
 import { rollup } from './rollup.js';
 import {
   createCampaignSchema,
-  whitelistRetailerSchema,
-  delistRetailerSchema,
+  alterRetailerSchema,
   addReceiptSchema,
   claimRewardSchema,
 } from './schemas.js';
@@ -23,7 +22,7 @@ const signMessage = async (signer, schema, payload) => {
   return signature;
 };
 
-function makeAction(schema) {
+function makeAction(name, schema) {
   return async function (inputs, signer, sender) {
     // Sign transaction
     const signature = await signMessage(signer, schema, inputs);
@@ -34,31 +33,37 @@ function makeAction(schema) {
       msgSender: sender,
     });
     // Send transaction
-    return rollup.submitAction(schema.identifier, action);
+    return rollup.submitAction(name, action);
   };
 }
 
 /**
  * @type {(inputs: CreateCampaignInputs, signer: import('ethers').Signer, address: string) => Promise<import('@stackr/sdk').SerializedAcknowledgement>}
  */
-export const createCampaign = makeAction(createCampaignSchema);
+export const createCampaign = makeAction(
+  'createCampaign',
+  createCampaignSchema,
+);
 
 /**
  * @type {(inputs: AlterRetailerInputs, signer: import('ethers').Signer, address: string) => Promise<import('@stackr/sdk').SerializedAcknowledgement>}
  */
-export const whitelistRetailer = makeAction(whitelistRetailerSchema);
+export const whitelistRetailer = makeAction(
+  'whitelistRetailer',
+  alterRetailerSchema,
+);
 
 /**
  * @type {(inputs: AlterRetailerInputs, signer: import('ethers').Signer, address: string) => Promise<import('@stackr/sdk').SerializedAcknowledgement>}
  */
-export const delistRetailer = makeAction(delistRetailerSchema);
+export const delistRetailer = makeAction('delistRetailer', alterRetailerSchema);
 
 /**
  * @type {(inputs: AddReceiptInputs, signer: import('ethers').Signer, address: string) => Promise<import('@stackr/sdk').SerializedAcknowledgement>}
  */
-export const addReceipt = makeAction(addReceiptSchema);
+export const addReceipt = makeAction('addReceipt', addReceiptSchema);
 
 /**
  * @type {(inputs: ClaimRewardInputs, signer: import('ethers').Signer, address: string) => Promise<import('@stackr/sdk').SerializedAcknowledgement>}
  */
-export const claimReward = makeAction(claimRewardSchema);
+export const claimReward = makeAction('claimReward', claimRewardSchema);

@@ -1,5 +1,5 @@
 {
-  "name": "starter-mru",
+  "name": "loyalz-mru",
   "module": "index.js",
   "dependencies": {
     "@stackr/sdk": "latest",
@@ -18,7 +18,8 @@
     "typescript": "^5.5.4"
   },
   "scripts": {
-    "start": "bun run playground.js",
+    "start": "bun run index.js",
+    "dev": "bun run playground.js",
     "test": "mocha src/**/*.test.js"
   },
   "type": "module"

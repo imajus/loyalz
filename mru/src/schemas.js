@@ -13,12 +13,7 @@ export const createCampaignSchema = new ActionSchema('createCampaign', {
   //TODO: Other fields...
 });
 
-export const whitelistRetailerSchema = new ActionSchema('whitelistRetailer', {
-  campaign: SolidityType.UINT,
-  address: SolidityType.ADDRESS,
-});
-
-export const delistRetailerSchema = new ActionSchema('delistRetailer', {
+export const alterRetailerSchema = new ActionSchema('alterRetailer', {
   campaign: SolidityType.UINT,
   address: SolidityType.ADDRESS,
 });

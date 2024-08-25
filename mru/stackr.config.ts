@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const stackrConfig: StackrConfig = {
-  // isSandbox: true,
+  isSandbox: true,
   sequencer: {
     blockSize: 16,
     blockTime: 10,
@@ -33,7 +33,7 @@ const stackrConfig: StackrConfig = {
   },
   preferredDA: DA.AVAIL,
   registryContract: process.env.REGISTRY_CONTRACT as string,
-  logLevel: process.env.NODE_ENV === 'development' ? 'debug' : 'log',
+  logLevel: 'log',
 };
 
 export { stackrConfig };

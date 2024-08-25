@@ -3,8 +3,7 @@ import { stackrConfig } from '../stackr.config.ts';
 import { machine } from './machine.js';
 import {
   createCampaignSchema,
-  whitelistRetailerSchema,
-  delistRetailerSchema,
+  alterRetailerSchema,
   addReceiptSchema,
   claimRewardSchema,
 } from './schemas.js';
@@ -13,10 +12,16 @@ export const rollup = await MicroRollup({
   config: stackrConfig,
   actionSchemas: [
     createCampaignSchema,
-    whitelistRetailerSchema,
-    delistRetailerSchema,
+    alterRetailerSchema,
     addReceiptSchema,
     claimRewardSchema,
   ],
   stateMachines: [machine],
+  stfSchemaMap: {
+    'createCampaign': createCampaignSchema,
+    'whitelistRetailer': alterRetailerSchema,
+    'delistRetailer': alterRetailerSchema,
+    'addReceipt': addReceiptSchema,
+    'claimReward': claimRewardSchema,
+  },
 });
