@@ -16,7 +16,7 @@
   ],
   "parserOptions": {
     "parser": "@typescript-eslint/parser",
-    "project": "./web/tsconfig.json"
+    "project": "./tsconfig.json"
   },
   "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
   "rules": {

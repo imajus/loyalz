@@ -32,8 +32,8 @@ export const submitRollupAction = async (name: string, inputs: object, signer: J
     }),
   });
   const json = await res.json();
-  if ((json as any).error) {
-    throw new Error((json as any).error);
+  if ('error' in json) {
+    throw new Error(json.error);
   }
   return json;
 };
