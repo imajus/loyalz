@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const stackrConfig: StackrConfig = {
-  isSandbox: true,
+  isSandbox: Boolean(process.env.IS_SANDBOX),
   sequencer: {
     blockSize: 16,
     blockTime: 10,
