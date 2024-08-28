@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { IProvider } from "@web3auth/base";
+import type { IProvider } from '@web3auth/base';
 import { ethers } from 'ethers';
 
 const getChainId = async (provider: IProvider): Promise<any> => {
@@ -11,7 +11,7 @@ const getChainId = async (provider: IProvider): Promise<any> => {
   } catch (error) {
     return error;
   }
-}
+};
 
 const getAccounts = async (provider: IProvider): Promise<any> => {
   try {
@@ -25,7 +25,7 @@ const getAccounts = async (provider: IProvider): Promise<any> => {
   } catch (error) {
     return error;
   }
-}
+};
 
 const getBalance = async (provider: IProvider): Promise<string> => {
   try {
@@ -37,30 +37,30 @@ const getBalance = async (provider: IProvider): Promise<string> => {
 
     // Get user's balance in ether
     const balance = ethers.formatEther(
-      await ethersProvider.getBalance(address) // Balance is in wei
+      await ethersProvider.getBalance(address), // Balance is in wei
     );
 
     return balance;
   } catch (error) {
     return error as string;
   }
-}
+};
 
 const sendTransaction = async (provider: IProvider): Promise<any> => {
   try {
     const ethersProvider = new ethers.BrowserProvider(provider);
     const signer = await ethersProvider.getSigner();
 
-    const destination = "0x40e1c367Eca34250cAF1bc8330E9EddfD403fC56";
+    const destination = '0x40e1c367Eca34250cAF1bc8330E9EddfD403fC56';
 
-    const amount = ethers.parseEther("0.001");
+    const amount = ethers.parseEther('0.001');
 
     // Submit transaction to the blockchain
     const tx = await signer.sendTransaction({
       to: destination,
       value: amount,
-      maxPriorityFeePerGas: "5000000000", // Max priority fee per gas
-      maxFeePerGas: "6000000000000", // Max fee per gas
+      maxPriorityFeePerGas: '5000000000', // Max priority fee per gas
+      maxFeePerGas: '6000000000000', // Max fee per gas
     });
 
     // Wait for transaction to be mined
@@ -70,7 +70,7 @@ const sendTransaction = async (provider: IProvider): Promise<any> => {
   } catch (error) {
     return error as string;
   }
-}
+};
 
 const signMessage = async (provider: IProvider): Promise<any> => {
   try {
@@ -81,7 +81,7 @@ const signMessage = async (provider: IProvider): Promise<any> => {
     // For ethers v5
     // const signer = ethersProvider.getSigner();
     const signer = await ethersProvider.getSigner();
-    const originalMessage = "YOUR_MESSAGE";
+    const originalMessage = 'YOUR_MESSAGE';
 
     // Sign the message
     const signedMessage = await signer.signMessage(originalMessage);
@@ -90,6 +90,6 @@ const signMessage = async (provider: IProvider): Promise<any> => {
   } catch (error) {
     return error as string;
   }
-}
+};
 
-export default {getChainId, getAccounts, getBalance, sendTransaction, signMessage};
+export default { getChainId, getAccounts, getBalance, sendTransaction, signMessage };

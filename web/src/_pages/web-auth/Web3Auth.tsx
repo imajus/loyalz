@@ -58,7 +58,7 @@ export const Web3AuthPage = () => {
       }
     };
 
-    init();
+    void init();
   }, []);
 
   const login = async () => {
