@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import { Button } from '@/shared/components';
 import { Product as ProductType } from '@/shared/types';
+import { toastInfo } from '@/shared/utils/toast';
 
 type PropTypes = {
   product: ProductType;
@@ -31,7 +32,7 @@ export const ExchangeItem = ({ product }: PropTypes) => {
             <span className="capitalize">{`${product.price} ${product.priceUnit}`}</span>
           </div>
         </div>
-        {isExchangeable && <Button title="Exchange" onClick={() => alert('exchange')} />}
+        {isExchangeable && <Button title="Exchange" onClick={() => toastInfo('exchange')} />}
       </div>
     </div>
   );

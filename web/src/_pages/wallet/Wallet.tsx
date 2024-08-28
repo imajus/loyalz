@@ -1,6 +1,7 @@
 'use client';
 import { walletBalance } from '@/mock/wallet';
 import { Button, MainWrapper } from '@/shared/components';
+import { toastInfo } from '@/shared/utils/toast';
 
 import { BalanceItem } from './ui/BalanceItem';
 
@@ -16,8 +17,8 @@ export const Wallet = () => {
         ))}
       </div>
       <div className="flex flex-col items-center justify-center h-32 gap-3 w-full">
-        <Button onClick={() => alert('scan re')} title="Transaction history" />
-        <Button onClick={() => alert('scan re')} title="Log out" />
+        <Button onClick={() => toastInfo('scan re')} title="Transaction history" />
+        <Button onClick={() => toastInfo('scan re')} title="Log out" />
       </div>
     </MainWrapper>
   );

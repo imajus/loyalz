@@ -2,6 +2,7 @@
 
 import { products } from '@/mock/products';
 import { Button, MainWrapper } from '@/shared/components';
+import { toastInfo } from '@/shared/utils/toast';
 
 import { Product } from './ui/Product';
 
@@ -17,7 +18,7 @@ export const Earn = () => {
         ))}
       </div>
       <div className="flex items-center justify-center h-20 w-full">
-        <Button onClick={() => alert('scan re')} title="Scan receipt" />
+        <Button onClick={() => toastInfo('scan re')} title="Scan receipt" />
       </div>
     </MainWrapper>
   );
