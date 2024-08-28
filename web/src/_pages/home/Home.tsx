@@ -1,9 +1,3 @@
-import { MainWrapper } from '@/shared/components';
+import { Wallet } from '@/_pages';
 
-export const Home = () => {
-  return (
-    <MainWrapper title="Home" page="Wallet">
-      <div className="text-red-900">Content</div>
-    </MainWrapper>
-  );
-};
+export const Home = () => <Wallet />;
