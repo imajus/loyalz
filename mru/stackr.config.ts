@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const stackrConfig: StackrConfig = {
-  isSandbox: Boolean(process.env.IS_SANDBOX),
+  isSandbox: Boolean(Number(process.env.IS_SANDBOX)),
   sequencer: {
     blockSize: 16,
     blockTime: 10,
@@ -24,7 +24,7 @@ const stackrConfig: StackrConfig = {
   },
   domain: {
     name: 'Loyalz',
-    version: '0.0.1',
+    version: process.env.DOMAIN_VERSION as string,
     salt: '0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef',
   },
   datastore: {
@@ -35,5 +35,7 @@ const stackrConfig: StackrConfig = {
   registryContract: process.env.REGISTRY_CONTRACT as string,
   logLevel: 'log',
 };
+
+console.log(stackrConfig);
 
 export { stackrConfig };
