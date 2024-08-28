@@ -1,1 +1,1 @@
-export type Page = 'Wallet' | 'Earn' | 'Exchange';
+export type Page = 'wallet' | 'earn' | 'exchange';

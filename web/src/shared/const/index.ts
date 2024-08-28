@@ -3,4 +3,4 @@ import { Page } from '@/shared/types';
 export const appName = 'Loyalz';
 export const appUrl = 'https://example.com';
 
-export const pages: Page[] = ['Wallet', 'Earn', 'Exchange'];
+export const pages: Page[] = ['wallet', 'earn', 'exchange'];

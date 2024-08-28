@@ -17,11 +17,15 @@ export const Footer = ({ currentPage }: PropTypes) => {
             <Link
               key={page}
               className={classNames(
-                'w-80 h-16 flex justify-center items-center border-r cursor-pointer',
+                'w-80 h-16 flex justify-center items-center border-r cursor-pointer capitalize',
                 isCurrent ? 'bg-red-500' : 'bg-red-300',
               )}
-              href={`${page}`}
-              onClick={() => alert(page)}
+              href={`/${page}`}
+              onClick={(e) => {
+                if (!isCurrent) return;
+                e.stopPropagation();
+                e.preventDefault();
+              }}
             >
               {page}
             </Link>
