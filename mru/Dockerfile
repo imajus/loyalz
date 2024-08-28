@@ -14,7 +14,7 @@ COPY tsconfig.json tsconfig.json
 
 # Copy Stackr files
 COPY index.js .
-COPY playground.js .
+COPY deployment.json .
 COPY genesis-state.json .
 COPY stackr.config.ts .
 
