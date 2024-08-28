@@ -15,10 +15,10 @@ export const ExchangeItem = ({ product }: PropTypes) => {
   const isExchangeable = product.price > 200;
 
   return (
-    <div className="h-60 w-full flex flex-col items-center justify-center text-gray-600 gap-2">
+    <div className="sm:h-60 w-full flex flex-col items-center justify-center text-gray-600 gap-2">
       <span className="text-lg font-bold">{product.company}</span>
       <div className="flex flex-col gap-3 border rounded-2xl w-full items-center p-2">
-        <div className="flex flex-row p-3 w-full items-center">
+        <div className="flex flex-col sm:flex-row p-3 w-full items-center">
           <Image
             src={icon}
             alt="avatar"
@@ -27,7 +27,7 @@ export const ExchangeItem = ({ product }: PropTypes) => {
             sizes="100vw"
             className="rounded-[50%] w-[100px] h-[100px] shadow-2xl bg-sapphire-blue-60%"
           />
-          <div className="flex flex-col gap-3 p-1">
+          <div className="flex flex-col gap-3 p-1 items-center sm:items-start">
             <span>{`Get ${product.productName}`}</span>
             <span className="capitalize">{`${product.price} ${product.priceUnit}`}</span>
           </div>
