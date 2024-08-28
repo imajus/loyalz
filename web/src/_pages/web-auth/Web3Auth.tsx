@@ -10,10 +10,12 @@ import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider';
 import { Web3Auth } from '@web3auth/modal';
 
 import RPC from './ethersRPC';
+
 // import RPC from "./viemRPC";
 // import RPC from "./web3RPC";
 
-const clientId = process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID as string;
+const clientId =
+  'BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ'; // get from https://dashboard.web3auth.io
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -34,11 +36,11 @@ const privateKeyProvider = new EthereumPrivateKeyProvider({
 
 const web3auth = new Web3Auth({
   clientId,
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   privateKeyProvider,
 });
 
-export const Home = () => {
+export const Web3AuthPage = () => {
   const [provider, setProvider] = useState<IProvider | null>(null);
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -56,7 +58,7 @@ export const Home = () => {
       }
     };
 
-    void init();
+    init();
   }, []);
 
   const login = async () => {
@@ -117,24 +119,6 @@ export const Home = () => {
     uiConsole(transactionReceipt);
   };
 
-  const signRollupMessage = async () => {
-    if (!provider) {
-      uiConsole('provider not initialized yet');
-      return;
-    }
-    const signedMessage = await RPC.signRollupMessage(provider);
-    uiConsole(signedMessage);
-  };
-
-  const sendRollupMessage = async () => {
-    if (!provider) {
-      uiConsole('provider not initialized yet');
-      return;
-    }
-    const signedMessage = await RPC.sendRollupMessage(provider);
-    uiConsole(signedMessage);
-  };
-
   function uiConsole(...args: any[]): void {
     const el = document.querySelector('#console>p');
     if (el) {
@@ -145,7 +129,7 @@ export const Home = () => {
 
   const loggedInView = (
     <>
-      <div className="flex flex-col">
+      <div className="flex-container">
         <div>
           <button onClick={getUserInfo} className="card">
             Get User Info
@@ -169,17 +153,6 @@ export const Home = () => {
         <div>
           <button onClick={sendTransaction} className="card">
             Send Transaction
-          </button>
-        </div>
-        <hr />
-        <div>
-          <button onClick={signRollupMessage} className="card">
-            Sign Rollup Message
-          </button>
-        </div>
-        <div>
-          <button onClick={sendRollupMessage} className="card">
-            Send Rollup Message
           </button>
         </div>
         <div>

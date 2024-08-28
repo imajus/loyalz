@@ -1,3 +1,4 @@
-import { Home } from './Home/Home';
+import { Home } from './home/Home';
+import { Web3AuthPage } from './web-auth/Web3Auth';
 
-export { Home };
+export { Home, Web3AuthPage };

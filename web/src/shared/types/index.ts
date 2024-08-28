@@ -1,5 +1,1 @@
-export type Contract = {
-  uid?: string;
-  name: string;
-  text: string;
-};
+export type Page = 'Wallet' | 'Earn' | 'Exchange' | 'News';

@@ -1,13 +1,13 @@
-import Link from 'next/link';
+type PropTypes = {
+  title: string;
+};
 
-import { Logo } from '@/shared/icon';
-
-export const Header = () => {
+export const Header = ({ title }: PropTypes) => {
   return (
     <header className="flex flex-col shrink-0 items-center justify-center border-b-[1px] border-b-gray-400 w-full h-16">
-      <Link href="/" className="cursor-pointer">
-        <Logo height={30} />
-      </Link>
+      <h3 className="h-16 flex items-start pt-6 px-3 justify-center text-black text-2xl font-semibold text-center">
+        {title}
+      </h3>
     </header>
   );
 };
