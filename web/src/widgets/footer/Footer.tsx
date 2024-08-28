@@ -17,7 +17,7 @@ export const Footer = ({ currentPage }: PropTypes) => {
             <Link
               key={page}
               className={classNames(
-                'w-80 h-16 flex justify-center items-center border-r cursor-pointer capitalize',
+                'w-80 h-16 flex justify-center items-center border-r cursor-pointer capitalize hover:bg-red-500',
                 isCurrent ? 'bg-red-500' : 'bg-red-300',
               )}
               href={`/${page}`}
