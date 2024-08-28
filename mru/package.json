@@ -3,6 +3,7 @@
   "module": "index.js",
   "dependencies": {
     "@stackr/sdk": "latest",
+    "@stackr/cli": "latest",
     "ethers": "^6.7.1",
     "express": "^4.18.2",
     "lodash": "^4.17.21",
@@ -20,6 +21,8 @@
   "scripts": {
     "start": "bun run index.js",
     "dev": "bun run playground.js",
+    "register": "npx @stackr/cli register",
+    "deploy": "npx @stackr/cli deploy",
     "test": "mocha src/**/*.test.js"
   },
   "type": "module"

@@ -7,16 +7,16 @@ RUN npm install -g bun
 
 WORKDIR /app
 
-# Copy package.json and tsconfig.json
+# Copy NPM/TypeScript configuration
 COPY package.json package.json
+COPY package-lock.json package-lock.json
 COPY tsconfig.json tsconfig.json
 
 # Copy Stackr files
-COPY index.js index.js
-COPY playground.js playground.js
-COPY deployment.json deployment.json
-COPY genesis-state.json genesis-state.json
-COPY stackr.config.ts stackr.config.ts
+COPY index.js .
+COPY deployment.json .
+COPY genesis-state.json .
+COPY stackr.config.ts .
 
 # Copy source code
 COPY src src
@@ -29,6 +29,7 @@ ENV L1_RPC https://rpc2.sepolia.org
 ENV REGISTRY_CONTRACT 0x985bAfb3cAf7F4BD13a21290d1736b93D07A1760
 ENV NODE_ENV production
 ENV DATABASE_URI /db/mru.sqlite
+ENV DOMAIN_VERSION 0.1.0
 ENV PORT 3210
 
 # Command to run the application
