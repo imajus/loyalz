@@ -1,3 +1,3 @@
-import { Wallet } from '@/_pages';
+import { Earn } from '@/_pages';
 
-export const Home = () => <Wallet />;
+export const Home = () => <Earn />;
