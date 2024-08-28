@@ -5,7 +5,7 @@ export const products: Product[] = [
     id: '1a2b3c4d-5678-90ab-cdef-1234567890ab',
     company: 'Alpha Inc.',
     productName: 'Apple',
-    price: 100,
+    price: 2200,
     priceUnit: 'pearls',
   },
   {
@@ -19,7 +19,7 @@ export const products: Product[] = [
     id: '3c4d5e6f-7890-12cd-efab-3456789012cd',
     company: 'Gamma Groves',
     productName: 'Banana',
-    price: 50,
+    price: 350,
     priceUnit: 'emeralds',
   },
   {
