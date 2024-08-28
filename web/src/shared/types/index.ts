@@ -6,3 +6,9 @@ export type Product = {
   price: number;
   priceUnit: string;
 };
+
+export type WalletBalanceItem = {
+  company: string;
+  sum: number;
+  unit: string;
+};
