@@ -1,7 +1,9 @@
 'use client';
 
 import { products } from '@/mock/products';
-import { Button, MainWrapper, Product } from '@/shared/components';
+import { Button, MainWrapper } from '@/shared/components';
+
+import { Product } from './ui/Product';
 
 export const Earn = () => {
   return (
