@@ -7,7 +7,7 @@ import { HistoryItem } from './ui/HistoryItem';
 
 export const HistoryPage = () => {
   return (
-    <MainWrapper title="History" page="history">
+    <MainWrapper title="History" page="wallet">
       <div
         className="flex flex-col gap-6 overflow-y-scroll overflow-x-hidden h-full w-full"
         style={{ scrollbarWidth: 'none' }}

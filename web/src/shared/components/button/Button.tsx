@@ -4,7 +4,7 @@ import { ComponentProps, ReactNode } from 'react';
 
 type PropTypes = {
   title: string;
-  children: ReactNode;
+  children?: ReactNode;
   href?: string;
   onClick?: () => void;
   className?: string;
