@@ -1,9 +1,10 @@
 import classNames from 'classnames';
 import Link from 'next/link';
-import { ComponentProps } from 'react';
+import { ComponentProps, ReactNode } from 'react';
 
 type PropTypes = {
   title: string;
+  children: ReactNode;
   href?: string;
   onClick?: () => void;
   className?: string;
@@ -28,7 +29,7 @@ const getClassNames = (props: PropTypes) => {
 };
 
 export const Button = (props: PropTypes) => {
-  const { href, title, onClick } = props;
+  const { href, title, onClick, children } = props;
 
   if (!href && !onClick) return null;
 
@@ -38,6 +39,7 @@ export const Button = (props: PropTypes) => {
     return (
       <Link href={href} className={className} {...props}>
         {title}
+        {children}
       </Link>
     );
   }
@@ -45,6 +47,7 @@ export const Button = (props: PropTypes) => {
   return (
     <button className={className} onClick={onClick} {...props}>
       {title}
+      {children}
     </button>
   );
 };
