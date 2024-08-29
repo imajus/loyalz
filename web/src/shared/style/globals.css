@@ -28,3 +28,9 @@
     @apply bg-zinc-950 text-neutral-200;
   }
 }
+
+@layer components {
+  .parent:hover .child {
+    bottom: 2px;
+  }
+}

@@ -1,4 +1,4 @@
-export type Page = 'wallet' | 'earn' | 'exchange' | 'history';
+export type Page = 'wallet' | 'earn' | 'exchange' | 'news';
 export type Product = {
   id: string;
   company: string;

@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-col gap-3 items-center justify-center h-[100dvh] w-screen">
-        <div className="w-full h-full sm:w-96 sm:h-[700px] bg-white sm:rounded-2xl flex flex-col justify-start items-center">
+        <div className="w-full h-full sm:w-96 bg-white sm:rounded-2xl flex flex-col justify-start items-center">
           {children}
         </div>
       </body>
