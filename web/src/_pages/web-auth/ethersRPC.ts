@@ -2,6 +2,8 @@
 import type { IProvider } from '@web3auth/base';
 import { ethers } from 'ethers';
 
+import { signActionInputs, submitRollupAction } from './rollup';
+
 const getChainId = async (provider: IProvider): Promise<any> => {
   try {
     const ethersProvider = new ethers.BrowserProvider(provider);
@@ -92,4 +94,50 @@ const signMessage = async (provider: IProvider): Promise<any> => {
   }
 };
 
-export default { getChainId, getAccounts, getBalance, sendTransaction, signMessage };
+const signRollupMessage = async (provider: IProvider): Promise<any> => {
+  try {
+    const ethersProvider = new ethers.BrowserProvider(provider);
+    const signer = await ethersProvider.getSigner();
+    return signActionInputs(
+      'addReceipt',
+      {
+        id: String(Date.now()),
+        sku: 'xxx-012345678',
+        quantity: 1,
+      },
+      signer,
+    );
+  } catch (error) {
+    return error as string;
+  }
+};
+
+const sendRollupMessage = async (provider: IProvider): Promise<any> => {
+  try {
+    const ethersProvider = new ethers.BrowserProvider(provider);
+    const signer = await ethersProvider.getSigner();
+    return await submitRollupAction(
+      'addReceipt',
+      {
+        id: String(Date.now()),
+        sku: 'xxx-012345678',
+        quantity: 1,
+      },
+      signer,
+    );
+  } catch (error) {
+    return error as string;
+  }
+};
+
+const RPC = {
+  getChainId,
+  getAccounts,
+  getBalance,
+  sendTransaction,
+  signMessage,
+  signRollupMessage,
+  sendRollupMessage,
+};
+
+export default RPC;
