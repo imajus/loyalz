@@ -10,7 +10,7 @@ export const Earn = () => {
   return (
     <MainWrapper title="Earn" page="earn">
       <div
-        className="flex flex-col m-5 gap-6 overflow-y-scroll overflow-x-hidden h-full"
+        className="grid m-5 gap-6 overflow-y-scroll overflow-x-hidden h-full"
         style={{ scrollbarWidth: 'none', width: 'calc(100% - 40px)' }}
       >
         {products.map((product) => (
@@ -18,7 +18,7 @@ export const Earn = () => {
         ))}
       </div>
       <div className="flex items-center justify-center h-20 w-full">
-        <Button onClick={() => toastInfo('scan re')} title="Scan receipt" />
+        <Button onClick={() => toastInfo('scan re')} title="Scan receipt QR" />
       </div>
     </MainWrapper>
   );

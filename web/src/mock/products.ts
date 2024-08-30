@@ -31,7 +31,7 @@ export const products: Product[] = [
   },
   {
     id: '5e6f7a8b-9012-34ef-abcd-5678901234ef',
-    company: 'Epsilon Orchards',
+    company: 'Epsilon Orchard',
     productName: 'Orange',
     price: 75,
     priceUnit: 'topaz',
