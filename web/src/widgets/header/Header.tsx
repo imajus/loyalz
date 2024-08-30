@@ -28,7 +28,8 @@ export const Header = ({ title }: PropTypes) => {
         <Button
           title="Logout"
           onClick={() => toastInfo('exchange')}
-          className="flex flex-col-reverse items-center justify-center font-bold text-xs font-['Radio_Canada']"
+          className="relative flex flex-col-reverse items-center justify-center font-bold text-xs font-['Radio_Canada']"
+          hasBorder={false}
         >
           <DoorOpen />
         </Button>
