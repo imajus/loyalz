@@ -535,6 +535,11 @@
   dependencies:
     "@types/ms" "*"
 
+"@types/indefinite@^2.3.4":
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/@types/indefinite/-/indefinite-2.3.4.tgz#6525c3cf0615c022ffc087e7e1261c3d3d7c5743"
+  integrity sha512-X9sp9nbqkZT7hFNUKxicGr6gZLahs95lryW2Vvx5+krDxhWWle4K1OfJ4b8Sjd+FLul3tGhfYehtfeoFF1Ot4g==
+
 "@types/json5@^0.0.29":
   version "0.0.29"
   resolved "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
@@ -2230,6 +2235,11 @@ imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.npmjs.org/imurmurhash/-/imurmurhash-0.1.4.tgz"
   integrity sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==
+
+indefinite@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/indefinite/-/indefinite-2.5.1.tgz#f898da40762342ddb6878f07a38f8b35311ddd00"
+  integrity sha512-Ul0hCdnSjuFDEloYWeozTaEfljbz+0q+u4HsHns2dOk2DlhGlbRMGFtNcIL+Ve7sZYeIOTOAKA0usAXBGHpNDg==
 
 inflight@^1.0.4:
   version "1.0.6"
