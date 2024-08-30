@@ -1,5 +1,10 @@
 import { Wallet } from '@/_pages';
+import { RequireAuth } from '@/shared/components';
 
 export default function WalletPage() {
-  return <Wallet />;
+  return (
+    <RequireAuth>
+      <Wallet />
+    </RequireAuth>
+  );
 }
