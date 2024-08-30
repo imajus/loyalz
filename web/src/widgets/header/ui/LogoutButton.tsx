@@ -20,7 +20,7 @@ export const LogoutButton = () => {
   useEffect(() => {
     const init = async () => {
       try {
-        if (!web3auth.connected) {
+        if (!Object.keys(web3auth.walletAdapters).length) {
           await web3auth.initModal();
         }
 

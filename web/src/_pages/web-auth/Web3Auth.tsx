@@ -45,7 +45,7 @@ export const Web3AuthPage = () => {
     const init = async () => {
       try {
         setIsLoading(true);
-        if (!web3auth.connected) {
+        if (!Object.keys(web3auth.walletAdapters).length) {
           await web3auth.initModal();
         }
         setProvider(web3auth.provider);
