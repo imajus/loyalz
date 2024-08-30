@@ -5,4 +5,4 @@ import { Home } from './home/Home';
 import { Wallet } from './wallet/Wallet';
 import { Web3AuthPage } from './web-auth/Web3Auth';
 
-export { Earn, Exchange, HistoryPage, Home, Wallet, Web3AuthPage };
+export { Earn, Exchange, HistoryPage, Home, Wallet, Web3AuthPage as Web3Auth };

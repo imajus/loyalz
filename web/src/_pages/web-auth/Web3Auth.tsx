@@ -1,229 +1,102 @@
 'use client';
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable no-console */
-import './App.css';
 
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
-import { CHAIN_NAMESPACES, IProvider, WEB3AUTH_NETWORK } from '@web3auth/base';
-import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider';
-import { Web3Auth } from '@web3auth/modal';
+import { Button, MainWrapper, Spinner } from '@/shared/components';
+import { useAuth } from '@/shared/hook/useAuth/useAuth';
+import { useAppSelector } from '@/shared/store/hook';
+import { userSelector } from '@/shared/store/selector/user';
+import { getUserInfo } from '@/shared/utils/web3Auth';
+import { IProvider, UserInfo } from '@web3auth/base';
 
-import RPC from './ethersRPC';
+import { web3auth } from './config';
+import { RPCButtons } from './ui/rpc-buttons';
 
-// import RPC from "./viemRPC";
-// import RPC from "./web3RPC";
-
-const clientId = process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID as string;
-
-const chainConfig = {
-  chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: '0xaa36a7',
-  rpcTarget: 'https://rpc.ankr.com/eth_sepolia',
-  // Avoid using public rpcTarget in production.
-  // Use services like Infura, Quicknode etc
-  displayName: 'Ethereum Sepolia Testnet',
-  blockExplorerUrl: 'https://sepolia.etherscan.io',
-  ticker: 'ETH',
-  tickerName: 'Ethereum',
-  logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
+const Wrapper = ({ children }: { children: ReactNode }) => {
+  return (
+    <MainWrapper title="Web 3 Auth" page="">
+      <div className="relative w-full h-full flex flex-col items-center justify-center gap-5">
+        {children}
+      </div>
+    </MainWrapper>
+  );
 };
 
-const privateKeyProvider = new EthereumPrivateKeyProvider({
-  config: { chainConfig },
-});
-
-const web3auth = new Web3Auth({
-  clientId,
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
-  privateKeyProvider,
-});
-
-export const Home = () => {
+export const Web3AuthPage = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [provider, setProvider] = useState<IProvider | null>(null);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState<Partial<UserInfo | null>>(null);
+  const currentUser = useAppSelector(userSelector);
+  const { login } = useAuth();
+
+  useEffect(() => {
+    if (isLoading) return;
+
+    if (!currentUser?.idToken && !currentUser?.oAuthAccessToken) {
+      setIsLoggedIn(false);
+      setProvider(null);
+    }
+  }, [currentUser, isLoading]);
 
   useEffect(() => {
     const init = async () => {
       try {
-        await web3auth.initModal();
+        setIsLoading(true);
+        if (!web3auth.connected) {
+          await web3auth.initModal();
+        }
         setProvider(web3auth.provider);
 
         if (web3auth.connected) {
-          setLoggedIn(true);
+          setIsLoggedIn(true);
+          const user = await getUserInfo(web3auth);
+          setUser(user);
         }
       } catch (error) {
         console.error(error);
       }
+      setTimeout(() => setIsLoading(false), 500);
     };
 
     void init();
   }, []);
 
-  const login = async () => {
-    const web3authProvider = await web3auth.connect();
-    setProvider(web3authProvider);
-    if (web3auth.connected) {
-      setLoggedIn(true);
-    }
-  };
-
-  const getUserInfo = async () => {
-    const user = await web3auth.getUserInfo();
-    uiConsole(user);
-  };
-
-  const logout = async () => {
-    await web3auth.logout();
-    setProvider(null);
-    setLoggedIn(false);
-    uiConsole('logged out');
-  };
-
-  // Check the RPC file for the implementation
-  const getAccounts = async () => {
-    if (!provider) {
-      uiConsole('provider not initialized yet');
-      return;
-    }
-    const address = await RPC.getAccounts(provider);
-    uiConsole(address);
-  };
-
-  const getBalance = async () => {
-    if (!provider) {
-      uiConsole('provider not initialized yet');
-      return;
-    }
-    const balance = await RPC.getBalance(provider);
-    uiConsole(balance);
-  };
-
-  const signMessage = async () => {
-    if (!provider) {
-      uiConsole('provider not initialized yet');
-      return;
-    }
-    const signedMessage = await RPC.signMessage(provider);
-    uiConsole(signedMessage);
-  };
-
-  const sendTransaction = async () => {
-    if (!provider) {
-      uiConsole('provider not initialized yet');
-      return;
-    }
-    uiConsole('Sending Transaction...');
-    const transactionReceipt = await RPC.sendTransaction(provider);
-    uiConsole(transactionReceipt);
-  };
-
-  const signRollupMessage = async () => {
-    if (!provider) {
-      uiConsole('provider not initialized yet');
-      return;
-    }
-    const signedMessage = await RPC.signRollupMessage(provider);
-    uiConsole(signedMessage);
-  };
-
-  const sendRollupMessage = async () => {
-    if (!provider) {
-      uiConsole('provider not initialized yet');
-      return;
-    }
-    const signedMessage = await RPC.sendRollupMessage(provider);
-    uiConsole(signedMessage);
-  };
-
-  function uiConsole(...args: any[]): void {
-    const el = document.querySelector('#console>p');
-    if (el) {
-      el.innerHTML = JSON.stringify(args || {}, null, 2);
-      console.log(...args);
-    }
+  if (isLoading) {
+    return (
+      <Wrapper>
+        <div
+          className="absolute h-full w-full top-0 left-0 bg-white/80"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Spinner />
+        </div>
+      </Wrapper>
+    );
   }
 
-  const loggedInView = (
-    <>
-      <div className="flex flex-col">
-        <div>
-          <button onClick={getUserInfo} className="card">
-            Get User Info
-          </button>
-        </div>
-        <div>
-          <button onClick={getAccounts} className="card">
-            Get Accounts
-          </button>
-        </div>
-        <div>
-          <button onClick={getBalance} className="card">
-            Get Balance
-          </button>
-        </div>
-        <div>
-          <button onClick={signMessage} className="card">
-            Sign Message
-          </button>
-        </div>
-        <div>
-          <button onClick={sendTransaction} className="card">
-            Send Transaction
-          </button>
-        </div>
-        <hr />
-        <div>
-          <button onClick={signRollupMessage} className="card">
-            Sign Rollup Message
-          </button>
-        </div>
-        <div>
-          <button onClick={sendRollupMessage} className="card">
-            Send Rollup Message
-          </button>
-        </div>
-        <div>
-          <button onClick={logout} className="card">
-            Log Out
-          </button>
-        </div>
-      </div>
-    </>
-  );
-
-  const unloggedInView = (
-    <button onClick={login} className="card">
-      Login
-    </button>
-  );
+  if (!isLoggedIn) {
+    return (
+      <Wrapper>
+        <Button onClick={() => login(web3auth, setProvider, setIsLoggedIn)} title="Login" />
+      </Wrapper>
+    );
+  }
 
   return (
-    <div className="container">
-      <h1 className="title">
-        <a target="_blank" href="https://web3auth.io/docs/sdk/pnp/web/modal" rel="noreferrer">
-          Web3Auth{' '}
-        </a>
-        & React Quick Start
-      </h1>
-
-      <div className="grid">{loggedIn ? loggedInView : unloggedInView}</div>
-      <div id="console" style={{ whiteSpace: 'pre-line' }}>
-        <p style={{ whiteSpace: 'pre-line' }}></p>
+    <Wrapper>
+      <div className="flex items-center justify-center flex-shrink-0 font-['Radio_Canada'] text-3xl text-black font-bold">
+        {`User: ${user?.name}`}
       </div>
 
-      <footer className="footer">
-        <a
-          href="https://github.com/Web3Auth/web3auth-pnp-examples/tree/main/web-modal-sdk/quick-starts/react-vite-modal-quick-start"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Source code
-        </a>
-        <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FWeb3Auth%2Fweb3auth-pnp-examples%2Ftree%2Fmain%2Fweb-modal-sdk%2Fquick-starts%2Freact-vite-evm-modal-quick-start&project-name=w3a-react-vite-no-modal&repository-name=w3a-react-vite-no-modal">
-          <img src="https://vercel.com/button" alt="Deploy with Vercel" />
-        </a>
-      </footer>
-    </div>
+      <RPCButtons
+        provider={provider}
+        setProvider={setProvider}
+        setLoggedIn={setIsLoggedIn}
+        web3auth={web3auth}
+      />
+    </Wrapper>
   );
 };

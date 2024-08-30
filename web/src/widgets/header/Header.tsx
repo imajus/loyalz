@@ -1,9 +1,8 @@
 import Image from 'next/image';
 
-import { DoorOpen } from '@/shared/assets';
 import Logo from '@/shared/assets/logo.png';
-import { Button } from '@/shared/components';
-import { toastInfo } from '@/shared/utils/toast';
+
+import { LogoutButton } from './ui/LogoutButton';
 
 type PropTypes = {
   title: string;
@@ -25,14 +24,7 @@ export const Header = ({ title }: PropTypes) => {
       </div>
 
       <div className="h-full flex-grow flex flex-col items-end p-6 justify-end gap-3 text-black">
-        <Button
-          title="Logout"
-          onClick={() => toastInfo('exchange')}
-          className="relative flex flex-col-reverse items-center justify-center font-bold text-xs font-['Radio_Canada']"
-          hasBorder={false}
-        >
-          <DoorOpen />
-        </Button>
+        <LogoutButton />
         <h3 className="text-4xl font-semibold text-center font-['Racing_Sans_One']">{title}</h3>
       </div>
     </header>

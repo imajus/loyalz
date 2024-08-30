@@ -1,4 +1,4 @@
-export type Page = 'wallet' | 'earn' | 'exchange' | 'news';
+export type Page = 'wallet' | 'earn' | 'exchange' | 'news' | '';
 export type Product = {
   id: string;
   company: string;
@@ -19,4 +19,20 @@ export type WalletBalanceItem = {
   company: string;
   sum: number;
   unit: string;
+};
+
+export type Web3User = {
+  appState: string;
+  email: string;
+  aggregateVerifier: string;
+  name: string;
+  profileImage: string;
+  typeOfLogin: string;
+  verifier: string;
+  verifierId: string;
+  dappShare: string;
+  oAuthIdToken: string;
+  oAuthAccessToken: string;
+  isMfaEnabled: boolean;
+  idToken: string;
 };

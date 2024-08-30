@@ -1,5 +1,5 @@
-import { Web3AuthPage } from '@/_pages';
+import { Web3Auth } from '@/_pages';
 
 export default function HomePage() {
-  return <Web3AuthPage />;
+  return <Web3Auth />;
 }

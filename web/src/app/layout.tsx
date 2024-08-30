@@ -2,6 +2,8 @@ import '@/shared/style/globals.css';
 
 import { ReactNode } from 'react';
 
+import { StoreProvider } from '@/shared/store/provider';
+
 import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Loyalz',
@@ -17,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="flex flex-col gap-3 items-center justify-center h-[100dvh] w-screen">
         <div className="w-full h-full sm:w-96 bg-white sm:rounded-2xl flex flex-col justify-start items-center">
-          {children}
+          <StoreProvider>{children}</StoreProvider>
         </div>
       </body>
     </html>

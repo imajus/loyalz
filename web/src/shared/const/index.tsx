@@ -12,4 +12,5 @@ export const pageIcons: Record<Page, ReactNode> = {
   wallet: <Globe />,
   exchange: <ArrowLeftRight />,
   news: <Newspaper />,
+  '': null,
 };
