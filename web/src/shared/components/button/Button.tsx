@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import Link from 'next/link';
 import { ComponentProps, ReactNode } from 'react';
 
@@ -11,21 +10,13 @@ type PropTypes = {
 } & ComponentProps<'button'> &
   ComponentProps<'a'>;
 
-const getClassNames = (props: PropTypes) => {
-  const { className, href } = props;
-
+const getClassNames = ({ className }: PropTypes) => {
   if (className) return className;
 
   const defaultClassName =
-    'text-white text-xl font-medium w-56 h-12 rounded-xl flex flex-row items-center justify-center cursor-pointer';
+    "text-black text-xl font-['Racing_Sans_One'] text-black text-3xl w-56 h-12 rounded-xl flex flex-row items-center justify-center cursor-pointer border-2 border-black shadow-sm";
 
-  if (href) {
-    //classNames of anchor element
-    return classNames(defaultClassName, 'bg-[#DC0203]');
-  }
-
-  //classNames of button element
-  return classNames(defaultClassName, props.disabled ? 'bg-[#DC0203]/60' : 'bg-[#DC0203]');
+  return defaultClassName;
 };
 
 export const Button = (props: PropTypes) => {
@@ -37,17 +28,25 @@ export const Button = (props: PropTypes) => {
 
   if (href) {
     return (
-      <Link href={href} className={className} {...props}>
-        {title}
-        {children}
+      <Link href={href} className="relative" {...props}>
+        <div className="absolute inset-0 rounded-xl border-2 border-black cursor-pointer shadow-[1px_1px_0_0_rgba(0,0,0,1)]" />
+
+        <div className={className}>
+          {title}
+          {children}
+        </div>
       </Link>
     );
   }
 
   return (
-    <button className={className} onClick={onClick} {...props}>
-      {title}
-      {children}
+    <button className="relative" onClick={onClick} {...props}>
+      <div className="absolute inset-0 rounded-xl border-2 border-black cursor-pointer shadow-[1px_1px_0_0_rgba(0,0,0,1)]" />
+
+      <div className={className}>
+        {title}
+        {children}
+      </div>
     </button>
   );
 };
