@@ -9,7 +9,7 @@ export const Exchange = () => {
   return (
     <MainWrapper title="Exchange" page="exchange">
       <div
-        className="flex flex-col m-5 gap-6 overflow-y-scroll overflow-x-hidden h-full"
+        className="flex flex-col m-5 gap-6 overflow-y-scroll overflow-x-hidden h-full pr-[1px]"
         style={{ scrollbarWidth: 'none', width: 'calc(100% - 40px)' }}
       >
         {products.map((product) => (
