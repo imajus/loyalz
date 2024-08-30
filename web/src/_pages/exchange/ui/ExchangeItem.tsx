@@ -15,7 +15,7 @@ export const ExchangeItem = ({ product }: PropTypes) => {
   const isExchangeable = product.price > 200;
 
   return (
-    <div className="sm:h-60 w-full flex flex-col items-center justify-center text-gray-600 gap-2">
+    <div className="sm:h-60 w-full flex flex-col items-center justify-center text-gray-600 gap-2 pr-[1px]">
       <span className="text-lg font-bold">{product.company}</span>
       <div className="flex flex-col gap-3 border rounded-2xl w-full items-center p-2">
         <div className="flex flex-col sm:flex-row p-3 w-full items-center">
