@@ -1,6 +1,6 @@
-import Image from 'next/image';
+import indefinite from 'indefinite';
 
-import { Button } from '@/shared/components';
+import { Button, Frame, Icon } from '@/shared/components';
 import { Product as ProductType } from '@/shared/types';
 import { toastInfo } from '@/shared/utils/toast';
 
@@ -15,25 +15,24 @@ export const ExchangeItem = ({ product }: PropTypes) => {
   const isExchangeable = product.price > 200;
 
   return (
-    <div className="sm:h-60 w-full flex flex-col items-center justify-center text-gray-600 gap-2 pr-[1px]">
-      <span className="text-lg font-bold">{product.company}</span>
-      <div className="flex flex-col gap-3 border rounded-2xl w-full items-center p-2">
-        <div className="flex flex-col sm:flex-row p-3 w-full items-center">
-          <Image
-            src={icon}
-            alt="avatar"
-            width={0}
-            height={0}
-            sizes="100vw"
-            className="rounded-[50%] w-[100px] h-[100px] shadow-2xl "
-          />
-          <div className="flex flex-col gap-3 p-1 items-center sm:items-start">
-            <span>{`Get ${product.productName}`}</span>
-            <span className="capitalize">{`${product.price} ${product.priceUnit}`}</span>
+    <div className="w-full flex flex-col items-center justify-center text-gray-600 gap-2 pr-[1px]">
+      <span className="font-['Radio_Canada'] text-sm text-black font-bold">{product.company}</span>
+      <Frame>
+        <div className="flex flex-col w-full">
+          <div className="flex flex-col sm:flex-row p-3 w-full items-center">
+            <Icon src={icon} />
+            <div className="flex flex-col gap-1 p-1 items-center sm:items-start">
+              <span className="text-sm font-bold">{`Buy ${indefinite(product.productName)}`}</span>
+              <span className="capitalize text-xs">{`+ ${product.price} ${product.priceUnit}`}</span>
+            </div>
           </div>
+          {isExchangeable && (
+            <div className="w-full flex justify-end">
+              <Button title="Exchange" onClick={() => toastInfo('exchange')} />
+            </div>
+          )}
         </div>
-        {isExchangeable && <Button title="Exchange" onClick={() => toastInfo('exchange')} />}
-      </div>
+      </Frame>
     </div>
   );
 };

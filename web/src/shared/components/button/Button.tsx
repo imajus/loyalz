@@ -3,6 +3,8 @@ import { ComponentProps, ReactNode } from 'react';
 
 import { classNames } from '@/shared/utils';
 
+type ButtonType = 'default' | 'grid';
+
 type PropTypes = {
   title?: string;
   children?: ReactNode;
@@ -10,7 +12,7 @@ type PropTypes = {
   onClick?: () => void;
   className?: string;
   hasBorder?: boolean;
-  btnType?: 'default' | 'grid';
+  btnType?: ButtonType;
 } & ComponentProps<'button'> &
   ComponentProps<'a'>;
 
@@ -23,6 +25,20 @@ const getClassNames = (className: string | undefined) => {
 
   return defaultClassName;
 };
+
+const Shadow = ({ hasBorder, btnType }: { hasBorder: boolean; btnType: ButtonType }) => (
+  <>
+    {hasBorder && (
+      <div
+        className={classNames(
+          'absolute inset-0 rounded-xl border-2 border-black shadow-[1px_1px_0_0_rgba(0,0,0,1)]',
+          btnType === 'grid' && 'w-full',
+          btnType === 'default' && 'w-56',
+        )}
+      />
+    )}
+  </>
+);
 
 export const Button = (props: PropTypes) => {
   const {
@@ -45,10 +61,7 @@ export const Button = (props: PropTypes) => {
   if (href) {
     return (
       <Link href={href} className={parentClassName} {...restProps}>
-        {hasBorder && (
-          <div className="absolute inset-0 rounded-xl border-2 border-black cursor-pointer shadow-[1px_1px_0_0_rgba(0,0,0,1)]" />
-        )}
-
+        <Shadow hasBorder={hasBorder} btnType={btnType} />
         <div className={childClassName}>
           {title}
           {children}
@@ -59,10 +72,7 @@ export const Button = (props: PropTypes) => {
 
   return (
     <button className={parentClassName} onClick={onClick} {...restProps}>
-      {hasBorder && (
-        <div className="absolute inset-0 rounded-xl border-2 border-black cursor-pointer shadow-[1px_1px_0_0_rgba(0,0,0,1)]" />
-      )}
-
+      <Shadow hasBorder={hasBorder} btnType={btnType} />
       <div className={childClassName}>
         {title}
         {children}

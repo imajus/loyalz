@@ -15,7 +15,7 @@ const icon =
 export const Product = ({ product }: PropTypes) => {
   return (
     <div className="h-60 w-full flex flex-col items-center justify-center text-gray-600 gap-2 pr-[1px]">
-      <span className="text-lg font-bold">{product.company}</span>
+      <span className="font-['Radio_Canada'] text-sm text-black font-bold">{product.company}</span>
       <Button
         onClick={() => toastSuccess(`Bought ${product.productName}`)}
         className="relative text-black font-['Radio_Canada'] p-3 rounded-xl flex flex-row items-center justify-start cursor-pointer border-2 border-black shadow-sm w-full gap-2"

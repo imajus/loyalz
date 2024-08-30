@@ -9,7 +9,7 @@ const getClassNames = (className: string | undefined) => {
   if (className) return className;
 
   const defaultClassName =
-    "text-black font-['Radio_Canada'] p-3 w-full text-black text-3xl rounded-xl flex flex-row items-center justify-start border-2 border-black shadow-sm";
+    "text-black font-['Radio_Canada'] p-2 w-full text-black text-3xl rounded-xl flex flex-row items-center justify-start border-2 border-black shadow-sm";
 
   return defaultClassName;
 };
