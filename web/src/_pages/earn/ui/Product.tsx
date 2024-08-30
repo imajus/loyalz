@@ -29,7 +29,7 @@ export const Product = ({ product }: PropTypes) => {
           width={0}
           height={0}
           sizes="100vw"
-          className="rounded-[50%] w-[48px] h-[48px] shadow-2xl bg-sapphire-blue-60%"
+          className="rounded-[50%] w-[48px] h-[48px] shadow-2xl "
         />
         <div className="flex flex-col gap-1 p-1 items-center sm:items-start">
           <span className="text-sm font-bold">{`Buy ${indefinite(product.productName)}`}</span>

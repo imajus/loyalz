@@ -25,7 +25,7 @@ export const ExchangeItem = ({ product }: PropTypes) => {
             width={0}
             height={0}
             sizes="100vw"
-            className="rounded-[50%] w-[100px] h-[100px] shadow-2xl bg-sapphire-blue-60%"
+            className="rounded-[50%] w-[100px] h-[100px] shadow-2xl "
           />
           <div className="flex flex-col gap-3 p-1 items-center sm:items-start">
             <span>{`Get ${product.productName}`}</span>
