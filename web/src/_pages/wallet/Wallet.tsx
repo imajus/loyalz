@@ -12,7 +12,7 @@ export const Wallet = () => {
   return (
     <MainWrapper title="Wallet" page="wallet">
       <div
-        className="flex flex-col m-5 gap-6 overflow-y-scroll overflow-x-hidden h-full"
+        className="grid m-5 gap-6 overflow-y-scroll overflow-x-hidden h-full pr-[1px]"
         style={{ scrollbarWidth: 'none', width: 'calc(100% - 40px)' }}
       >
         {walletBalance.map((item) => (

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import { Frame } from '@/shared/components';
 import { WalletBalanceItem } from '@/shared/types';
 
 type PropTypes = {
@@ -11,28 +12,32 @@ const icon =
 
 export const BalanceItem = ({ item }: PropTypes) => {
   return (
-    <div className="h-60 w-full flex flex-col sm:flex-row items-center text-gray-600">
-      <Image
-        src={icon}
-        alt="avatar"
-        width={0}
-        height={0}
-        sizes="100vw"
-        className="rounded-[50%] w-[80px] h-[80px] shadow-2xl bg-sapphire-blue-60%"
-      />
-      <div className="hidden sm:flex flex-col gap-3 p-1 text-sm">
-        <span className="capitalize overflow-ellipsis whitespace-nowrap overflow-hidden sm:w-32">{`${item.unit}`}</span>
-        <div className="flex gap-1">
-          by
-          <span className="capitalize overflow-ellipsis whitespace-nowrap overflow-hidden sm:w-[107px]">{`${item.company}`}</span>
+    <Frame>
+      <div className="w-full h-full flex flex-row justify-between">
+        <div className="w-full h-full flex items-center justify-start">
+          <Image
+            src={icon}
+            alt="avatar"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="rounded-[50%] w-[48px] h-[48px] shadow-2xl"
+          />
+
+          <div className="hidden sm:flex flex-col gap-1 p-1 items-center sm:items-start">
+            <span className="text-sm font-bold">{`Buy ${item.unit}`}</span>
+            <span className="capitalize text-xs">{`by ${item.company}`}</span>
+          </div>
+
+          <div className="flex sm:hidden flex-row gap-1 p-1 text-xl">
+            <span className="capitalize text-center">{`${item.unit} by ${item.company}`}</span>
+          </div>
+        </div>
+
+        <div className="w-[88px] flex items-center justify-center sm:justify-end text-sm font-bold flex-shrink-0">
+          {item.sum.toLocaleString(undefined, { maximumFractionDigits: 2 })}
         </div>
       </div>
-      <div className="flex sm:hidden flex-row gap-1 p-1 text-xl">
-        <span className="capitalize text-center">{`${item.unit} by ${item.company}`}</span>
-      </div>
-      <span className="w-[88px] flex justify-center sm:justify-end text-2xl">
-        {item.sum.toLocaleString(undefined, { maximumFractionDigits: 2 })}
-      </span>
-    </div>
+    </Frame>
   );
 };
