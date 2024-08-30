@@ -1,6 +1,4 @@
-import Image from 'next/image';
-
-import { Frame } from '@/shared/components';
+import { Frame, Icon } from '@/shared/components';
 import { WalletBalanceItem } from '@/shared/types';
 
 type PropTypes = {
@@ -15,14 +13,7 @@ export const BalanceItem = ({ item }: PropTypes) => {
     <Frame>
       <div className="w-full h-full flex flex-row justify-between">
         <div className="w-full h-full flex items-center justify-start">
-          <Image
-            src={icon}
-            alt="avatar"
-            width={0}
-            height={0}
-            sizes="100vw"
-            className="rounded-[50%] w-[48px] h-[48px] shadow-2xl"
-          />
+          <Icon src={icon} />
 
           <div className="hidden sm:flex flex-col gap-1 p-1 items-center sm:items-start">
             <span className="text-sm font-bold">{`Buy ${item.unit}`}</span>
