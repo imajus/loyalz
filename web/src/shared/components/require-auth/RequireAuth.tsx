@@ -2,26 +2,30 @@
 import { useRouter } from 'next/navigation';
 import { ReactNode, useEffect } from 'react';
 
-import { useAppSelector } from '@/shared/store/hook';
-import { userSelector } from '@/shared/store/selector/user';
+import { useWeb3Auth } from '@/shared/hook';
 import { toastError } from '@/shared/utils/toast';
+
+import { Spinner } from '../spinner/Spinner';
 
 type PropTypes = {
   children: ReactNode;
 };
 export const RequireAuth = ({ children }: PropTypes) => {
-  const currentUser = useAppSelector(userSelector);
-  const isAuthenticated = !!(currentUser.idToken || currentUser.oAuthAccessToken);
+  const { isLoggedIn, isLoading } = useWeb3Auth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (isLoading) return;
+
+    if (!isLoggedIn) {
       router.push('/web3auth', { scroll: false });
       toastError('Authorization requred');
     }
-  }, [router, isAuthenticated]);
+  }, [router, isLoggedIn, isLoading]);
 
-  if (isAuthenticated) {
+  if (isLoading) return <Spinner />;
+
+  if (isLoggedIn) {
     return children;
   }
 

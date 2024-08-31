@@ -1,16 +1,15 @@
 'use client';
 import { useRouter } from 'next/navigation';
 
-import { web3auth } from '@/_pages/web-auth/config';
 import { walletBalance } from '@/mock/wallet';
 import { Button, MainWrapper } from '@/shared/components';
-import { useAuth } from '@/shared/hook/useAuth/useAuth';
+import { useWeb3Auth } from '@/shared/hook';
 
 import { BalanceItem } from './ui/BalanceItem';
 
 export const Wallet = () => {
   const router = useRouter();
-  const { logout } = useAuth();
+  const { logoutWeb3Auth } = useWeb3Auth();
   return (
     <MainWrapper title="Wallet" page="wallet">
       <div
@@ -26,7 +25,13 @@ export const Wallet = () => {
           onClick={() => router.push('/history', { scroll: false })}
           title="Transaction history"
         />
-        <Button onClick={() => logout(web3auth)} title="Log out" />
+        <Button
+          onClick={async () => {
+            await logoutWeb3Auth?.();
+            router.push('/earn', { scroll: false });
+          }}
+          title="Log out"
+        />
       </div>
     </MainWrapper>
   );

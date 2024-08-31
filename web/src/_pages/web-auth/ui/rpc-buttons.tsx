@@ -1,7 +1,5 @@
-import { Dispatch, SetStateAction } from 'react';
-
 import { Button } from '@/shared/components';
-import { useAuth } from '@/shared/hook/useAuth/useAuth';
+import { useWeb3Auth } from '@/shared/hook/';
 import {
   getAccounts,
   getBalance,
@@ -11,18 +9,9 @@ import {
   signMessage,
   signRollupMessage,
 } from '@/shared/utils/web3Auth';
-import { IProvider } from '@web3auth/base';
-import { Web3Auth } from '@web3auth/modal';
 
-type PropTypes = {
-  web3auth: Web3Auth;
-  provider: IProvider | null;
-  setProvider: Dispatch<SetStateAction<IProvider | null>>;
-  setLoggedIn: Dispatch<SetStateAction<boolean>>;
-};
-
-export const RPCButtons = ({ web3auth, provider, setProvider, setLoggedIn }: PropTypes) => {
-  const { logout } = useAuth();
+export const RPCButtons = () => {
+  const { web3auth, logoutWeb3Auth, provider } = useWeb3Auth();
 
   return (
     <div
@@ -37,7 +26,7 @@ export const RPCButtons = ({ web3auth, provider, setProvider, setLoggedIn }: Pro
       <hr />
       <Button onClick={() => signRollupMessage(provider)}>Sign Rollup Message</Button>
       <Button onClick={() => sendRollupMessage(provider)}>Send Rollup Message</Button>
-      <Button onClick={() => logout(web3auth, setProvider, setLoggedIn)}>Log Out</Button>
+      <Button onClick={() => logoutWeb3Auth?.()}>Log Out</Button>
     </div>
   );
 };

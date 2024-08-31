@@ -1,10 +1,13 @@
 import RPC from '@/_pages/web-auth/ethersRPC';
+import { Web3User } from '@/shared/types';
 import { IProvider } from '@web3auth/base';
 import { Web3Auth } from '@web3auth/modal';
 
-export const getUserInfo = async (web3auth: Web3Auth) => {
+export const getUserInfo = async (web3auth: Web3Auth | null) => {
+  if (!web3auth || !web3auth.connected) return null;
+
   const user = await web3auth.getUserInfo();
-  console.log({ user });
+  console.info({ user });
   return user;
 };
 
@@ -14,7 +17,7 @@ export const getAccounts = async (provider: IProvider | null) => {
     return;
   }
   const address = await RPC.getAccounts(provider);
-  console.log({ address });
+  console.info({ address });
 };
 
 export const getBalance = async (provider: IProvider | null) => {
@@ -22,7 +25,7 @@ export const getBalance = async (provider: IProvider | null) => {
     return;
   }
   const balance = await RPC.getBalance(provider);
-  console.log({ balance });
+  console.info({ balance });
 };
 
 export const signMessage = async (provider: IProvider | null) => {
@@ -30,7 +33,7 @@ export const signMessage = async (provider: IProvider | null) => {
     return;
   }
   const signedMessage = await RPC.signMessage(provider);
-  console.log({ signedMessage });
+  console.info({ signedMessage });
 };
 
 export const sendTransaction = async (provider: IProvider | null) => {
@@ -38,7 +41,7 @@ export const sendTransaction = async (provider: IProvider | null) => {
     return;
   }
   const transactionReceipt = await RPC.sendTransaction(provider);
-  console.log({ transactionReceipt });
+  console.info({ transactionReceipt });
 };
 
 export const signRollupMessage = async (provider: IProvider | null) => {
@@ -46,7 +49,7 @@ export const signRollupMessage = async (provider: IProvider | null) => {
     return;
   }
   const signedMessage = await RPC.signRollupMessage(provider);
-  console.log({ signedMessage });
+  console.info({ signedMessage });
 };
 
 export const sendRollupMessage = async (provider: IProvider | null) => {
@@ -54,5 +57,10 @@ export const sendRollupMessage = async (provider: IProvider | null) => {
     return;
   }
   const signedMessage = await RPC.sendRollupMessage(provider);
-  console.log({ signedMessage });
+  console.info({ signedMessage });
+};
+
+export const getUserIsAuthenticated = (currentUser: Web3User | null) => {
+  if (!currentUser) return false;
+  return !!(currentUser.idToken || currentUser.oAuthAccessToken);
 };
