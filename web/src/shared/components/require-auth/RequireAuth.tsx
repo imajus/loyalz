@@ -11,11 +11,17 @@ type PropTypes = {
   children: ReactNode;
 };
 export const RequireAuth = ({ children }: PropTypes) => {
-  const { isLoggedIn, isLoading } = useWeb3Auth();
+  const { isLoggedIn, isLoading, setIsLoading } = useWeb3Auth();
   const router = useRouter();
 
   useEffect(() => {
-    if (isLoading) return;
+    if (isLoading) {
+      setTimeout(() => {
+        toastError('Something went wrong');
+        setIsLoading?.(false);
+      }, 15000);
+      return;
+    }
 
     if (!isLoggedIn) {
       router.push('/web3auth', { scroll: false });

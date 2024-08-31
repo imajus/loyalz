@@ -20,6 +20,7 @@ type Web3AuthData = {
   isLoggedIn: boolean;
   web3user: Web3User | null;
   isLoading: boolean;
+  setIsLoading?: Dispatch<SetStateAction<boolean>>;
   setIsLoggedIn?: Dispatch<SetStateAction<boolean>>;
   provider: IProvider | null;
   setProvider?: Dispatch<SetStateAction<IProvider | null>>;
@@ -109,6 +110,7 @@ export const Web3AuthProvider = ({ children }: PropTypes) => {
     web3user,
     isLoggedIn,
     isLoading,
+    setIsLoading,
     provider,
     loginWeb3Auth,
     logoutWeb3Auth,
