@@ -14,3 +14,5 @@ export const pageIcons: Record<Page, ReactNode> = {
   news: <Newspaper />,
   '': null,
 };
+
+export const securedPages: Page[] = ['wallet', 'exchange'];

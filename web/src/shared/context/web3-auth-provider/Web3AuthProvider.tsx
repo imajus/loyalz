@@ -1,8 +1,11 @@
 'use client';
+import { usePathname } from 'next/navigation';
 import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
 
 import { clientId, privateKeyProvider } from '@/_pages/web-auth/config';
-import { Web3User } from '@/shared/types';
+import { securedPages } from '@/shared/const';
+import { Page, Web3User } from '@/shared/types';
+import { removeLeadingTrailingSlashes } from '@/shared/utils';
 import { getLocalUserInfo, storeUserInfo } from '@/shared/utils/localStorage';
 import { getUserInfo, getUserIsAuthenticated } from '@/shared/utils/web3Auth';
 import { IProvider, WEB3AUTH_NETWORK } from '@web3auth/base';
@@ -40,9 +43,11 @@ export const Web3AuthProvider = ({ children }: PropTypes) => {
   const [web3auth, setWeb3auth] = useState<Web3Auth | null>(null);
   const [provider, setProvider] = useState<IProvider | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const pathname = usePathname();
 
   useEffect(() => {
-    void loginWeb3Auth();
+    const path = removeLeadingTrailingSlashes(pathname) as Page;
+    if (securedPages.includes(path)) void loginWeb3Auth();
   }, []);
 
   const loginWeb3Auth = async () => {
