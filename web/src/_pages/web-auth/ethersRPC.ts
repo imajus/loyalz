@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { signActionInputs, submitRollupAction } from '@/shared/utils/rollup';
 import type { IProvider } from '@web3auth/base';
 import { ethers } from 'ethers';
-
-import { signActionInputs, submitRollupAction } from './rollup';
 
 const getChainId = async (provider: IProvider): Promise<any> => {
   try {

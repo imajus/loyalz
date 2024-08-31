@@ -1,8 +1,5 @@
+import { server } from 'src/api/index.js';
 import { rollup } from './src/rollup.js';
-import { server } from './src/server.js';
-
-export * from './src/api.js';
-export { rollup } from './src/rollup.js';
 
 const main = async () => {
   // Init Micro-rollup
