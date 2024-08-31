@@ -25,7 +25,10 @@ export const RPCButtons = ({ web3auth, provider, setProvider, setLoggedIn }: Pro
   const { logout } = useAuth();
 
   return (
-    <div className="flex flex-col gap-3">
+    <div
+      className="flex flex-col gap-3 flex-grow overflow-y-scroll"
+      style={{ scrollbarWidth: 'none' }}
+    >
       <Button onClick={() => getUserInfo(web3auth)}>Get User Info</Button>
       <Button onClick={() => getAccounts(provider)}>Get Accounts</Button>
       <Button onClick={() => getBalance(provider)}>Get Balance</Button>
