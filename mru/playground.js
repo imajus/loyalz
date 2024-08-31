@@ -1,12 +1,7 @@
 import { Playground } from '@stackr/sdk/plugins';
 import { ZeroAddress, Wallet } from 'ethers';
 import { rollup } from './src/rollup.js';
-import {
-  addReceipt,
-  claimReward,
-  createCampaign,
-  whitelistRetailer,
-} from './src/api.js';
+import { executeAction } from './src/util.js';
 
 const managerWallet = Wallet.createRandom();
 const customerWallet = Wallet.createRandom();
@@ -18,7 +13,8 @@ const main = async () => {
   // Connect to playground
   Playground.init(rollup);
   // 1. Create campaign
-  await createCampaign(
+  await executeAction(
+    'createCampaign',
     {
       name: 'Campaign #1',
       sku: '12345678',
@@ -32,7 +28,8 @@ const main = async () => {
     managerWallet.address,
   );
   // 2. Add receipt
-  await addReceipt(
+  await executeAction(
+    'addReceipt',
     {
       id: '010101010101010101',
       sku: '12345678',
@@ -42,7 +39,8 @@ const main = async () => {
     customerWallet.address,
   );
   // 3. Whitelist retailer
-  await whitelistRetailer(
+  await executeAction(
+    'whitelistRetailer',
     {
       campaign: 0,
       address: retailerWallet.address,
@@ -51,7 +49,8 @@ const main = async () => {
     managerWallet.address,
   );
   // 4. Claim reward
-  await claimReward(
+  await executeAction(
+    'claimReward',
     {
       campaign: 0,
       customer: customerWallet.address,
