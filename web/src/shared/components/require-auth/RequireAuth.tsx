@@ -17,9 +17,13 @@ export const RequireAuth = ({ children }: PropTypes) => {
   useEffect(() => {
     if (isLoading) {
       setTimeout(() => {
-        toastError('Something went wrong');
-        setIsLoading?.(false);
-      }, 15000);
+        if (isLoading) {
+          //if web3auth taking more than a minute, stop loading spinner and display login page again
+
+          toastError('Something went wrong');
+          setIsLoading?.(false);
+        }
+      }, 10000);
       return;
     }
 

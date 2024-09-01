@@ -43,12 +43,20 @@ export const Web3AuthProvider = ({ children }: PropTypes) => {
   const [web3user, setWeb3user] = useState<Web3User | null>(null);
   const [web3auth, setWeb3auth] = useState<Web3Auth | null>(null);
   const [provider, setProvider] = useState<IProvider | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     const path = removeLeadingTrailingSlashes(pathname) as Page;
-    if (securedPages.includes(path)) void loginWeb3Auth();
+
+    if (securedPages.includes(path)) {
+      void loginWeb3Auth();
+    } else {
+      const currentUser = getLocalUserInfo();
+      if (getUserIsAuthenticated(currentUser)) {
+        void loginWeb3Auth();
+      }
+    }
   }, []);
 
   const loginWeb3Auth = async () => {
