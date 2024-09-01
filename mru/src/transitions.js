@@ -56,20 +56,29 @@ const delistRetailer = {
  */
 const addReceipt = {
   handler: ({ inputs, state, msgSender }) => {
-    //TODO: Prevent duplicates
-    const campaign = state.campaigns.find(({ sku }) => sku === inputs.sku);
-    if (campaign) {
-      state.mints.push({
-        customer: msgSender,
-        token: campaign.mintToken,
-        amount: campaign.mintAmount * inputs.quantity,
-      });
-    }
+    // Prevent reusing receipts with same IDs
+    const existing = state.receipts.find((receipt) => receipt.id === inputs.id);
+    REQUIRE(!existing, 'Receipt already added');
+    const mints = state.campaigns
+      .map((campaign, id) => {
+        if (campaign.sku === inputs.sku) {
+          const length = state.mints.push({
+            campaign: id,
+            customer: msgSender,
+            token: campaign.mintToken,
+            amount: campaign.mintAmount * inputs.quantity,
+          });
+          return length - 1;
+        }
+        return null;
+      })
+      .filter(Boolean);
     state.receipts.push({
       id: inputs.id,
       customer: msgSender,
       sku: inputs.sku,
       quantity: inputs.quantity,
+      mints,
     });
     return state;
   },

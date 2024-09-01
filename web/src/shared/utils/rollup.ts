@@ -19,9 +19,11 @@ interface ReceiptState {
   customer: string;
   sku: string;
   quantity: number;
+  mints: number[];
 }
 
 interface TokenEvent {
+  campaign: number;
   customer: string;
   token: string;
   amount: number;
