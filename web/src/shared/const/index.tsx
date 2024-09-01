@@ -15,4 +15,4 @@ export const pageIcons: Record<Page, ReactNode> = {
   '': null,
 };
 
-export const securedPages: Page[] = ['wallet', 'exchange'];
+export const securedPages: Page[] = ['wallet', 'exchange', 'news'];

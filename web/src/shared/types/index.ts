@@ -1,4 +1,5 @@
 export type Page = 'wallet' | 'earn' | 'exchange' | 'news' | '';
+
 export type Product = {
   id: string;
   company: string;
@@ -6,6 +7,14 @@ export type Product = {
   price: number;
   priceUnit: string;
 };
+
+export type NewsItem = {
+  id: string;
+  text: string;
+  company: string;
+  date: string;
+};
+
 export type TransactionItem = {
   id: string;
   tokenCompany: string;
