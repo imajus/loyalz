@@ -21,7 +21,7 @@ interface ReceiptState {
   quantity: number;
 }
 
-interface TokenState {
+interface TokenEvent {
   customer: string;
   token: string;
   amount: number;
@@ -122,13 +122,32 @@ export async function addReceipt(inputs: AddReceiptInputs, signer: JsonRpcSigner
 
 /* Tokens */
 
-export async function listMints(): Promise<TokenState[]> {
+export async function listMints(): Promise<TokenEvent[]> {
   const res = await fetch(`${BASE_URL}/mints`);
   return res.json();
 }
 
-export async function listBurns(): Promise<TokenState[]> {
+export async function listBurns(): Promise<TokenEvent[]> {
   const res = await fetch(`${BASE_URL}/burns`);
+  return res.json();
+}
+
+export async function createToken(
+  chainId: string,
+  symbol: string,
+  allowance: bigint,
+): Promise<string> {
+  const res = await fetch(`${BASE_URL}/tokens`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      chainId,
+      symbol,
+      allowance: String(allowance),
+    }),
+  });
   return res.json();
 }
 
