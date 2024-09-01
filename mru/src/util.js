@@ -1,3 +1,4 @@
+import { ActionConfirmationStatus } from '@stackr/sdk';
 import { rollup } from './rollup.js';
 
 /**
@@ -29,5 +30,6 @@ export async function executeAction(name, inputs, signer, sender) {
     msgSender: sender,
   });
   // Send transaction
-  return rollup.submitAction(name, action);
+  const ack = await rollup.submitAction(name, action);
+  return ack.waitFor(ActionConfirmationStatus.C1);
 }

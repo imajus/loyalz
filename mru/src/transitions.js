@@ -98,11 +98,13 @@ const claimReward = {
     // REQUIRE(hasToken && hasAmount, 'Does not meet token requirements');
     state.burns.push(
       {
+        campaign: inputs.campaign,
         customer: inputs.customer,
         token: campaign.mintToken,
         amount: campaign.mintAmount,
       },
       {
+        campaign: inputs.campaign,
         customer: inputs.customer,
         token: campaign.otherToken,
         amount: campaign.otherAmount,

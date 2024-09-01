@@ -1,8 +1,71 @@
 {
   "state": {
-    "campaigns": [],
-    "receipts": [],
-    "mints": [],
-    "burns": []
+    "campaigns": [
+      {
+        "manager": "0xF9934b9034FEdC3E22bA49e85c1847663EeF8d67",
+        "name": "Buy carrot get parrot",
+        "sku": "carrot",
+        "mintToken": "0x0000000000000000000000000000000000000000",
+        "mintAmount": 1000,
+        "retailers": ["0xc7A3ea5641c1d928809bE31bB89C44290c4FB23E"],
+        "active": true
+      },
+      {
+        "manager": "0xF9934b9034FEdC3E22bA49e85c1847663EeF8d67",
+        "name": "Get burger for Cola and carrot",
+        "sku": "cola",
+        "mintToken": "0x0000000000000000000000000000000000000001",
+        "mintAmount": 100,
+        "reward": "burger",
+        "otherToken": "0x0000000000000000000000000000000000000000",
+        "otherAmount": 1000,
+        "retailers": ["0xc7A3ea5641c1d928809bE31bB89C44290c4FB23E"],
+        "active": true
+      }
+    ],
+    "receipts": [
+      {
+        "id": "0000000001",
+        "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
+        "sku": "carrot",
+        "quantity": 1,
+        "mints": [0]
+      },
+      {
+        "id": "0000000002",
+        "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
+        "sku": "cola",
+        "quantity": 1,
+        "mints": [1]
+      }
+    ],
+    "mints": [
+      {
+        "campaign": 0,
+        "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
+        "token": "0x0000000000000000000000000000000000000000",
+        "amount": 1000
+      },
+      {
+        "campaign": 1,
+        "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
+        "token": "0x0000000000000000000000000000000000000001",
+        "amount": 100
+      }
+    ],
+    "burns": [
+      {
+        "campaign": 1,
+        "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
+        "token": "0x0000000000000000000000000000000000000000",
+        "amount": 1000
+      },
+      {
+        "campaign": 1,
+        "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
+        "token": "0x0000000000000000000000000000000000000001",
+        "amount": 100
+      }
+    ]
   }
 }

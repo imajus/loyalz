@@ -6,7 +6,7 @@ interface CampaignState {
   sku: string;
   mintToken: string;
   mintAmount: number;
-  reward: string;
+  reward?: string;
   otherToken?: string;
   otherAmount?: number;
   retailers: string[];
@@ -42,9 +42,9 @@ type CreateCampaignInputs = {
   sku: string;
   mintToken: string;
   mintAmount: number;
-  reward: string;
-  otherToken: string;
-  otherAmount: number;
+  reward?: string;
+  otherToken?: string;
+  otherAmount?: number;
 } & import('@stackr/sdk').AllowedInputTypes;
 
 type AlterRetailerInputs = {

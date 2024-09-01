@@ -1,6 +1,7 @@
 import { Playground } from '@stackr/sdk/plugins';
 import { ZeroAddress, Wallet } from 'ethers';
 import { rollup } from './src/rollup.js';
+import { machine } from './src/machine.js';
 import { executeAction } from './src/util.js';
 
 const managerWallet = Wallet.createRandom();
@@ -27,6 +28,9 @@ const main = async () => {
     managerWallet,
     managerWallet.address,
   );
+  // Get campaign ID
+  const campaign = machine.state.campaigns.length - 1;
+  console.log(machine.state.campaigns);
   // 2. Add receipt
   await executeAction(
     'addReceipt',
@@ -42,7 +46,7 @@ const main = async () => {
   await executeAction(
     'whitelistRetailer',
     {
-      campaign: 0,
+      campaign,
       address: retailerWallet.address,
     },
     managerWallet,
@@ -52,7 +56,7 @@ const main = async () => {
   await executeAction(
     'claimReward',
     {
-      campaign: 0,
+      campaign,
       customer: customerWallet.address,
     },
     retailerWallet,
