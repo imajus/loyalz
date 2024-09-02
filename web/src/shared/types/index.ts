@@ -45,3 +45,57 @@ export type Web3User = {
   isMfaEnabled: boolean;
   idToken: string;
 };
+
+export type CampaignState = {
+  manager: string;
+  name: string;
+  sku: string;
+  mintToken: string;
+  mintAmount: number;
+  reward?: string;
+  otherToken?: string;
+  otherAmount?: number;
+  retailers: string[];
+  active: boolean;
+};
+
+export type ReceiptState = {
+  id: string;
+  customer: string;
+  sku: string;
+  quantity: number;
+  mints: number[];
+};
+
+export type TokenEvent = {
+  campaign: number;
+  customer: string;
+  token: string;
+  amount: number;
+};
+
+export type CreateCampaignInputs = {
+  name: string;
+  sku: string;
+  mintToken: string;
+  mintAmount: number;
+  reward?: string;
+  otherToken?: string;
+  otherAmount?: number;
+};
+
+export type AlterRetailerInputs = {
+  campaign: number;
+  address: string;
+};
+
+export type AddReceiptInputs = {
+  id: string;
+  sku: string;
+  quantity: number;
+};
+
+export type ClaimRewardInputs = {
+  campaign: number;
+  customer: string;
+};

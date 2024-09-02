@@ -3,14 +3,8 @@
 import { useEffect, useState } from 'react';
 
 import { MainWrapper } from '@/shared/components';
-import { TransactionItem } from '@/shared/types';
-import {
-  CampaignState,
-  listBurns,
-  listCampaigns,
-  listMints,
-  TokenEvent,
-} from '@/shared/utils/rollup';
+import { CampaignState, TokenEvent, TransactionItem } from '@/shared/types';
+import { listBurns, listCampaigns, listMints } from '@/shared/utils/rollup';
 import { brandName, productName, tokenName } from '@/shared/utils/token';
 
 import { HistoryItem } from './ui/HistoryItem';

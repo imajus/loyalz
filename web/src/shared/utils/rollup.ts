@@ -1,59 +1,15 @@
 import { JsonRpcSigner, Signer } from 'ethers';
 import { once } from 'lodash';
 
-export interface CampaignState {
-  manager: string;
-  name: string;
-  sku: string;
-  mintToken: string;
-  mintAmount: number;
-  reward?: string;
-  otherToken?: string;
-  otherAmount?: number;
-  retailers: string[];
-  active: boolean;
-}
-
-export interface ReceiptState {
-  id: string;
-  customer: string;
-  sku: string;
-  quantity: number;
-  mints: number[];
-}
-
-export interface TokenEvent {
-  campaign: number;
-  customer: string;
-  token: string;
-  amount: number;
-}
-
-export type CreateCampaignInputs = {
-  name: string;
-  sku: string;
-  mintToken: string;
-  mintAmount: number;
-  reward?: string;
-  otherToken?: string;
-  otherAmount?: number;
-};
-
-export type AlterRetailerInputs = {
-  campaign: number;
-  address: string;
-};
-
-export type AddReceiptInputs = {
-  id: string;
-  sku: string;
-  quantity: number;
-};
-
-export type ClaimRewardInputs = {
-  campaign: number;
-  customer: string;
-};
+import {
+  AddReceiptInputs,
+  AlterRetailerInputs,
+  CampaignState,
+  ClaimRewardInputs,
+  CreateCampaignInputs,
+  ReceiptState,
+  TokenEvent,
+} from '@/shared/types';
 
 const BASE_URL = process.env.NEXT_PUBLIC_MRU_BASE_URL as string;
 
