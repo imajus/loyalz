@@ -1,5 +1,6 @@
-import React, { ReactElement, useEffect, useState } from 'react';
 import { ContentTypeReaction } from '@xmtp/content-type-reaction';
+import { Message } from 'postcss';
+import { ReactElement } from 'react';
 import { useClient } from '../hooks/useClient';
 import { useConversations } from '../hooks/useConversations';
 import { useMessages } from '../hooks/useMessages';
@@ -13,10 +14,11 @@ const appearsInMessageList = (message: Message): boolean => {
 };
 
 export function NewsListView(): ReactElement {
-
   const client = useClient();
   const conversations = useConversations(client);
-  const messages = useMessages(conversations)?.filter(({ senderAddress }) => senderAddress !== client?.address);
+  const messages = useMessages(conversations)?.filter(
+    ({ senderAddress }) => senderAddress !== client?.address,
+  );
 
   return (
     <div>
@@ -24,12 +26,7 @@ export function NewsListView(): ReactElement {
       {messages ? (
         messages.reduce((acc: ReactElement[], message: Message, index) => {
           if (appearsInMessageList(message)) {
-            acc.push(
-              <MessageCellView
-                key={message.id}
-                message={message}
-              />
-            );
+            acc.push(<MessageCellView key={message.id} message={message} />);
           }
           return acc;
         }, [] as ReactElement[])

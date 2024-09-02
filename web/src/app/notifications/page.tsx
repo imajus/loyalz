@@ -1,14 +1,13 @@
 'use client';
-import React from 'react';
-import NewsListView from './views/NewsListView';
 import ClientProvider from './context/ClientContext';
+import NewsListView from './views/NewsListView';
 
-export default function page () {
+export default function page() {
   return (
     <div>
       <ClientProvider>
         <NewsListView />
       </ClientProvider>
     </div>
-  )
+  );
 }

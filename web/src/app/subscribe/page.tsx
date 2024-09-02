@@ -1,12 +1,12 @@
-'use client'
+/* eslint-disable @typescript-eslint/no-unsafe-enum-comparison */
+'use client';
 
+import { createConsentMessage, createConsentProofPayload } from '@xmtp/consent-proof-signature';
+import { invitation } from '@xmtp/proto';
 import { ChangeEventHandler, CSSProperties, useCallback, useMemo, useState } from 'react';
-import { createConsentMessage, createConsentProofPayload} from '@xmtp/consent-proof-signature';
-
-import { wallet } from './utils';
+import { getXmtpClient } from '../broadcast.client';
 import { broadcastConfigs } from '../broadcast.config';
-
-const host = process.env.NEXT_PUBLIC_API_HOST || '';
+import { wallet } from './utils';
 
 enum ErrorStates {
   NO_WALLET = 'NO_WALLET',
@@ -85,8 +85,10 @@ const SubscribeButton = () => {
   const isDisconnected = false;
   const [selectedBroadcast, setSelectedBroadcast] = useState(broadcastConfigs[0].address);
 
-  const {address: broadcastAddress, name} = useMemo(() => {
-    return broadcastConfigs.find(({ address }) => address === selectedBroadcast) ?? broadcastConfigs[0];
+  const { address: broadcastAddress, name } = useMemo(() => {
+    return (
+      broadcastConfigs.find(({ address }) => address === selectedBroadcast) ?? broadcastConfigs[0]
+    );
   }, [selectedBroadcast]);
 
   // Define the handleClick function
@@ -98,19 +100,12 @@ const SubscribeButton = () => {
       if (!address) {
         throw new Error(ErrorStates.NO_WALLET);
       }
-
-      const lookupResponse = await fetch(`${host}/lookup`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            address,
-            broadcastAddress,
-          })
-        });
-      const data = await lookupResponse.json();
-      if (!data.onNetwork) {
+      const client = await getXmtpClient(broadcastAddress);
+      if (!client) {
+        console.log('Client not initialized ' + broadcastAddress);
+        return;
+      }
+      if (!(await client.canMessage(address))) {
         throw new Error(ErrorStates.NOT_ON_NETWORK);
       }
 
@@ -119,20 +114,19 @@ const SubscribeButton = () => {
       const signature = await wallet.signMessage(message);
 
       const payloadBytes = createConsentProofPayload(signature, timestamp);
-      const base64Payload = Buffer.from(payloadBytes).toString('base64');
-
-      const subscribeResponse = await fetch(`${host}/subscribe`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            address,
-            broadcastAddress,
-            consentProof: base64Payload
-          })
-        });
-      await subscribeResponse.json();
+      const { greeting } = broadcastConfigs.find(({ address: a }) => a === broadcastAddress);
+      const consentProof = invitation.ConsentProofPayload.decode(payloadBytes);
+      console.log('Creating conversation with: ', {
+        consentProof,
+      });
+      const conversation = await client.conversations.newConversation(
+        address,
+        undefined,
+        consentProof,
+      );
+      console.log('Conversation created: ', conversation.topic);
+      const res = await conversation.send(greeting);
+      console.log('Conversation send greeting result: ', res);
       setSubscriptionStatus(true);
       setLoading(false);
     } catch (error) {
@@ -155,22 +149,30 @@ const SubscribeButton = () => {
       }
       setLoading(false);
     }
-  }, [address, broadcastAddress]); 
+  }, [address, broadcastAddress]);
 
   const handleButtonClick = useCallback(() => {
-    !isDisconnected && handleSigning();
+    void (!isDisconnected && handleSigning());
   }, [isDisconnected, handleSigning]);
 
-  const handleDropdownChange: ChangeEventHandler<HTMLSelectElement> = useCallback((event) => {
-    setSelectedBroadcast(event.target.value);
-  }, [setSelectedBroadcast]);
+  const handleDropdownChange: ChangeEventHandler<HTMLSelectElement> = useCallback(
+    (event) => {
+      setSelectedBroadcast(event.target.value);
+    },
+    [setSelectedBroadcast],
+  );
 
   return (
-    <main className='flex min-h-screen flex-col items-center p-24'>
+    <main className="flex min-h-screen flex-col items-center p-24">
       <div style={styles.BroadcastDropdownContainer}>
-        <label htmlFor='config-dropdown'>Choose a Broadcast:</label>
-        <select style={styles.Dropdown} id='config-dropdown' value={selectedBroadcast} onChange={handleDropdownChange}>
-          {broadcastConfigs.map(config => (
+        <label htmlFor="config-dropdown">Choose a Broadcast:</label>
+        <select
+          style={styles.Dropdown}
+          id="config-dropdown"
+          value={selectedBroadcast}
+          onChange={handleDropdownChange}
+        >
+          {broadcastConfigs.map((config) => (
             <option key={config.address} value={config.address}>
               {config.name}
             </option>
@@ -179,22 +181,18 @@ const SubscribeButton = () => {
       </div>
       <div
         style={styles.SubscribeButtonContainer}
-        className={`Subscribe ${loading ? 'loading' : ''}`}>
-          Subscribe to {name}
+        className={`Subscribe ${loading ? 'loading' : ''}`}
+      >
+        Subscribe to {name}
         <button style={styles.SubscribeButton} onClick={handleButtonClick}>
           {subscriptionStatus ? 'Subscribed' : loading ? 'Loading... ' : 'Subscribe'}
         </button>
-        <div>
-          {errorState && <p style={styles.ErrorText}>{getErrorMessage(errorState)}</p>}
-        </div>
+        <div>{errorState && <p style={styles.ErrorText}>{getErrorMessage(errorState)}</p>}</div>
       </div>
     </main>
   );
 };
 
 export default function SubscribeButtonPage() {
-  return (
-    <SubscribeButton />
-  );
+  return <SubscribeButton />;
 }
-
