@@ -1,7 +1,7 @@
 import { JsonRpcSigner, Signer } from 'ethers';
 import { once } from 'lodash';
 
-interface CampaignState {
+export interface CampaignState {
   manager: string;
   name: string;
   sku: string;
@@ -14,7 +14,7 @@ interface CampaignState {
   active: boolean;
 }
 
-interface ReceiptState {
+export interface ReceiptState {
   id: string;
   customer: string;
   sku: string;
@@ -22,14 +22,14 @@ interface ReceiptState {
   mints: number[];
 }
 
-interface TokenEvent {
+export interface TokenEvent {
   campaign: number;
   customer: string;
   token: string;
   amount: number;
 }
 
-type CreateCampaignInputs = {
+export type CreateCampaignInputs = {
   name: string;
   sku: string;
   mintToken: string;
@@ -39,18 +39,18 @@ type CreateCampaignInputs = {
   otherAmount?: number;
 };
 
-type AlterRetailerInputs = {
+export type AlterRetailerInputs = {
   campaign: number;
   address: string;
 };
 
-type AddReceiptInputs = {
+export type AddReceiptInputs = {
   id: string;
   sku: string;
   quantity: number;
 };
 
-type ClaimRewardInputs = {
+export type ClaimRewardInputs = {
   campaign: number;
   customer: string;
 };

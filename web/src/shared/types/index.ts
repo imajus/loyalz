@@ -17,11 +17,11 @@ export type NewsItem = {
 
 export type TransactionItem = {
   id: string;
-  tokenCompany: string;
+  brandName: string;
   productName: string;
   sum: number;
-  priceUnit: string;
-  date: string;
+  token: string;
+  type: 'burn' | 'mint';
 };
 
 export type WalletBalanceItem = {
