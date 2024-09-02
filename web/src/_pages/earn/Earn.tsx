@@ -1,12 +1,15 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import { products } from '@/mock/products';
 import { Button, MainWrapper } from '@/shared/components';
-import { toastInfo } from '@/shared/utils/toast';
 
 import { Product } from './ui/Product';
 
 export const Earn = () => {
+  const router = useRouter();
+
   return (
     <MainWrapper title="Earn" page="earn">
       <div
@@ -18,7 +21,10 @@ export const Earn = () => {
         ))}
       </div>
       <div className="flex items-center justify-center h-20 w-full">
-        <Button onClick={() => toastInfo('scan re')} title="Scan receipt QR" />
+        <Button
+          onClick={() => router.push('scan-receipt-qr', { scroll: false })}
+          title="Scan receipt QR"
+        />
       </div>
     </MainWrapper>
   );
