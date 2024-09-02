@@ -1,6 +1,6 @@
 import * as XMTP from '@xmtp/xmtp-js';
-import db, { Conversation } from './db';
 import { Mutex } from 'async-mutex';
+import db, { Conversation } from './db';
 
 // Prevent races when updating the local database
 const conversationMutex = new Mutex();
@@ -8,37 +8,24 @@ const conversationMutex = new Mutex();
 // TODO: figure out better way to turn db Conversation -> XMTP.Conversation
 export async function getXMTPConversation(
   client: XMTP.Client,
-  conversation: Conversation
+  conversation: Conversation,
 ): Promise<XMTP.Conversation> {
   const conversations = await client.conversations.list();
   const xmtpConversation = conversations.find(
-    (xmtpConversation) =>
-      stripTopicName(xmtpConversation.topic) == conversation.topic
+    (xmtpConversation) => stripTopicName(xmtpConversation.topic) == conversation.topic,
   );
 
-  if (!xmtpConversation)
-    throw new Error('could not convert db conversation to XMTP conversation');
+  if (!xmtpConversation) throw new Error('could not convert db conversation to XMTP conversation');
 
   return xmtpConversation;
 }
 
-export async function findConversation(
-  topic: string
-): Promise<Conversation | undefined> {
-  return await db.conversations
-    .where('topic')
-    .equals(stripTopicName(topic))
-    .first();
+export async function findConversation(topic: string): Promise<Conversation | undefined> {
+  return await db.conversations.where('topic').equals(stripTopicName(topic)).first();
 }
 
-export async function updateConversationTimestamp(
-  topic: string,
-  updatedAt: Date
-) {
-  const conversation = await db.conversations
-    .where('topic')
-    .equals(topic)
-    .first();
+export async function updateConversationTimestamp(topic: string, updatedAt: Date) {
+  const conversation = await db.conversations.where('topic').equals(topic).first();
 
   if (conversation && conversation.updatedAt < updatedAt) {
     await conversationMutex.runExclusive(async () => {
@@ -53,15 +40,13 @@ export function stripTopicName(conversationTopic: string): string {
 
 export async function startConversation(
   client: XMTP.Client,
-  address: string
+  address: string,
 ): Promise<Conversation> {
   const xmtpConversation = await client.conversations.newConversation(address);
   return await saveConversation(xmtpConversation);
 }
 
-export async function saveConversation(
-  xmtpConversation: XMTP.Conversation
-): Promise<Conversation> {
+export async function saveConversation(xmtpConversation: XMTP.Conversation): Promise<Conversation> {
   return await conversationMutex.runExclusive(async () => {
     const existing = await db.conversations
       .where('topic')

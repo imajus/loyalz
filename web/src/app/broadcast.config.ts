@@ -1,35 +1,16 @@
 interface BroadcastConfig {
+  id: string;
   name: string;
   address: string;
+  greeting: string;
 }
 
 export const broadcastConfigs: BroadcastConfig[] = [
   {
-    address: "0xb1991BA7297408733EB47Eb9c0d2d8Ab5Eb918A2",
-    name: "Welcome Loyalz XMTP Broadcasts",
+    id: 'LB',
+    address: '0xb1991BA7297408733EB47Eb9c0d2d8Ab5Eb918A2',
+    name: 'Loyalz XMTP Broadcasts',
+    greeting: 'Loyalz say thanx for subscribing!',
   },
-  // {
-  //   address: "0x189b416Ab2FbfbF90052Ca4C66fD509C16739353",
-  //   name: "Good Evening XMTP Broadcasts",
-  // },
-  // {
-  //   address: "0xbA30066a24bC3FFEE24dE8126F5e5478e2e95B82",
-  //   name: "XMTP Demo Broadcasts",
-  // },
-  // {
-  //   address: "0x013C3f9bfD875EF487c745048Eb8BA9B5A898b32",
-  //   name: "Awesome XMTP updates",
-  // },
-  // {
-  //   name: "Wrap Up XMTP Broadcast",
-  //   address: "0x83A5D283F5B8c4D2c1913EA971a3B7FD8473F446",
-  // },
-  // {
-  //   name: "Broadcast Test 1",
-  //   address: "0x4F44eE3011E1e82D1DBcce6dBDE140ba4818ad35",
-  // }, 
-  // {
-  //   name: "Broadcast Test 2",
-  //   address: "0x2E2252AB27c8D71B1Bf550adC24e3C1D1297b7eA",
-  // }
+  // ...put here more configs for testing
 ];

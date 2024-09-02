@@ -35,7 +35,6 @@ export interface Message {
   isSending: boolean;
 }
 
-
 export interface ReadReceipt {
   peerAddress: string;
   timestamp: string;

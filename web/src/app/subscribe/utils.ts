@@ -1,8 +1,6 @@
-import { Wallet, getDefaultProvider } from "ethers";
+import { Wallet, getDefaultProvider } from 'ethers';
 
-export const createConsentMessage = (peerAddress: string,
-  timestamp: number
-): string =>  {
+export const createConsentMessage = (peerAddress: string, timestamp: number): string => {
   return (
     'XMTP : Grant inbox consent to sender\n' +
     '\n' +
@@ -10,11 +8,10 @@ export const createConsentMessage = (peerAddress: string,
     `From Address: ${peerAddress}\n` +
     '\n' +
     'For more info: https://xmtp.org/signatures/'
-  )
-}
+  );
+};
 
 // Should be replaced by web3Auth or Telegram Lit
-const privateToken = process.env.NEXT_PUBLIC_PRIVATE_KEY || '';
+const privateToken = process.env.NEXT_PUBLIC_CLIENT_PRIVATE_KEY || '';
 const provider = getDefaultProvider('sepolia');
 export const wallet = new Wallet(privateToken, provider);
-

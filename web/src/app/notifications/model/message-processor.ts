@@ -1,13 +1,10 @@
-import db, { Conversation, Message } from './db';
 import { ContentTypeReadReceipt } from '@xmtp/content-type-read-receipt';
 import { ContentTypeId } from '@xmtp/xmtp-js';
+import db, { Conversation, Message } from './db';
 
 export async function process(
   conversation: Conversation,
-  {
-    contentType,
-    message,
-  }: { contentType: ContentTypeId; message: Message }
+  { contentType, message }: { contentType: ContentTypeId; message: Message },
 ) {
   if (ContentTypeReadReceipt.sameAs(contentType)) {
     // Get items from the read receipts table based on peerAddress within conversation
