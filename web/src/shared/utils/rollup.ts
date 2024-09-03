@@ -51,7 +51,6 @@ export const submitRollupAction = async (name: string, inputs: object, signer: J
 /* Campaigns */
 
 export async function listCampaigns(): Promise<CampaignState[]> {
-  console.log({ BASE_URL, NEXT_PUBLIC_MRU_BASE_URL: process.env.NEXT_PUBLIC_MRU_BASE_URL });
   const res = await fetch(`${BASE_URL}/campaigns`);
   return res.json();
 }
