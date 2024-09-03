@@ -1,8 +1,8 @@
 import { Frame, Icon } from '@/shared/components';
-import { WalletBalanceItem } from '@/shared/types';
+import { TransactionItem } from '@/shared/types';
 
 type PropTypes = {
-  item: WalletBalanceItem;
+  item: TransactionItem;
 };
 
 const icon =
@@ -16,12 +16,12 @@ export const BalanceItem = ({ item }: PropTypes) => {
           <Icon src={icon} />
 
           <div className="hidden sm:flex flex-col gap-1 p-1 items-center sm:items-start">
-            <span className="text-sm font-bold">{`Buy ${item.unit}`}</span>
-            <span className="capitalize text-xs">{`by ${item.company}`}</span>
+            <span className="text-sm font-bold">{`Buy ${item.token}`}</span>
+            <span className="capitalize text-xs">{`by ${item.brandName}`}</span>
           </div>
 
           <div className="flex sm:hidden flex-row gap-1 p-1 text-xl">
-            <span className="capitalize text-center">{`${item.unit} by ${item.company}`}</span>
+            <span className="capitalize text-center">{`${item.token} by ${item.brandName}`}</span>
           </div>
         </div>
 
