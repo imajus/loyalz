@@ -1,9 +1,11 @@
 import { ContentTypeReaction } from '@xmtp/content-type-reaction';
-import { Message } from 'postcss';
 import { ReactElement } from 'react';
+// @ts-ignore
+import { ContentTypeId } from '@xmtp/xmtp-js';
 import { useClient } from '../hooks/useClient';
 import { useConversations } from '../hooks/useConversations';
 import { useMessages } from '../hooks/useMessages';
+import { Message } from '../model/db';
 import MessageCellView from './MessageCellView';
 
 const appearsInMessageList = (message: Message): boolean => {
@@ -24,7 +26,7 @@ export function NewsListView(): ReactElement {
     <div>
       {messages?.length == 0 && <p>No messages yet.</p>}
       {messages ? (
-        messages.reduce((acc: ReactElement[], message: Message, index) => {
+        messages.reduce((acc: ReactElement[], message: Message) => {
           if (appearsInMessageList(message)) {
             acc.push(<MessageCellView key={message.id} message={message} />);
           }

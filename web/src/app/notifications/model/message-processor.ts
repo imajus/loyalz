@@ -1,4 +1,5 @@
 import { ContentTypeReadReceipt } from '@xmtp/content-type-read-receipt';
+// @ts-ignore
 import { ContentTypeId } from '@xmtp/xmtp-js';
 import db, { Conversation, Message } from './db';
 

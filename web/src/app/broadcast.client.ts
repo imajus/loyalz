@@ -3,7 +3,7 @@ import { Wallet, getDefaultProvider } from 'ethers';
 import { broadcastConfigs } from './broadcast.config';
 
 export const getXmtpClient = async (address: string) => {
-  const { id, name } = broadcastConfigs.find(({ address: a }) => a === address) || {};
+  const { /*id,*/ name } = broadcastConfigs.find(({ address: a }) => a === address) || {};
   // const privateToken = process.env[`NEXT_PUBLIC_${id}_BROADCAST_PRIVATE_KEY`] || '';
   const privateToken = process.env.NEXT_PUBLIC_LB_BROADCAST_PRIVATE_KEY || '';
 

@@ -8,7 +8,7 @@ import db, { Conversation } from '../model/db';
 export function useConversations(client: XMTP.Client | null): Conversation[] {
   const broadcastAddresses = broadcastConfigs.map(({ address }) => address);
   useEffect(() => {
-    (async () => {
+    void (async () => {
       if (!client) return;
       for (const xmtpConversation of await client.conversations.list()) {
         if (broadcastAddresses.includes(xmtpConversation.peerAddress)) {
@@ -19,7 +19,7 @@ export function useConversations(client: XMTP.Client | null): Conversation[] {
   }, []);
 
   useEffect(() => {
-    (async () => {
+    void (async () => {
       if (!client) return;
       for await (const conversation of await client.conversations.stream()) {
         if (broadcastAddresses.includes(conversation.peerAddress)) {

@@ -1,4 +1,4 @@
-interface BroadcastConfig {
+export interface BroadcastConfig {
   id: string;
   name: string;
   address: string;
