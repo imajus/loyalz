@@ -5,7 +5,7 @@ import { createConsentMessage, createConsentProofPayload } from '@xmtp/consent-p
 import { invitation } from '@xmtp/proto';
 import { ChangeEventHandler, CSSProperties, useCallback, useMemo, useState } from 'react';
 import { getXmtpClient } from '../broadcast.client';
-import { broadcastConfigs } from '../broadcast.config';
+import { BroadcastConfig, broadcastConfigs } from '../broadcast.config';
 import { wallet } from './utils';
 
 enum ErrorStates {
@@ -114,7 +114,9 @@ const SubscribeButton = () => {
       const signature = await wallet.signMessage(message);
 
       const payloadBytes = createConsentProofPayload(signature, timestamp);
-      const { greeting } = broadcastConfigs.find(({ address: a }) => a === broadcastAddress);
+      const { greeting } = broadcastConfigs.find(
+        ({ address: a }) => a === broadcastAddress,
+      ) as BroadcastConfig;
       const consentProof = invitation.ConsentProofPayload.decode(payloadBytes);
       console.log('Creating conversation with: ', {
         consentProof,

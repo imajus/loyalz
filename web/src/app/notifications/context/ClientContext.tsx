@@ -19,7 +19,7 @@ export default function ClientProvider({ children }: { children: ReactElement })
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    (async () => {
+    void (async () => {
       const client = await Client.create(wallet, {
         env: 'dev',
       });
