@@ -11,19 +11,11 @@ type PropTypes = {
   children: ReactNode;
 };
 export const RequireAuth = ({ children }: PropTypes) => {
-  const { isLoggedIn, isLoading, setIsLoading } = useWeb3Auth();
+  const { isLoggedIn, isLoading } = useWeb3Auth();
   const router = useRouter();
 
   useEffect(() => {
     if (isLoading) {
-      setTimeout(() => {
-        if (isLoading) {
-          //if web3auth taking more than a minute, stop loading spinner and display login page again
-
-          toastError('Something went wrong');
-          setIsLoading?.(false);
-        }
-      }, 10000);
       return;
     }
 

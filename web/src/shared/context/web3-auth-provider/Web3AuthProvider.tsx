@@ -7,6 +7,7 @@ import { securedPages } from '@/shared/const';
 import { Page, Web3User } from '@/shared/types';
 import { removeLeadingTrailingSlashes } from '@/shared/utils';
 import { getLocalUserInfo, storeUserInfo } from '@/shared/utils/localStorage';
+import { toastError } from '@/shared/utils/toast';
 import { getUserInfo, getUserIsAuthenticated } from '@/shared/utils/web3Auth';
 import { IProvider, WEB3AUTH_NETWORK } from '@web3auth/base';
 import { Web3Auth } from '@web3auth/modal';
@@ -43,7 +44,7 @@ export const Web3AuthProvider = ({ children }: PropTypes) => {
   const [web3user, setWeb3user] = useState<Web3User | null>(null);
   const [web3auth, setWeb3auth] = useState<Web3Auth | null>(null);
   const [provider, setProvider] = useState<IProvider | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -61,6 +62,19 @@ export const Web3AuthProvider = ({ children }: PropTypes) => {
 
   const loginWeb3Auth = async () => {
     setIsLoading(true);
+    setIsLoggedIn(false);
+
+    setTimeout(() => {
+      setIsLoading?.((isLoading) => {
+        if (isLoading) {
+          //if web3auth taking more than a 30 seconds, stop loading spinner and display login page again
+
+          toastError('Something went wrong');
+        }
+
+        return false;
+      });
+    }, 30000);
 
     let w3auth = web3auth;
     if (!w3auth) {
@@ -101,7 +115,9 @@ export const Web3AuthProvider = ({ children }: PropTypes) => {
     } catch (error) {
       console.error(error);
     }
-    setIsLoading(false);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 100);
   };
 
   const logoutWeb3Auth = async () => {
