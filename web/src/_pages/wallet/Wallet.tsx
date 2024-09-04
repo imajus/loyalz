@@ -14,7 +14,7 @@ import { calculateWalletBalance } from './utils';
 export const Wallet = () => {
   const router = useRouter();
   const [walletBalance, setWalletBalance] = useState<TransactionItem[]>([]);
-  const { logoutWeb3Auth } = useWeb3Auth();
+  const { logoutWeb3Auth, isError } = useWeb3Auth();
 
   useEffect(() => {
     const init = async () => {
@@ -33,7 +33,7 @@ export const Wallet = () => {
   }, []);
 
   return (
-    <MainWrapper title="Wallet" page="wallet">
+    <MainWrapper title="Wallet" page="wallet" isError={isError}>
       <div
         className="grid m-5 gap-6 overflow-y-scroll overflow-x-hidden h-full pr-[1px]"
         style={{ scrollbarWidth: 'none', width: 'calc(100% - 40px)' }}

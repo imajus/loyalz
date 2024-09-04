@@ -7,7 +7,6 @@ import { securedPages } from '@/shared/const';
 import { Page, Web3User } from '@/shared/types';
 import { removeLeadingTrailingSlashes } from '@/shared/utils';
 import { getLocalUserInfo, storeUserInfo } from '@/shared/utils/localStorage';
-import { toastError } from '@/shared/utils/toast';
 import { getUserInfo, getUserIsAuthenticated } from '@/shared/utils/web3Auth';
 import { IProvider, WEB3AUTH_NETWORK } from '@web3auth/base';
 import { Web3Auth } from '@web3auth/modal';
@@ -24,6 +23,8 @@ type Web3AuthData = {
   setIsLoading?: Dispatch<SetStateAction<boolean>>;
   setIsLoggedIn?: Dispatch<SetStateAction<boolean>>;
   provider: IProvider | null;
+  isError: boolean;
+  setIsError?: Dispatch<SetStateAction<boolean>>;
   setProvider?: Dispatch<SetStateAction<IProvider | null>>;
   loginWeb3Auth?: () => Promise<void>;
   logoutWeb3Auth?: () => Promise<void>;
@@ -35,12 +36,14 @@ const initialWeb3AuthData = {
   isLoggedIn: false,
   provider: null,
   isLoading: false,
+  isError: false,
 };
 
 export const Web3AuthContext = createContext<Web3AuthData>(initialWeb3AuthData);
 
 export const Web3AuthProvider = ({ children }: PropTypes) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [web3user, setWeb3user] = useState<Web3User | null>(null);
   const [web3auth, setWeb3auth] = useState<Web3Auth | null>(null);
   const [provider, setProvider] = useState<IProvider | null>(null);
@@ -69,7 +72,7 @@ export const Web3AuthProvider = ({ children }: PropTypes) => {
         if (isLoading) {
           //if web3auth taking more than a 30 seconds, stop loading spinner and display login page again
 
-          toastError('Something went wrong');
+          setIsError(true);
         }
 
         return false;
@@ -134,6 +137,8 @@ export const Web3AuthProvider = ({ children }: PropTypes) => {
     web3user,
     isLoggedIn,
     isLoading,
+    isError,
+    setIsError,
     setIsLoading,
     provider,
     loginWeb3Auth,
