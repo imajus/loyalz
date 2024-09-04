@@ -9,9 +9,6 @@ import { getBurnTransaction, getMintTransaction } from '@/shared/utils/token';
 
 import { HistoryItem } from './ui/HistoryItem';
 
-//TODO: earn page data: list campaigns and exchange
-// wallet:
-
 export const HistoryPage = () => {
   const [transactions, setTransactions] = useState<TransactionItem[]>([]);
   const [hasError, setHasError] = useState(false);
