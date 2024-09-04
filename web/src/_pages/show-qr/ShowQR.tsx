@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import QRCode from 'react-qr-code';
 
-import { Button, Frame, MainWrapper } from '@/shared/components';
+import { Frame, GoBackButton, MainWrapper } from '@/shared/components';
 
 export const ShowQR = () => {
   const router = useRouter();
@@ -19,7 +19,7 @@ export const ShowQR = () => {
         </Frame>
       </div>
       <div className="flex items-center justify-center h-20 w-full">
-        <Button onClick={() => router.push('/exchange', { scroll: false })} title="Go Back" />
+        <GoBackButton handleClick={() => router.push('/exchange', { scroll: false })} />
       </div>
     </MainWrapper>
   );

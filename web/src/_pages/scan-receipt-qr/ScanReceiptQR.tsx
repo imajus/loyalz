@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { Button, Frame, MainWrapper } from '@/shared/components';
+import { Frame, GoBackButton, MainWrapper } from '@/shared/components';
 
 export const ScanReceiptQR = () => {
   const router = useRouter();
@@ -18,7 +18,7 @@ export const ScanReceiptQR = () => {
         </Frame>
       </div>
       <div className="flex items-center justify-center h-20 w-full">
-        <Button onClick={() => router.push('/earn', { scroll: false })} title="Go Back" />
+        <GoBackButton handleClick={() => router.push('/earn', { scroll: false })} />
       </div>
     </MainWrapper>
   );
