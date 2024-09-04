@@ -38,8 +38,12 @@ export const Exchange = () => {
         className="flex flex-col m-5 gap-6 overflow-y-scroll overflow-x-hidden h-full pr-[1px]"
         style={{ scrollbarWidth: 'none', width: 'calc(100% - 40px)' }}
       >
-        {campaigns.map((product) => (
-          <ExchangeItem key={product.id} product={product} walletBalance={walletBalance} />
+        {campaigns.map((product, idx) => (
+          <ExchangeItem
+            key={`exchange-item-${idx}`}
+            product={product}
+            walletBalance={walletBalance}
+          />
         ))}
       </div>
     </MainWrapper>
