@@ -15,25 +15,31 @@ export const Wallet = () => {
   const router = useRouter();
   const [walletBalance, setWalletBalance] = useState<TransactionItem[]>([]);
   const { logoutWeb3Auth, isError } = useWeb3Auth();
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const init = async () => {
-      const mints = await listMints();
-      const burns = await listBurns();
-      const campaigns = await listCampaigns();
+      try {
+        const mints = await listMints();
+        const burns = await listBurns();
+        const campaigns = await listCampaigns();
 
-      const walletBalance = calculateWalletBalance(mints, burns).map((tr, idx) =>
-        getMintTransaction(tr, campaigns, idx),
-      );
-
-      setWalletBalance(() => [...walletBalance]);
+        const walletBalance = calculateWalletBalance(mints, burns).map((tr, idx) =>
+          getMintTransaction(tr, campaigns, idx),
+        );
+        //@ts-ignore
+        setWalletBalance(() => [...walletBalance]);
+      } catch (e: any) {
+        console.error(`Wallet balance initialization failed: ${e}`);
+        setHasError(true);
+      }
     };
 
     void init();
   }, []);
 
   return (
-    <MainWrapper title="Wallet" page="wallet" isError={isError}>
+    <MainWrapper title="Wallet" page="wallet" isError={isError || hasError}>
       <div
         className="grid m-5 gap-6 overflow-y-scroll overflow-x-hidden h-full pr-[1px]"
         style={{ scrollbarWidth: 'none', width: 'calc(100% - 40px)' }}

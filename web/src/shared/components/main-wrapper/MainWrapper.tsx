@@ -1,5 +1,5 @@
 'use client';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 import { ErrorMessage, GoBackButton, Spinner } from '@/shared/components';
 import { Page } from '@/shared/types';
@@ -14,6 +14,10 @@ type PropTypes = {
 };
 export const MainWrapper = ({ title, children, isLoading, isError = false, page }: PropTypes) => {
   const [hasError, setHasError] = useState(isError);
+
+  useEffect(() => {
+    setHasError(isError);
+  }, [isError]);
 
   if (hasError) {
     return (
