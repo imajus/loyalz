@@ -5,11 +5,9 @@ import { useEffect, useState } from 'react';
 import { Button, MainWrapper } from '@/shared/components';
 import { useWeb3Auth } from '@/shared/hook';
 import { TransactionItem } from '@/shared/types';
-import { listBurns, listCampaigns, listMints } from '@/shared/utils/rollup';
-import { getMintTransaction } from '@/shared/utils/token';
+import { getWalletBalance } from '@/shared/utils/token';
 
 import { BalanceItem } from './ui/BalanceItem';
-import { calculateWalletBalance } from './utils';
 
 export const Wallet = () => {
   const router = useRouter();
@@ -20,14 +18,8 @@ export const Wallet = () => {
   useEffect(() => {
     const init = async () => {
       try {
-        const mints = await listMints();
-        const burns = await listBurns();
-        const campaigns = await listCampaigns();
+        const walletBalance = await getWalletBalance();
 
-        const walletBalance = calculateWalletBalance(mints, burns).map((tr, idx) =>
-          getMintTransaction(tr, campaigns, idx),
-        );
-        //@ts-ignore
         setWalletBalance(() => [...walletBalance]);
       } catch (e: any) {
         console.error(`Wallet balance initialization failed: ${e}`);
