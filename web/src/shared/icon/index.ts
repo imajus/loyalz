@@ -1,3 +1,4 @@
+import { GreenEllipseWithCheck } from './GreenEllipseWithCheck';
 import { RedEllipseWithCheck } from './RedEllipseWithCheck';
 
-export { RedEllipseWithCheck };
+export { GreenEllipseWithCheck, RedEllipseWithCheck };
