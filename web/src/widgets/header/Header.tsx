@@ -10,23 +10,27 @@ type PropTypes = {
 
 export const Header = ({ title }: PropTypes) => {
   return (
-    <header className="flex flex-row shrink-0 items-center justify-center border-b-[1px] bg-[#5BC8D6] w-full h-[144px] rounded-b-3xl">
-      <div className="relative w-1/3 flex flex-shrink-0 items-center justify-center">
-        <Image
-          src={Logo}
-          alt="avatar"
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="w-[35px] h-[35px]"
-        />
-        <span className="absolute top-8 font-bold text-lg text-black">Loyalz</span>
-      </div>
+    <header className="flex flex-col shrink-0 items-center justify-start w-full h-[144px]">
+      <div className="flex items-center justify-between border-b-[1px] bg-[#5BC8D6] w-full h-[82px] rounded-b-3xl px-7">
+        <div className="relative flex flex-col flex-shrink-0 items-center justify-center">
+          <Image
+            src={Logo}
+            alt="avatar"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-[28px] h-[28px]"
+          />
+          <span className="font-bold text-lg text-black">Loyalz</span>
+        </div>
 
-      <div className="h-full flex-grow flex flex-col items-end p-6 justify-end gap-3 text-black">
-        <LogoutButton />
-        <h3 className="text-4xl font-semibold text-center font-['Racing_Sans_One']">{title}</h3>
+        <div className="text-black">
+          <LogoutButton />
+        </div>
       </div>
+      <h3 className="text-4xl font-semibold text-center font-['Racing_Sans_One'] text-black">
+        {title}
+      </h3>
     </header>
   );
 };
