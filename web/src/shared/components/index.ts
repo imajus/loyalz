@@ -1,4 +1,5 @@
 import { Button } from './button/Button';
+import { DoneMessage } from './done-message/DoneMessage';
 import { ErrorMessage } from './error-message/ErrorMessage';
 import { Frame } from './frame/Frame';
 import { GoBackButton } from './go-back-button/GoBackButton';
@@ -11,6 +12,7 @@ import { Toast } from './toast/Toast';
 
 export {
   Button,
+  DoneMessage,
   ErrorMessage,
   Frame,
   GoBackButton,
