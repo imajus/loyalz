@@ -1,12 +1,11 @@
-'use client';
 import indefinite from 'indefinite';
 
-import { Button, Icon } from '@/shared/components';
-import { Product as ProductType } from '@/shared/types';
-import { toastSuccess } from '@/shared/utils/toast';
+import { Frame, Icon } from '@/shared/components';
+import { CampaignState } from '@/shared/types';
+import { brandName, tokenName } from '@/shared/utils/token';
 
 type PropTypes = {
-  product: ProductType;
+  product: CampaignState;
 };
 
 const icon =
@@ -15,18 +14,28 @@ const icon =
 export const Product = ({ product }: PropTypes) => {
   return (
     <div className="w-full flex flex-col items-center justify-center text-gray-600 gap-2 pr-[1px]">
-      <span className="font-['Radio_Canada'] text-sm text-black font-bold">{product.company}</span>
-      <Button
-        onClick={() => toastSuccess(`Bought ${product.productName}`)}
-        className="relative text-black font-['Radio_Canada'] p-3 rounded-xl flex flex-row items-center justify-start cursor-pointer border-2 border-black shadow-sm w-full gap-2"
-        btnType="grid"
-      >
-        <Icon src={icon} />
-        <div className="flex flex-col gap-1 p-1 items-center sm:items-start">
-          <span className="text-sm font-bold">{`Buy ${indefinite(product.productName)}`}</span>
-          <span className="capitalize text-xs">{`+ ${product.price} ${product.priceUnit}`}</span>
+      <span className="font-['Radio_Canada'] text-sm text-black font-bold">
+        {brandName(product.manager)}
+      </span>
+      <Frame>
+        <div className="flex flex-col w-full">
+          <div className="flex flex-col sm:flex-row p-3 w-full items-center">
+            <Icon src={icon} />
+            <div className="flex flex-col gap-1 p-1 items-center sm:items-start">
+              <span className="text-sm font-bold">{`${product.name}`}</span>
+              <div className="flex items-center justify-center flex-wrap gap-3">
+                <span className="text-xs">{`Buy ${indefinite(product.reward || '')} to get `}</span>
+                <span className="capitalize text-xs">{`${product.mintAmount} ${tokenName(product.mintToken)}`}</span>
+                {product.otherAmount && (
+                  <>
+                    <span className="text-xs">{`and ${product.otherAmount} ${tokenName(product.otherToken || '')}`}</span>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-      </Button>
+      </Frame>
     </div>
   );
 };
