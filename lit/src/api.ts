@@ -1,5 +1,5 @@
 import { LitNodeClientNodeJs } from "@lit-protocol/lit-node-client-nodejs";
-import { LitNetwork, LIT_RPC } from "@lit-protocol/constants";
+import { LIT_RPC } from "@lit-protocol/constants";
 import {
   createSiweMessage,
   generateAuthSig,
@@ -8,37 +8,28 @@ import {
 } from "@lit-protocol/auth-helpers";
 import { LitContracts } from "@lit-protocol/contracts-sdk";
 import * as ethers from "ethers";
-import dotenv from 'dotenv';
 import { litActionCode } from "./litAction.js";
+import config from './config.js';
 
-dotenv.config();
-
-const CHAIN_TO_CHECK_CONDITION_ON = process.env["CHAIN_TO_CHECK_CONDITION_ON"];
-const LIT_PKP_PUBLIC_KEY = process.env["LIT_PKP_PUBLIC_KEY"];
-const LIT_CAPACITY_CREDIT_TOKEN_ID = process.env["LIT_CAPACITY_CREDIT_TOKEN_ID"];
-const LIT_NETWORK = LitNetwork.DatilTest;
-
-export const conditionalSigning = async (privateKey: string) => {
-
+export const conditionalSigning = async () => {
   let litNodeClient: LitNodeClientNodeJs;
   let pkpInfo: {
     tokenId?: string;
     publicKey?: string;
     ethAddress?: string;
   } = {
-    publicKey: LIT_PKP_PUBLIC_KEY,
+    publicKey: config.pkpPublicKey,
   };
-
   try {
     const ethersWallet = new ethers.Wallet(
-      privateKey,
+      config.privateKey,
       new ethers.providers.JsonRpcProvider(LIT_RPC.CHRONICLE_YELLOWSTONE)
     );
 
     console.log("🔄 Connecting to the Lit network...");
     litNodeClient = new LitNodeClientNodeJs({
-      litNetwork: LIT_NETWORK,
-      debug: false,
+      litNetwork: config.network,
+      debug: config.debug,
     });
     await litNodeClient.connect();
     console.log("✅ Connected to the Lit network");
@@ -46,13 +37,13 @@ export const conditionalSigning = async (privateKey: string) => {
     console.log("🔄 Connecting LitContracts client to network...");
     const litContracts = new LitContracts({
       signer: ethersWallet,
-      network: LIT_NETWORK,
-      debug: false,
+      network: config.network,
+      debug: config.debug,
     });
     await litContracts.connect();
     console.log("✅ Connected LitContracts client to network");
 
-    if (LIT_PKP_PUBLIC_KEY === undefined || LIT_PKP_PUBLIC_KEY === "") {
+    if (!config.pkpPublicKey) {
       console.log("🔄 PKP wasn't provided, minting a new one...");
       pkpInfo = (await litContracts.pkpNftContractUtils.write.mint()).pkp;
       console.log("✅ PKP successfully minted");
@@ -60,14 +51,14 @@ export const conditionalSigning = async (privateKey: string) => {
       console.log(`ℹ️  PKP public key: ${pkpInfo.publicKey}`);
       console.log(`ℹ️  PKP ETH address: ${pkpInfo.ethAddress}`);
     } else {
-      console.log(`ℹ️  Using provided PKP: ${LIT_PKP_PUBLIC_KEY}`);
+      console.log(`ℹ️  Using provided PKP: ${config.pkpPublicKey}`);
       pkpInfo = {
-        publicKey: LIT_PKP_PUBLIC_KEY,
-        ethAddress: ethers.utils.computeAddress(`0x${LIT_PKP_PUBLIC_KEY}`),
+        publicKey: config.pkpPublicKey,
+        ethAddress: ethers.utils.computeAddress(`0x${config.pkpPublicKey}`),
       };
     }
 
-    let capacityTokenId = LIT_CAPACITY_CREDIT_TOKEN_ID;
+    let capacityTokenId = config.creditTokenId;
     if (capacityTokenId === "" || capacityTokenId === undefined) {
       console.log("🔄 No Capacity Credit provided, minting a new one...");
       capacityTokenId = (
@@ -79,7 +70,7 @@ export const conditionalSigning = async (privateKey: string) => {
       console.log(`✅ Minted new Capacity Credit with ID: ${capacityTokenId}`);
     } else {
       console.log(
-        `ℹ️  Using provided Capacity Credit with ID: ${LIT_CAPACITY_CREDIT_TOKEN_ID}`
+        `ℹ️  Using provided Capacity Credit with ID: ${config.creditTokenId}`
       );
     }
 
@@ -96,7 +87,7 @@ export const conditionalSigning = async (privateKey: string) => {
     console.log("🔄 Executing Lit Action...");
     const litActionSignatures = await litNodeClient.executeJs({
       sessionSigs: await litNodeClient.getSessionSigs({
-        chain: CHAIN_TO_CHECK_CONDITION_ON,
+        chain: config.chainToCheckConditionOn,
         capabilityAuthSigs: [capacityDelegationAuthSig],
         expiration: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString(), // 24 hours
         resourceAbilityRequests: [
@@ -132,7 +123,7 @@ export const conditionalSigning = async (privateKey: string) => {
             conditionType: "evmBasic",
             contractAddress: "",
             standardContractType: "",
-            chain: CHAIN_TO_CHECK_CONDITION_ON,
+            chain: config.chainToCheckConditionOn,
             method: "eth_getBalance",
             parameters: [":userAddress", "latest"],
             returnValueTest: {
@@ -160,7 +151,7 @@ export const conditionalSigning = async (privateKey: string) => {
             toSign,
           });
         })(),
-        chain: CHAIN_TO_CHECK_CONDITION_ON,
+        chain: config.chainToCheckConditionOn,
         dataToSign: ethers.utils.arrayify(ethers.utils.keccak256([1, 2, 3, 4, 5])),
         publicKey: pkpInfo.publicKey,
       },
