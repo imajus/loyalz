@@ -15,7 +15,9 @@
     "@lit-protocol/constants": "^6.4.10",
     "@lit-protocol/contracts-sdk": "^6.4.10",
     "@lit-protocol/lit-node-client-nodejs": "^6.4.10",
-    "ethers": "5.7.2"
+    "bs58": "^6.0.0",
+    "ethers": "v5",
+    "ipfs-only-hash": "^4.0.0"
   },
   "devDependencies": {
     "@types/chai": "^4.3.17",
