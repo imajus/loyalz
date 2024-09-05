@@ -1,9 +1,8 @@
-import { broadcastConfigs } from '@/app/broadcast.config';
+import { Message } from '@/shared/models/xmtp';
 import { ReactElement } from 'react';
-import { Message } from '../model/db';
 
-const title = (address: string) => {
-  return broadcastConfigs.find((broadcasto) => broadcasto.address === address)?.name;
+const title = () => {
+  return 'Title';
 };
 
 export function Content({ content }: { content: any }): ReactElement {
@@ -25,7 +24,7 @@ export default function MessageCellView({ message }: { message: Message }): Reac
         title={message.sentByMe ? 'You' : message.senderAddress}
         className={message.sentByMe ? 'text-zinc-500' : 'text-green-500'}
       >
-        {title(message.senderAddress) + ' ' + message.sentAt})
+        {title() + ' ' + message.sentAt})
       </span>
       <div className="ml-2">
         <MessageContent message={message} />
