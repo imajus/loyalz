@@ -1,13 +1,13 @@
 'use client';
-import ClientProvider from './context/ClientContext';
-import NewsListView from './views/NewsListView';
+// import XmtpClientProvider from '@/shared/context/xmtp/XmtpClientProvider';
+// import NewsListView from './views/NewsListView';
 
 export default function page() {
   return (
     <div>
-      <ClientProvider>
+      {/* <XmtpClientProvider>
         <NewsListView />
-      </ClientProvider>
+      </XmtpClientProvider> */}
     </div>
   );
 }

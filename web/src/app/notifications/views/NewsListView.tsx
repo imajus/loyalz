@@ -1,11 +1,9 @@
+import { useClient, useConversations, useMessages } from '@/shared/hook/xmtp';
+import { Message } from '@/shared/models/xmtp';
 import { ContentTypeReaction } from '@xmtp/content-type-reaction';
 import { ReactElement } from 'react';
 // @ts-ignore
 import { ContentTypeId } from '@xmtp/xmtp-js';
-import { useClient } from '../hooks/useClient';
-import { useConversations } from '../hooks/useConversations';
-import { useMessages } from '../hooks/useMessages';
-import { Message } from '../model/db';
 import MessageCellView from './MessageCellView';
 
 const appearsInMessageList = (message: Message): boolean => {
@@ -16,8 +14,8 @@ const appearsInMessageList = (message: Message): boolean => {
 };
 
 export function NewsListView(): ReactElement {
-  const client = useClient();
-  const conversations = useConversations(client);
+  const { client } = useClient();
+  const conversations = useConversations(['']);
   const messages = useMessages(conversations)?.filter(
     ({ senderAddress }) => senderAddress !== client?.address,
   );
