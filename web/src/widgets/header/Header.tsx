@@ -10,7 +10,7 @@ type PropTypes = {
 
 export const Header = ({ title }: PropTypes) => {
   return (
-    <header className="flex flex-col shrink-0 items-center justify-start w-full h-[144px]">
+    <header className="flex flex-col shrink-0 items-center justify-start w-full h-[144px] gap-6">
       <div className="flex items-center justify-between border-b-[1px] bg-[#5BC8D6] w-full h-[82px] rounded-b-3xl px-7">
         <div className="relative flex flex-col flex-shrink-0 items-center justify-center">
           <Image
