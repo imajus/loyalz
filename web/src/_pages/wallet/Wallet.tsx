@@ -47,13 +47,13 @@ export const Wallet = () => {
       </div>
       <div className="flex flex-col items-center justify-center h-32 gap-3 w-full">
         <Button
-          onClick={() => router.push('/history', { scroll: false })}
+          onClick={() => router.push('/customer/history', { scroll: false })}
           title="Transaction history"
         />
         <Button
           onClick={async () => {
             await logoutWeb3Auth?.();
-            router.push('/earn', { scroll: false });
+            router.push('/customer/earn', { scroll: false });
           }}
           title="Log out"
         />

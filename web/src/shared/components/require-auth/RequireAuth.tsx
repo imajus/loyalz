@@ -20,7 +20,7 @@ export const RequireAuth = ({ children }: PropTypes) => {
     }
 
     if (!isLoggedIn) {
-      router.push('/web3auth', { scroll: false });
+      router.push('/customer/web3auth', { scroll: false });
       toastError('Authorization requred');
     }
   }, [router, isLoggedIn, isLoading]);

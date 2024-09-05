@@ -22,7 +22,7 @@ export const Footer = ({ currentPage }: PropTypes) => {
                   'after:content-[" "] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-white',
                 'hover:after:content-[" "] hover:after:absolute hover:after:left-0 hover:after:bottom-0 hover:after:w-full hover:after:h-[2px] hover:after:bg-white',
               )}
-              href={`/${page}`}
+              href={`/customer/${page}`}
               onClick={(e) => {
                 if (!isCurrent) return;
                 e.stopPropagation();

@@ -19,7 +19,7 @@ export const ShowQR = () => {
         </Frame>
       </div>
       <div className="flex items-center justify-center h-20 w-full">
-        <GoBackButton handleClick={() => router.push('/exchange', { scroll: false })} />
+        <GoBackButton handleClick={() => router.push('/customer/exchange', { scroll: false })} />
       </div>
     </MainWrapper>
   );

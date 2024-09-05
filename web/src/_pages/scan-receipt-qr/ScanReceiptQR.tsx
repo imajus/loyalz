@@ -18,7 +18,7 @@ export const ScanReceiptQR = () => {
         </Frame>
       </div>
       <div className="flex items-center justify-center h-20 w-full">
-        <GoBackButton handleClick={() => router.push('/earn', { scroll: false })} />
+        <GoBackButton handleClick={() => router.push('/customer/earn', { scroll: false })} />
       </div>
     </MainWrapper>
   );
