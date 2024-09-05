@@ -2,13 +2,13 @@
 import { usePathname } from 'next/navigation';
 
 import { Button, MainWrapper } from '@/shared/components';
-import { pages } from '@/shared/const';
+import { customerPages } from '@/shared/const';
 import { Page } from '@/shared/types';
 import { removeLeadingTrailingSlashes } from '@/shared/utils';
 
 export default function NotFound() {
   const slug = removeLeadingTrailingSlashes(usePathname()) as Page;
-  const page: Page = pages.includes(slug) ? slug : 'earn';
+  const page: Page = customerPages.includes(slug) ? slug : 'earn';
   return (
     <div className="w-full h-full sm:w-96 bg-white sm:rounded-2xl flex flex-col justify-start items-center">
       <MainWrapper title="Wallet" page={page}>

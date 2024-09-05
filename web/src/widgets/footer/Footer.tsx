@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { pageIcons, pages } from '@/shared/const';
+import { customerPages, pageIcons } from '@/shared/const';
 import { Page } from '@/shared/types';
 import { classNames } from '@/shared/utils';
 
@@ -11,7 +11,7 @@ export const Footer = ({ currentPage }: PropTypes) => {
   return (
     <footer className="h-[77px] w-full flex items-center justify-center bg-[#F23B9C] flex-shrink-0 rounded-t-3xl">
       <div className="flex flex-row justify-center items-center overflow-hidden gap-9">
-        {pages.map((page) => {
+        {customerPages.map((page) => {
           const isCurrent = page === currentPage;
           return (
             <Link
