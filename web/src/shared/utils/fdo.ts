@@ -1,10 +1,7 @@
 interface ReceiptData {
-  organisationId: string;
-  fiscalId: string;
-  transactionId: string;
+  id: string;
   items: {
-    productId: string;
-    name: string;
+    sku: string;
     quantity: number;
   }[];
 }
@@ -17,17 +14,5 @@ export async function fetchReceiptData(link: string): Promise<ReceiptData> {
   const url = new URL('https://n8n.bishmanov.kz/webhook/kaztel-ofd');
   url.searchParams.set('qr-data', link);
   const res = await fetch(url);
-  const [{ orgId, ticket }] = await res.json();
-  const { fiscalId, transactionId, items } = ticket;
-  return {
-    organisationId: orgId,
-    fiscalId,
-    transactionId,
-    // @ts-ignore
-    items: items.map(({ commodity: { productId, name, quantity } }) => ({
-      productId,
-      name,
-      quantity,
-    })),
-  };
+  return res.json();
 }

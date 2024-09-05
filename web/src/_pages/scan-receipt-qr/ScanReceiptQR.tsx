@@ -1,8 +1,16 @@
 'use client';
 
+import { Frame, GoBackButton, MainWrapper } from '@/shared/components';
+import { fetchReceiptData } from '@/shared/utils/fdo';
 import { useRouter } from 'next/navigation';
 
-import { Frame, GoBackButton, MainWrapper } from '@/shared/components';
+void (async () => {
+  console.log(
+    await fetchReceiptData(
+      'https://consumer.oofd.kz/?i=2936414372&f=010100886168&s=3247.00&t=20240613T191146',
+    ),
+  );
+})();
 
 export const ScanReceiptQR = () => {
   const router = useRouter();

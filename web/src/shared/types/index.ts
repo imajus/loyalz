@@ -73,6 +73,7 @@ export type TokenEvent = {
   customer: string;
   token: string;
   amount: number;
+  timestamp: number;
 };
 
 export type CreateCampaignInputs = {
