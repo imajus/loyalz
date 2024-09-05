@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="flex flex-col gap-3 items-center justify-center h-[100dvh] w-screen">
+      <body className="flex flex-col items-center justify-center h-[100dvh] w-screen">
         <StoreProvider>
           <Web3AuthProvider>{children}</Web3AuthProvider>
         </StoreProvider>
