@@ -16,6 +16,7 @@ const Message = ({ children }: { children: ReactNode }) => {
 export const Earn = () => {
   const router = useRouter();
   const [isDone, setIsDone] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [hasError, setHasError] = useState(false);
   const [campaigns, setCampaigns] = useState<CampaignState[]>([]);
@@ -23,6 +24,7 @@ export const Earn = () => {
   useEffect(() => {
     const init = async () => {
       try {
+        setIsLoading(true);
         const campaigns = await listCampaigns();
         const eligibleCampaigns = campaigns.filter((c) => c.active && c.reward);
         setCampaigns(eligibleCampaigns);
@@ -30,6 +32,7 @@ export const Earn = () => {
         console.error(`Wallet balance initialization failed: ${e}`);
         setHasError(true);
       }
+      setIsLoading(false);
     };
 
     void init();
@@ -53,7 +56,7 @@ export const Earn = () => {
   }
 
   return (
-    <MainWrapper title="Earn" page="earn">
+    <MainWrapper title="Earn" page="earn" isLoading={isLoading}>
       <div
         className="flex m-5 gap-6 overflow-y-scroll overflow-x-hidden h-full flex-col items-start flex-grow"
         style={{ scrollbarWidth: 'none', width: 'calc(100% - 40px)' }}
@@ -65,7 +68,7 @@ export const Earn = () => {
       </div>
       <div className="flex items-center justify-center h-20 w-full">
         <Button
-          onClick={() => router.push('scan-receipt-qr', { scroll: false })}
+          onClick={() => router.push('/customer/scan-receipt-qr', { scroll: false })}
           title="Scan receipt QR"
         />
       </div>
