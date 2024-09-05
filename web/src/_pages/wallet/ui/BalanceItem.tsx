@@ -26,7 +26,7 @@ export const BalanceItem = ({ item }: PropTypes) => {
         </div>
 
         <div className="w-[88px] flex items-center justify-center sm:justify-end text-sm font-bold flex-shrink-0">
-          {item.sum.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+          {item.tokenAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })}
         </div>
       </div>
     </Frame>

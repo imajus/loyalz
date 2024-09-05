@@ -26,15 +26,9 @@ export type TransactionItem = {
   id: string;
   brandName: string;
   productName: string;
-  sum: number;
   token: string;
+  tokenAmount: number;
   type: 'burn' | 'mint';
-};
-
-export type WalletBalanceItem = {
-  company: string;
-  sum: number;
-  unit: string;
 };
 
 export type Web3User = {
@@ -105,4 +99,18 @@ export type AddReceiptInputs = {
 export type ClaimRewardInputs = {
   campaign: number;
   customer: string;
+};
+
+export type Campaign = {
+  name: string;
+  productName: string;
+  brandName: string;
+  mintToken: string;
+  mintAmount: number;
+  reward: string;
+  otherToken: string;
+  otherAmount: number;
+  retailers: string[];
+  active: boolean;
+  blockchain: string;
 };

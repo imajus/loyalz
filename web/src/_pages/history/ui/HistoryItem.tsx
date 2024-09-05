@@ -5,7 +5,7 @@ type PropTypes = {
 };
 
 const getSum = (item: TransactionItem) => {
-  return `${item.type === 'burn' ? '' : '+'}${item.sum}`;
+  return `${item.type === 'burn' ? '' : '+'}${item.tokenAmount}`;
 };
 
 const getEarnedText = (item: TransactionItem) => {
