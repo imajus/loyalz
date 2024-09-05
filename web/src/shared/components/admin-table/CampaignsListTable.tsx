@@ -9,7 +9,7 @@ type PropTypes = {
 
 export const CampaignsListTable = ({ campaigns }: PropTypes) => {
   return (
-    <Table className="h-40">
+    <Table className="max-h-64 h-fit">
       <TableHeader>
         <TableRow className="sticky top-0 bg-white">
           <TableHead>Campaign</TableHead>

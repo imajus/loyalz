@@ -35,7 +35,6 @@ export const BrandManagerHome = () => {
       <Button className="w-40" onClick={() => setIsFormVisible(true)}>
         + Create campaign
       </Button>
-      <div className="w-full h-full flex items-center justify-center bg-slate-300/50"></div>
       <Overlay
         isVisible={isFormVisible}
         style={{
