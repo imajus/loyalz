@@ -1,3 +1,4 @@
+import { BrandManagerHome } from './brand-manager-home/BrandManagerHome';
 import { CustomerHome } from './customer-home/CustomerHome';
 import { Earn } from './earn/Earn';
 import { Exchange } from './exchange/Exchange';
@@ -9,6 +10,7 @@ import { Wallet } from './wallet/Wallet';
 import { Web3AuthPage } from './web-auth/Web3Auth';
 
 export {
+  BrandManagerHome,
   CustomerHome,
   Earn,
   Exchange,
