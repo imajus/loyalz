@@ -1,4 +1,5 @@
 import { TransactionItem } from '@/shared/types';
+import moment from 'moment';
 
 type PropTypes = {
   item: TransactionItem;
@@ -19,6 +20,11 @@ const getEarnedText = (item: TransactionItem) => {
   return '';
 };
 
+function getTimestamp(item: TransactionItem) {
+  // All formats: https://momentjs.com/docs/?/displaying/format/#/displaying/format/
+  return moment(item.timestamp).format('LLL');
+}
+
 export const HistoryItem = ({ item }: PropTypes) => {
   return (
     <div className="h-40 w-full flex flex-row items-start justify-center text-gray-600">
@@ -26,6 +32,7 @@ export const HistoryItem = ({ item }: PropTypes) => {
         <span className="overflow-ellipsis whitespace-nowrap overflow-hidden">
           {getEarnedText(item)}
         </span>
+        <span>{getTimestamp(item)}</span>
       </div>
       <div className="flex flex-col gap-1 p-1 w-3/12 items-end">
         <span>{getSum(item)}</span>

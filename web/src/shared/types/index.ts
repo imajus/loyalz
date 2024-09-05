@@ -29,6 +29,7 @@ export type TransactionItem = {
   token: string;
   tokenAmount: number;
   type: 'burn' | 'mint';
+  timestamp: number;
 };
 
 export type Web3User = {

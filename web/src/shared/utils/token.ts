@@ -32,7 +32,7 @@ export const getMintTransaction = (
   shortenHashes = true,
   prefix = 'mint',
 ): TransactionItem => {
-  const { token, amount } = mint;
+  const { token, amount, timestamp } = mint;
   const campaign = campaigns[mint.campaign];
 
   return {
@@ -42,6 +42,7 @@ export const getMintTransaction = (
     tokenAmount: amount,
     brandName: shortenHashes ? brandName(campaign.manager) : campaign.manager,
     type: 'mint',
+    timestamp,
   };
 };
 
@@ -79,7 +80,7 @@ export const getBurnTransaction = (
   campaigns: CampaignState[],
   index: number,
 ): TransactionItem => {
-  const { token, amount } = burn;
+  const { token, amount, timestamp } = burn;
   const campaign = campaigns[burn.campaign];
 
   return {
@@ -89,6 +90,7 @@ export const getBurnTransaction = (
     tokenAmount: amount,
     brandName: brandName(campaign.manager),
     type: 'burn',
+    timestamp,
   };
 };
 

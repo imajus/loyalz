@@ -7,6 +7,7 @@ import { TransactionItem } from '@/shared/types';
 import { listBurns, listCampaigns, listMints } from '@/shared/utils/rollup';
 import { getBurnTransaction, getMintTransaction } from '@/shared/utils/token';
 
+import { sortBy } from 'lodash';
 import { HistoryItem } from './ui/HistoryItem';
 
 export const HistoryPage = () => {
@@ -17,12 +18,9 @@ export const HistoryPage = () => {
     const fetchData = async () => {
       try {
         const campaigns = await listCampaigns();
-
         const burns = (await listBurns()).map((tr, idx) => getBurnTransaction(tr, campaigns, idx));
-
         const mints = (await listMints()).map((tr, idx) => getMintTransaction(tr, campaigns, idx));
-
-        setTransactions(() => [...burns, ...mints]);
+        setTransactions(() => sortBy([...burns, ...mints], 'timestamp'));
       } catch (e: any) {
         console.error(`History initialization failed: ${e}`);
         setHasError(true);
