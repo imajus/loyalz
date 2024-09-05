@@ -67,6 +67,7 @@ const addReceipt = {
             customer: msgSender,
             token: campaign.mintToken,
             amount: campaign.mintAmount * inputs.quantity,
+            timestamp: Date.now(),
           });
           return length - 1;
         }
@@ -102,12 +103,14 @@ const claimReward = {
         customer: inputs.customer,
         token: campaign.mintToken,
         amount: campaign.mintAmount,
+        timestamp: Date.now(),
       },
       {
         campaign: inputs.campaign,
         customer: inputs.customer,
         token: campaign.otherToken,
         amount: campaign.otherAmount,
+        timestamp: Date.now(),
       },
     );
     return state;

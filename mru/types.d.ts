@@ -26,6 +26,7 @@ interface TokenEvent {
   customer: string;
   token: string;
   amount: number;
+  timestamp: number;
 }
 
 interface LoyalzState {

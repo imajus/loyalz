@@ -44,13 +44,15 @@
         "campaign": 0,
         "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
         "token": "0x0000000000000000000000000000000000000000",
-        "amount": 1000
+        "amount": 1000,
+        "timestamp": 1725537237581
       },
       {
         "campaign": 1,
         "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
         "token": "0x0000000000000000000000000000000000000001",
-        "amount": 100
+        "amount": 100,
+        "timestamp": 1725537237582
       }
     ],
     "burns": [
@@ -58,13 +60,15 @@
         "campaign": 1,
         "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
         "token": "0x0000000000000000000000000000000000000000",
-        "amount": 1000
+        "amount": 1000,
+        "timestamp": 1725545237583
       },
       {
         "campaign": 1,
         "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
         "token": "0x0000000000000000000000000000000000000001",
-        "amount": 100
+        "amount": 100,
+        "timestamp": 1725547237584
       }
     ]
   }
