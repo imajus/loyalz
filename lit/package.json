@@ -2,10 +2,11 @@
   "name": "conditional-signing-in-nodejs",
   "version": "0.1.0",
   "description": "Example of conditional signing within a Lit Action using Node.js",
-  "main": "index.js",
+  "main": "dist/index.js",
   "license": "MIT",
   "type": "module",
   "scripts": {
+    "dev": "tsc -w -p . & nodemon dist/index.js",
     "test": "npx @dotenvx/dotenvx run -- mocha test/**/*.spec.ts"
   },
   "dependencies": {
@@ -24,9 +25,8 @@
     "chai": "^5.1.1",
     "chai-json-schema": "^1.5.1",
     "mocha": "^10.7.3",
-    "ts-node": "^10.9.2",
-    "tslib": "^2.6.2",
-    "tsx": "^4.17.0",
+    "nodemon": "^3.1.4",
+    "tsc": "^2.0.4",
     "typescript": "^5.5.4"
   }
 }
