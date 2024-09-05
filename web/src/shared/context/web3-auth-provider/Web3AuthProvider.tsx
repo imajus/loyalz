@@ -4,7 +4,7 @@ import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState
 
 import { clientId, privateKeyProvider } from '@/_pages/web-auth/config';
 import { securedPages } from '@/shared/const';
-import { Page, Web3User } from '@/shared/types';
+import { SecuredPage, Web3User } from '@/shared/types';
 import { removeLeadingTrailingSlashes } from '@/shared/utils';
 import { getLocalUserInfo, storeUserInfo } from '@/shared/utils/localStorage';
 import { getUserInfo, getUserIsAuthenticated } from '@/shared/utils/web3Auth';
@@ -51,7 +51,7 @@ export const Web3AuthProvider = ({ children }: PropTypes) => {
   const pathname = usePathname();
 
   useEffect(() => {
-    const path = removeLeadingTrailingSlashes(pathname) as Page;
+    const path = removeLeadingTrailingSlashes(pathname) as SecuredPage;
 
     if (securedPages.includes(path)) {
       void loginWeb3Auth();
@@ -130,6 +130,7 @@ export const Web3AuthProvider = ({ children }: PropTypes) => {
     setProvider?.(null);
     setIsLoggedIn?.(false);
     storeUserInfo(null);
+    window.location.reload();
   };
 
   const web3AuthData: Web3AuthData = {

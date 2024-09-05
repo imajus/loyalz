@@ -1,10 +1,11 @@
 'use client';
 import { usePathname, useRouter } from 'next/navigation';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
-import { useWeb3Auth } from '@/shared/hook';
 import { removeLeadingTrailingSlashes } from '@/shared/utils';
+import { getLocalUserInfo } from '@/shared/utils/localStorage';
 import { toastError } from '@/shared/utils/toast';
+import { getUserIsAuthenticated } from '@/shared/utils/web3Auth';
 
 import { Spinner } from '../spinner/Spinner';
 
@@ -12,21 +13,24 @@ type PropTypes = {
   children: ReactNode;
 };
 export const RequireAuth = ({ children }: PropTypes) => {
-  const { isLoggedIn, isLoading } = useWeb3Auth();
   const router = useRouter();
   const pathname = usePathname();
   const pageSlug = removeLeadingTrailingSlashes(pathname);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    if (isLoading) {
-      return;
-    }
-
-    if (!isLoggedIn) {
+    setIsLoading(true);
+    const currentUser = getLocalUserInfo();
+    if (!getUserIsAuthenticated(currentUser)) {
       router.push(`/web3auth?redirectUrl=${pageSlug}`, { scroll: false });
       toastError('Authorization requred');
+      setIsLoggedIn(false);
+      return;
     }
-  }, [router, isLoggedIn, isLoading]);
+    setIsLoggedIn(true);
+    setIsLoading(false);
+  }, [router, pageSlug]);
 
   if (isLoading) return <Spinner />;
 

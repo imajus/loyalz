@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 import { ArrowLeftRight, Globe, HandCoins, Newspaper } from '@/shared/assets';
-import { Page } from '@/shared/types';
+import { Page, SecuredPage } from '@/shared/types';
 
 export const appName = 'Loyalz';
 export const appUrl = 'https://example.com';
@@ -17,4 +17,9 @@ export const pageIcons: Record<Page, ReactNode> = {
   '': null,
 };
 
-export const securedPages: Page[] = ['wallet', 'exchange', 'news', 'brand-manager'];
+export const securedPages: SecuredPage[] = [
+  'customer/wallet',
+  'customer/exchange',
+  'customer/news',
+  'brand-manager',
+];
