@@ -1,3 +1,4 @@
+import { CampaignsListTable } from './admin-table/CampaignsListTable';
 import { Button } from './button/Button';
 import { DoneMessage } from './done-message/DoneMessage';
 import { ErrorMessage } from './error-message/ErrorMessage';
@@ -13,6 +14,7 @@ import { Toast } from './toast/Toast';
 
 export {
   Button,
+  CampaignsListTable,
   DoneMessage,
   ErrorMessage,
   Frame,

@@ -17,7 +17,7 @@ export default function BrandManagerLayout({
   children: ReactNode;
 }>) {
   return (
-    <div className="w-full h-full bg-white flex flex-col justify-start items-center">
+    <div className="w-full h-full bg-white flex flex-col justify-start items-center p-5">
       <BrandManagersHeader />
       {children}
       <Toast />

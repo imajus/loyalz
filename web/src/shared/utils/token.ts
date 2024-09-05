@@ -1,6 +1,6 @@
 import { calculateWalletBalance } from '@/_pages/wallet/utils';
 
-import { CampaignState, TokenEvent, TransactionItem } from '../types';
+import { Campaign, CampaignState, TokenEvent, TransactionItem } from '../types';
 import { listBurns, listCampaigns, listMints } from './rollup';
 
 export const shortHash = (hash: string) => {
@@ -30,17 +30,47 @@ export const getMintTransaction = (
   campaigns: CampaignState[],
   index: number,
   shortenHashes = true,
+  prefix = 'mint',
 ): TransactionItem => {
   const { token, amount } = mint;
   const campaign = campaigns[mint.campaign];
 
   return {
-    id: `mint-${index}`,
+    id: `${prefix}-${index}`,
     productName: shortenHashes ? productName(campaign.sku) : campaign.sku,
-    sum: amount,
     token: shortenHashes ? tokenName(token) : token,
+    tokenAmount: amount,
     brandName: shortenHashes ? brandName(campaign.manager) : campaign.manager,
     type: 'mint',
+  };
+};
+
+export const getCampaign = (campaign: CampaignState, shortenHashes = true): Campaign => {
+  const {
+    name,
+    active,
+    mintToken,
+    mintAmount,
+    manager,
+    sku,
+    reward,
+    otherToken,
+    otherAmount,
+    retailers,
+  } = campaign;
+
+  return {
+    name: name,
+    productName: shortenHashes ? productName(sku) : sku,
+    brandName: shortenHashes ? brandName(manager) : manager,
+    mintToken: shortenHashes ? tokenName(mintToken) : mintToken,
+    mintAmount: mintAmount,
+    reward: reward || '',
+    otherToken: shortenHashes ? tokenName(otherToken || '') : otherToken || '',
+    otherAmount: otherAmount || 0,
+    retailers: retailers.map((r) => (shortenHashes ? tokenName(r) : r)),
+    active: active,
+    blockchain: '',
   };
 };
 
@@ -55,8 +85,8 @@ export const getBurnTransaction = (
   return {
     id: `burn-${index}`,
     productName: productName(campaign.reward || ''),
-    sum: amount,
     token: tokenName(token),
+    tokenAmount: amount,
     brandName: brandName(campaign.manager),
     type: 'burn',
   };
@@ -81,10 +111,10 @@ export const getTokensLeftForExchangingMint = (
   const { mintToken, mintAmount, otherToken, otherAmount } = mint;
 
   const walletItem = walletBalance.filter((item) => item.token === mintToken)?.[0];
-  const tokensLeft = walletItem ? mintAmount - (walletItem?.sum || 0) : mintAmount;
+  const tokensLeft = walletItem ? mintAmount - (walletItem?.tokenAmount || 0) : mintAmount;
 
   const otherWalletItem = walletBalance.filter((item) => item.token === otherToken)?.[0];
-  const otherTokensLeft = otherAmount ? otherAmount - (otherWalletItem?.sum || 0) : 0;
+  const otherTokensLeft = otherAmount ? otherAmount - (otherWalletItem?.tokenAmount || 0) : 0;
 
   return { tokensLeft: Math.max(0, tokensLeft), otherTokensLeft: Math.max(0, otherTokensLeft) };
 };
