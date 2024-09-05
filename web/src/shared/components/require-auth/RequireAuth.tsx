@@ -1,8 +1,9 @@
 'use client';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { ReactNode, useEffect } from 'react';
 
 import { useWeb3Auth } from '@/shared/hook';
+import { removeLeadingTrailingSlashes } from '@/shared/utils';
 import { toastError } from '@/shared/utils/toast';
 
 import { Spinner } from '../spinner/Spinner';
@@ -13,6 +14,8 @@ type PropTypes = {
 export const RequireAuth = ({ children }: PropTypes) => {
   const { isLoggedIn, isLoading } = useWeb3Auth();
   const router = useRouter();
+  const pathname = usePathname();
+  const pageSlug = removeLeadingTrailingSlashes(pathname);
 
   useEffect(() => {
     if (isLoading) {
@@ -20,7 +23,7 @@ export const RequireAuth = ({ children }: PropTypes) => {
     }
 
     if (!isLoggedIn) {
-      router.push('/customer/web3auth', { scroll: false });
+      router.push(`/web3auth?redirectUrl=${pageSlug}`, { scroll: false });
       toastError('Authorization requred');
     }
   }, [router, isLoggedIn, isLoading]);
