@@ -10,7 +10,6 @@ interface CampaignState {
   otherToken?: string;
   otherAmount?: number;
   retailers: string[];
-  active: boolean;
 }
 
 interface ReceiptState {

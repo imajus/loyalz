@@ -5,10 +5,10 @@ import { ActionSchema, SolidityType } from '@stackr/sdk';
 export const createCampaignSchema = new ActionSchema('createCampaignSchema', {
   name: SolidityType.STRING,
   sku: SolidityType.STRING,
-  mintToken: SolidityType.ADDRESS,
+  mintToken: SolidityType.STRING,
   mintAmount: SolidityType.UINT,
   reward: SolidityType.STRING,
-  otherToken: SolidityType.ADDRESS,
+  otherToken: SolidityType.STRING,
   otherAmount: SolidityType.UINT,
   //TODO: Other fields...
 });

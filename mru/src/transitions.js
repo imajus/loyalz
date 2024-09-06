@@ -13,11 +13,15 @@ import { LoyalzStateWrapper } from './machine.js';
  */
 const createCampaign = {
   handler: ({ inputs, state, msgSender }) => {
+    const regex = /\d+\:0x[\d\w]{40,64}/i;
+    REQUIRE(regex.test(inputs.mintToken), 'Token address value is wrong');
+    if (inputs.otherToken) {
+      REQUIRE(regex.test(inputs.otherToken), 'Token address value is wrong');
+    }
     state.campaigns.push({
       ...inputs,
       manager: msgSender,
       retailers: [],
-      active: true,
     });
     return state;
   },

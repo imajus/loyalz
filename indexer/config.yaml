@@ -1,20 +1,21 @@
 # yaml-language-server: $schema=./node_modules/envio/evm.schema.json
 name: LoyalzIndexer
+contracts:
+  - name: MultiTokenERC20
+    handler: ./src/EventHandlers.ts
+    events:
+      - event: OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
+      - event: TokenCreated(string indexed name, address indexed tokenAddress)
+      - event: TokensBurned(string name, address from, uint256 amount)
+      - event: TokensMinted(string name, address to, uint256 amount)
 networks:
 - id: 2810
   rpc_config:
     url: https://rpc-quicknode-holesky.morphl2.io
   start_block: 7733089
   contracts:
-  - name: MultiTokenERC20
-    address:
-    - 0x31d1042231fcD69d22c3076F841E5970f4a1603c
-    handler: ./src/EventHandlers.js
-    events:
-    - event: OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
-    - event: TokenCreated(string indexed name, address indexed tokenAddress)
-    - event: TokensBurned(string name, address from, uint256 amount)
-    - event: TokensMinted(string name, address to, uint256 amount)
+    - name: MultiTokenERC20
+      address: 0x31d1042231fcD69d22c3076F841E5970f4a1603c
 - id: 88882 # Chiliz Spicy Testnet
   rpc_config:
     url: https://spicy-rpc.chiliz.com
@@ -22,23 +23,14 @@ networks:
   contracts:
     - name: MultiTokenERC20
       address: 0x10bAc9115678D7B798B36b1D6Da68E0248873EBE
-      # events:
-      # - event: OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
-      # - event: TokenCreated(string indexed name, address indexed tokenAddress)
-      # - event: TokensBurned(string name, address from, uint256 amount)
-      # - event: TokensMinted(string name, address to, uint256 amount)
-# - id: 31 # Rootstock Testnet
-#   rpc_config:
-#     url: https://rpc.testnet.rootstock.io/L6ZhwA295IZEj8TgDgtnlNnoVumEws-T
-#   start_block: 5498226
-#   contracts:
-#     - name: MultiTokenERC20
-#       address: 0x0390eeb6B08D02f4e392866502D161Ad4105D2f3
-#       events:
-#       - event: OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
-#       - event: TokenCreated(string indexed name, address indexed tokenAddress)
-#       - event: TokensBurned(string name, address from, uint256 amount)
-#       - event: TokensMinted(string name, address to, uint256 amount)
+- id: 31 # Rootstock Testnet
+  rpc_config:
+    url: https://rpc.testnet.rootstock.io/L6ZhwA295IZEj8TgDgtnlNnoVumEws-T
+    initial_block_interval: 1500
+  start_block: 5498226
+  contracts:
+    - name: MultiTokenERC20
+      address: 0x0390eeb6B08D02f4e392866502D161Ad4105D2f3
 - id: 296 # Hedera Testnet
   rpc_config:
     url: https://testnet.hashio.io/api

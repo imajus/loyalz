@@ -19,10 +19,10 @@ const main = async () => {
     {
       name: 'Campaign #1',
       sku: '12345678',
-      mintToken: ZeroAddress,
+      mintToken: `2810:${ZeroAddress}`,
       mintAmount: 1,
       reward: 'xxx',
-      otherToken: ZeroAddress,
+      otherToken: `88882:${ZeroAddress}`,
       otherAmount: 1,
     },
     managerWallet,
