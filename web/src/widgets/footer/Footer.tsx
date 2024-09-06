@@ -10,7 +10,7 @@ type PropTypes = {
 export const Footer = ({ currentPage }: PropTypes) => {
   return (
     <footer className="h-[77px] w-full flex items-center justify-center bg-[#F23B9C] flex-shrink-0 rounded-t-3xl">
-      <div className="flex flex-row justify-center items-center overflow-hidden gap-9">
+      <div className="flex flex-row justify-center items-center overflow-hidden gap-9 text-white">
         {customerPages.map((page) => {
           const isCurrent = page === currentPage;
           return (
