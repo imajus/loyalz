@@ -27,13 +27,13 @@ networks:
       # - event: TokenCreated(string indexed name, address indexed tokenAddress)
       # - event: TokensBurned(string name, address from, uint256 amount)
       # - event: TokensMinted(string name, address to, uint256 amount)
-- id: 31 # Rootstock Testnet
-  rpc_config:
-    url: https://rpc.testnet.rootstock.io/L6ZhwA295IZEj8TgDgtnlNnoVumEws-T
-  start_block: 5498226
-  contracts:
-    - name: MultiTokenERC20
-      address: 0x0390eeb6B08D02f4e392866502D161Ad4105D2f3
+# - id: 31 # Rootstock Testnet
+#   rpc_config:
+#     url: https://rpc.testnet.rootstock.io/L6ZhwA295IZEj8TgDgtnlNnoVumEws-T
+#   start_block: 5498226
+#   contracts:
+#     - name: MultiTokenERC20
+#       address: 0x0390eeb6B08D02f4e392866502D161Ad4105D2f3
 #       events:
 #       - event: OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
 #       - event: TokenCreated(string indexed name, address indexed tokenAddress)
