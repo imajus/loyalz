@@ -114,7 +114,6 @@ export type Campaign = {
   otherAmount: number;
   retailers: string[];
   active: boolean;
-  blockchain: string;
 };
 
 export type Token = {

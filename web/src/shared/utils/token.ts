@@ -65,7 +65,6 @@ export const getCampaign = (campaign: CampaignState, shortenHashes = true): Camp
     otherAmount: otherAmount || 0,
     retailers: retailers.map((r) => (shortenHashes ? tokenName(r) : r)),
     active: active,
-    blockchain: '',
   };
 };
 

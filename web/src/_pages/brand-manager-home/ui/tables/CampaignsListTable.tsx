@@ -25,7 +25,6 @@ export const CampaignsListTable = ({ campaigns }: PropTypes) => {
           <TableHead>Reward</TableHead>
           <TableHead>Collab token</TableHead>
           <TableHead>Collab token amount</TableHead>
-          <TableHead>Blockchain</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody className="h-40 overflow-y-scroll">
@@ -38,7 +37,6 @@ export const CampaignsListTable = ({ campaigns }: PropTypes) => {
             <TableCell>{campaign.reward}</TableCell>
             <TableCell>{campaign.otherToken}</TableCell>
             <TableCell>{campaign.otherAmount}</TableCell>
-            <TableCell>{campaign.blockchain}</TableCell>
           </TableRow>
         ))}
       </TableBody>
