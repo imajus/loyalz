@@ -1,10 +1,10 @@
-export type Page = 'wallet' | 'earn' | 'exchange' | 'news' | 'brand-manager' | '';
+export type Page = 'wallet' | 'earn' | 'exchange' | 'news' | 'manager' | '';
 export type SecuredPage =
   | 'customer/wallet'
   | 'customer/earn'
   | 'customer/exchange'
   | 'customer/news'
-  | 'brand-manager'
+  | 'manager'
   | '';
 
 export type Product = {

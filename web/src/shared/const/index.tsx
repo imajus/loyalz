@@ -7,13 +7,13 @@ export const appName = 'Loyalz';
 export const appUrl = 'https://example.com';
 
 export const customerPages: Page[] = ['earn', 'wallet', 'news', 'exchange'];
-export const brandManagerPages: Page[] = ['brand-manager'];
+export const brandManagerPages: Page[] = ['manager'];
 export const pageIcons: Record<Page, ReactNode> = {
   earn: <HandCoins />,
   wallet: <Globe />,
   exchange: <ArrowLeftRight />,
   news: <Newspaper />,
-  'brand-manager': null,
+  manager: null,
   '': null,
 };
 
@@ -21,5 +21,5 @@ export const securedPages: SecuredPage[] = [
   'customer/wallet',
   'customer/exchange',
   'customer/news',
-  'brand-manager',
+  'manager',
 ];
