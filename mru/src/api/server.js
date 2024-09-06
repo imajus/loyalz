@@ -1,5 +1,6 @@
 import { ActionConfirmationStatus } from '@stackr/sdk';
 import express from 'express';
+import cors from 'cors';
 import { machine } from '../machine.js';
 import { rollup } from '../rollup.js';
 
@@ -9,15 +10,17 @@ const server = express();
 
 server.use(express.json());
 
+server.use(cors());
+
 // allow CORS
-server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept',
-  );
-  next();
-});
+// server.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, Content-Type, Accept',
+//   );
+//   next();
+// });
 
 server.get('/', (req, res) => {
   res.json({ state: machine.state });

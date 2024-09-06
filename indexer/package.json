@@ -1,0 +1,19 @@
+{
+  "name": "LoyalzIndexer",
+  "version": "0.1.0",
+  "scripts": {
+    "codegen": "envio codegen",
+    "dev": "envio dev",
+    "test": "pnpm mocha",
+    "start": "node generated/src/Index.bs.js"
+  },
+  "devDependencies": {
+    "mocha": "10.2.0"
+  },
+  "dependencies": {
+    "envio": "2.2.0"
+  },
+  "optionalDependencies": {
+    "generated": "./generated"
+  }
+}

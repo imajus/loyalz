@@ -30,7 +30,7 @@ export const signActionInputs = async (name: string, inputs: object, signer: Sig
 
 export const submitRollupAction = async (name: string, inputs: object, signer: JsonRpcSigner) => {
   const signature = await signActionInputs(name, inputs, signer);
-  const res = await fetch(`${BASE_URL}/${name}`, {
+  const res = await fetch(`${BASE_URL}/action/${name}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

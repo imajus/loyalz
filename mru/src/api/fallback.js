@@ -5,7 +5,6 @@ import { server } from './server.js';
 const { actions, getStfSchemaMap, submitAction } = rollup;
 const transitionToSchema = getStfSchemaMap();
 
-//TODO: Remove this fallback handler
 server.post('/action/:transition', async (req, res) => {
   const { transition } = req.params;
   if (!transitionToSchema[transition]) {
