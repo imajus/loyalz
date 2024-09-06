@@ -16,7 +16,6 @@ networks:
   contracts:
     - name: MultiTokenERC20
       address: 0x31d1042231fcD69d22c3076F841E5970f4a1603c
-      handler: ./src/EventHandlers.js
 - id: 88882 # Chiliz Spicy Testnet
   rpc_config:
     url: https://spicy-rpc.chiliz.com
