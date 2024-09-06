@@ -7,8 +7,7 @@
         "sku": "carrot",
         "mintToken": "2810:0x90595F79db34931ABcb4ea63Ed02c6D5A7d335Eb",
         "mintAmount": 1000,
-        "retailers": ["0xc7A3ea5641c1d928809bE31bB89C44290c4FB23E"],
-        "active": true
+        "retailers": ["0xc7A3ea5641c1d928809bE31bB89C44290c4FB23E"]
       },
       {
         "manager": "0xF9934b9034FEdC3E22bA49e85c1847663EeF8d67",
@@ -19,8 +18,7 @@
         "reward": "burger",
         "otherToken": "2810:0x90595F79db34931ABcb4ea63Ed02c6D5A7d335Eb",
         "otherAmount": 1000,
-        "retailers": ["0xc7A3ea5641c1d928809bE31bB89C44290c4FB23E"],
-        "active": true
+        "retailers": ["0xc7A3ea5641c1d928809bE31bB89C44290c4FB23E"]
       }
     ],
     "receipts": [

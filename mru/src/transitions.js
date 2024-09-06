@@ -1,14 +1,6 @@
 import { without } from 'lodash';
 import { REQUIRE } from '@stackr/sdk/machine';
 import { LoyalzStateWrapper } from './machine.js';
-import { ethers } from 'ethers';
-
-const SUPPORTED_CHAINS = [
-  '2810', // Morph Holesky Testnet
-  '88882', // Chiliz Spicy Testnet
-  '31', // Rootstock Testnet
-  '296', // Hedera Testnet
-];
 
 /**
  * @template T
@@ -16,30 +8,20 @@ const SUPPORTED_CHAINS = [
  * @type {import('@stackr/sdk/machine').STF<LoyalzStateWrapper, T>}
  */
 
-function validateTokenAddress(input) {
-  if (input) {
-    REQUIRE(
-      input.includes(':'),
-      'Token address must be prefixed with chain ID',
-    );
-    const [chain, address] = input.split(':');
-    REQUIRE(SUPPORTED_CHAINS.includes(chain), `Unsupported chain ID: ${chain}`);
-    REQUIRE(ethers.isAddress(address), 'Token address is wrong');
-  }
-}
-
 /**
  * @type {LoyalzStateSTF<CreateCampaignInputs>}
  */
 const createCampaign = {
   handler: ({ inputs, state, msgSender }) => {
-    validateTokenAddress(inputs.mintToken);
-    validateTokenAddress(inputs.otherToken);
+    const regex = /\d+\:0x[\d\w]{40,64}/i;
+    REQUIRE(regex.test(inputs.mintToken), 'Token address value is wrong');
+    if (inputs.otherToken) {
+      REQUIRE(regex.test(inputs.otherToken), 'Token address value is wrong');
+    }
     state.campaigns.push({
       ...inputs,
       manager: msgSender,
       retailers: [],
-      active: true,
     });
     return state;
   },
