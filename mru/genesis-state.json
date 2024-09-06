@@ -5,7 +5,7 @@
         "manager": "0xF9934b9034FEdC3E22bA49e85c1847663EeF8d67",
         "name": "Buy carrot get parrot",
         "sku": "carrot",
-        "mintToken": "0x0000000000000000000000000000000000000000",
+        "mintToken": "2810:0x90595F79db34931ABcb4ea63Ed02c6D5A7d335Eb",
         "mintAmount": 1000,
         "retailers": ["0xc7A3ea5641c1d928809bE31bB89C44290c4FB23E"],
         "active": true
@@ -14,10 +14,10 @@
         "manager": "0xF9934b9034FEdC3E22bA49e85c1847663EeF8d67",
         "name": "Get burger for Cola and carrot",
         "sku": "cola",
-        "mintToken": "0x0000000000000000000000000000000000000001",
+        "mintToken": "88882:0x9eEfF9f1C60e0B0d870A3946d13C321E97Eb475A",
         "mintAmount": 100,
         "reward": "burger",
-        "otherToken": "0x0000000000000000000000000000000000000000",
+        "otherToken": "2810:0x90595F79db34931ABcb4ea63Ed02c6D5A7d335Eb",
         "otherAmount": 1000,
         "retailers": ["0xc7A3ea5641c1d928809bE31bB89C44290c4FB23E"],
         "active": true
@@ -43,14 +43,14 @@
       {
         "campaign": 0,
         "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
-        "token": "0x0000000000000000000000000000000000000000",
+        "token": "2810:0x90595F79db34931ABcb4ea63Ed02c6D5A7d335Eb",
         "amount": 1000,
         "timestamp": 1725537237581
       },
       {
         "campaign": 1,
         "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
-        "token": "0x0000000000000000000000000000000000000001",
+        "token": "88882:0x9eEfF9f1C60e0B0d870A3946d13C321E97Eb475A",
         "amount": 100,
         "timestamp": 1725537237582
       }
@@ -59,14 +59,14 @@
       {
         "campaign": 1,
         "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
-        "token": "0x0000000000000000000000000000000000000000",
+        "token": "2810:0x90595F79db34931ABcb4ea63Ed02c6D5A7d335Eb",
         "amount": 1000,
         "timestamp": 1725545237583
       },
       {
         "campaign": 1,
         "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
-        "token": "0x0000000000000000000000000000000000000001",
+        "token": "88882:0x9eEfF9f1C60e0B0d870A3946d13C321E97Eb475A",
         "amount": 100,
         "timestamp": 1725547237584
       }

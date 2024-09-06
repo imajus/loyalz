@@ -16,10 +16,10 @@ export class LoyalzStateWrapper extends State {
     //TODO: Proper implementation
     const [types, values] = unzip([
       ['address[]', map(mints, 'customer')],
-      ['address[]', map(mints, 'token')],
+      ['string[]', map(mints, 'token')],
       ['uint[]', map(mints, 'amount').map(String)],
       ['address[]', map(burns, 'customer')],
-      ['address[]', map(burns, 'token')],
+      ['string[]', map(burns, 'token')],
       ['uint[]', map(burns, 'amount').map(String)],
     ]);
     return solidityPackedKeccak256(types, values);
