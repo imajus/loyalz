@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
-import { CampaignsListTable, Overlay, Spinner } from '@/shared/components';
+import { Overlay, Spinner } from '@/shared/components';
 import { Button } from '@/shared/components/shadcn/ui/button';
 import { Campaign } from '@/shared/types';
 
 import { CreateCampaignForm } from './create-campaign-form/CreateCampaignForm';
+import { CampaignsListTable } from './tables/CampaignsListTable';
 
 type PropTypes = {
   isLoading: boolean;
