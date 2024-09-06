@@ -1,21 +1,16 @@
 import { useLiveQuery } from 'dexie-react-hooks';
-import { useContext, useEffect } from 'react';
-import { XmtpClientContext } from '../context/xmtp/XmtpClientProvider';
+import { useEffect } from 'react';
 import db, { Conversation, Message } from '../models/xmtp';
 import { loadMessages, saveConversation } from '../utils/xmtp';
-
-export function useClient() {
-  const context = useContext(XmtpClientContext);
-  return context;
-}
+import { useWeb3Auth } from './useWeb3Auth/useWeb3Auth';
 
 export function useConversations(broadcastAddresses: string[]): Conversation[] {
-  const { client } = useClient();
+  const { xmtpUser } = useWeb3Auth();
 
   useEffect(() => {
     void (async () => {
-      if (!client) return;
-      for (const xmtpConversation of await client.conversations.list()) {
+      if (!xmtpUser) return;
+      for (const xmtpConversation of await xmtpUser.conversations.list()) {
         // if (broadcastAddresses.includes(xmtpConversation.peerAddress)) {
         await saveConversation(xmtpConversation);
         console.log(broadcastAddresses);
@@ -26,8 +21,8 @@ export function useConversations(broadcastAddresses: string[]): Conversation[] {
 
   useEffect(() => {
     void (async () => {
-      if (!client) return;
-      for await (const conversation of await client.conversations.stream()) {
+      if (!xmtpUser) return;
+      for await (const conversation of await xmtpUser.conversations.stream()) {
         // if (broadcastAddresses.includes(conversation.peerAddress)) {
         await saveConversation(conversation);
         // }
@@ -43,12 +38,12 @@ export function useConversations(broadcastAddresses: string[]): Conversation[] {
 }
 
 export function useMessages(conversations: Conversation[]): Message[] | undefined {
-  const { client } = useClient();
+  const { xmtpUser } = useWeb3Auth();
 
   useEffect(() => {
-    if (!client) return;
-    conversations.forEach((converso) => loadMessages(converso, client));
-  }, [client, conversations]);
+    if (!xmtpUser) return;
+    conversations.forEach((converso) => loadMessages(converso, xmtpUser));
+  }, [xmtpUser, conversations]);
 
   return useLiveQuery(async () => {
     return await db.messages
