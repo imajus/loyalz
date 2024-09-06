@@ -1,7 +1,13 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/shared/components/shadcn/ui/table';
 import { Campaign } from '@/shared/types';
 import { classNames } from '@/shared/utils';
-
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../shadcn/ui/table';
 
 type PropTypes = {
   campaigns: Campaign[];
