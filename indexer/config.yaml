@@ -8,12 +8,12 @@ networks:
   contracts:
     - name: MultiTokenERC20
       address: 0x31d1042231fcD69d22c3076F841E5970f4a1603c
-      handler: ./src/EventHandlers.ts
+      handler: ./src/EventHandlers.js
       events:
-        - event: OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
-        - event: TokenCreated(string indexed name, address indexed tokenAddress)
-        - event: TokensBurned(string name, address from, uint256 amount)
-        - event: TokensMinted(string name, address to, uint256 amount)
+      - event: OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
+      - event: TokenCreated(string indexed name, address indexed tokenAddress)
+      - event: TokensBurned(string name, address from, uint256 amount)
+      - event: TokensMinted(string name, address to, uint256 amount)
 - id: 88882 # Chiliz Spicy Testnet
   rpc_config:
     url: https://spicy-rpc.chiliz.com
