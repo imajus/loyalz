@@ -2,8 +2,9 @@
   "name": "loyalz-mru",
   "module": "index.js",
   "dependencies": {
-    "@stackr/sdk": "latest",
     "@stackr/cli": "latest",
+    "@stackr/sdk": "latest",
+    "cors": "^2.8.5",
     "ethers": "^6.7.1",
     "express": "^4.18.2",
     "lodash": "^4.17.21",
