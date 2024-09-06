@@ -6,7 +6,7 @@ import { LogoutButton } from './ui/LogoutButton';
 
 export const BrandManagersHeader = () => {
   return (
-    <header className="flex flex-col shrink-0 items-center justify-start w-full h-[144px]">
+    <header className="flex flex-col shrink-0 items-center justify-start w-full">
       <div className="flex items-center justify-between w-full h-[82px] px-7">
         <div className="relative flex flex-col flex-shrink-0 items-center justify-center">
           <Image
