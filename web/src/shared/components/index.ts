@@ -6,6 +6,7 @@ import { GoBackButton } from './go-back-button/GoBackButton';
 import { Icon } from './icon/Icon';
 import { MainWrapper } from './main-wrapper/MainWrapper';
 import { Overlay } from './overlay/Overlay';
+import { ScannerQR } from './qr-scanner/ScannerQR';
 import { RequireAuth } from './require-auth/RequireAuth';
 import { RootWrapper } from './root-wrapper/RootWrapper';
 import { Spinner } from './spinner/Spinner';
@@ -22,6 +23,7 @@ export {
   Overlay,
   RequireAuth,
   RootWrapper,
+  ScannerQR,
   Spinner,
   Toast,
 };
