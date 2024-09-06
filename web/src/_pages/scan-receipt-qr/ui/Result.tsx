@@ -19,7 +19,7 @@ export const Result = ({ scannedResult }: PropTypes) => {
   return (
     <div className="flex flex-col gap-1">
       <span className="font-bold">Result:</span>
-      <div className="flex flex-row ">
+      <div className="flex flex-row justify-between">
         {scannedResult}
         <div onClick={handleClick} className="cursor-pointer">
           <FilesIcon />
