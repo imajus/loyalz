@@ -116,3 +116,9 @@ export type Campaign = {
   active: boolean;
   blockchain: string;
 };
+
+export type Token = {
+  token: string;
+  limit: number;
+  blockchain: string;
+};

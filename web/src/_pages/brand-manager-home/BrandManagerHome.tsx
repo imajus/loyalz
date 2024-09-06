@@ -6,7 +6,7 @@ import { listCampaigns } from '@/shared/utils/rollup';
 import { getCampaign } from '@/shared/utils/token';
 
 import { CampaignsTable } from './ui/CampaignsTable';
-import { ListOfTokensTable } from './ui/ListOfTokensTable';
+import { ListOfTokens } from './ui/ListOfTokens';
 import { NewsSection } from './ui/NewsSection';
 
 export const BrandManagerHome = () => {
@@ -32,7 +32,7 @@ export const BrandManagerHome = () => {
     >
       <CampaignsTable campaigns={campaigns} isLoading={isLoading} />
       <div className="flex flex-col lg:flex-row gap-20 items-start justify-between">
-        <ListOfTokensTable />
+        <ListOfTokens isLoading={isLoading} />
         <NewsSection />
       </div>
     </div>
