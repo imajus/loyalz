@@ -11,6 +11,7 @@ export function useConversations(broadcastAddresses: string[]): Conversation[] {
     void (async () => {
       if (!xmtpUser) return;
       for (const xmtpConversation of await xmtpUser.conversations.list()) {
+        // TODO: filter by conversation.title instead
         // if (broadcastAddresses.includes(xmtpConversation.peerAddress)) {
         await saveConversation(xmtpConversation);
         console.log(broadcastAddresses);
@@ -23,6 +24,7 @@ export function useConversations(broadcastAddresses: string[]): Conversation[] {
     void (async () => {
       if (!xmtpUser) return;
       for await (const conversation of await xmtpUser.conversations.stream()) {
+        // TODO: filter by conversation.title instead
         // if (broadcastAddresses.includes(conversation.peerAddress)) {
         await saveConversation(conversation);
         // }

@@ -1,7 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { Button } from '@/shared/components/shadcn/ui/button';
-
+import { useWeb3Auth } from '@/shared/hook';
+import { allowedConsentList } from '@/shared/utils/xmtp';
+import { BroadcastClient } from '@xmtp/broadcast-sdk';
 import { emptyNewsErrors } from './const';
 import { News, NewsErrors } from './types';
 import { validateForm } from './utils';
@@ -11,6 +13,7 @@ export const SendNewsForm = () => {
     text: '',
   });
   const [errors, setErrors] = useState<NewsErrors>(emptyNewsErrors);
+  const { xmtpUser } = useWeb3Auth();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -31,16 +34,25 @@ export const SendNewsForm = () => {
 
     console.log({ formData });
 
-    // const submit = async () => {
-    //   try {
-    //     // await createCampaign(formData, signer);
-    //   } catch (e: any) {
-    //     console.error(`Campaign submission failed: ${e}`);
-    //     toastError('Campaign submission failed');
-    //   }
-    // };
+    const submit = async () => {
+      try {
+        if (xmtpUser) {
+          const subscribers = (await allowedConsentList(xmtpUser)).map(({ value }) => value);
+          debugger;
+          const broadcastClient = new BroadcastClient({
+            client: xmtpUser,
+            addresses: subscribers,
+            cachedCanMessageAddresses: subscribers,
+          });
+          await broadcastClient.broadcast([formData.text], {});
+          setFormData({ text: '' });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-    // void submit();
+    void submit();
   };
 
   return (
