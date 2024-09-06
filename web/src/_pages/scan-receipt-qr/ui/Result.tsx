@@ -18,7 +18,7 @@ export const Result = ({ scannedResult }: PropTypes) => {
 
   return (
     <div className="flex flex-col gap-1">
-      <span className="font-bold">Result:</span>\
+      <span className="font-bold">Result:</span>
       <div className="flex flex-row ">
         {scannedResult}
         <div onClick={handleClick} className="cursor-pointer">
