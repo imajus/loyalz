@@ -30,7 +30,7 @@ const Wrapper = ({
     );
   }
 
-  if (redirectUrl.startsWith('brand-manager')) {
+  if (redirectUrl.startsWith('manager')) {
     return (
       <RootWrapper isError={isError}>
         <div className="relative w-full h-full flex flex-col items-center justify-center gap-5">
