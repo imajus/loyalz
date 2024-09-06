@@ -57,8 +57,8 @@ export const CreateCampaignForm = ({ setIsFormVisible }: PropTypes) => {
     e.preventDefault();
 
     const { isValid, errors } = validateForm(formData);
+    setErrors(errors);
     if (!isValid) {
-      setErrors(errors);
       return;
     }
 
