@@ -1,18 +1,17 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-import { CampaignsListTable, Overlay, Spinner } from '@/shared/components/';
-import { Button } from '@/shared/components/shadcn/ui/button';
 import { Campaign } from '@/shared/types';
 import { listCampaigns } from '@/shared/utils/rollup';
 import { getCampaign } from '@/shared/utils/token';
 
-import { CreateCampaignForm } from './create-campaign-form/CreateCampaignForm';
+import { CampaignsTable } from './ui/CampaignsTable';
+import { ListOfTokensTable } from './ui/ListOfTokensTable';
+import { NewsSection } from './ui/NewsSection';
 
 export const BrandManagerHome = () => {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isFormVisible, setIsFormVisible] = useState(false);
 
   useEffect(() => {
     const init = async () => {
@@ -27,25 +26,15 @@ export const BrandManagerHome = () => {
   }, []);
 
   return (
-    <div className="w-full flex flex-col gap-3">
-      <div className="font-['Inter'] w-full flex justify-start">
-        <span className="font-bold text-[30px]">List of campaigns</span>
+    <div
+      className="w-full flex flex-col gap-20 py-5 overflow-y-scroll"
+      style={{ scrollbarWidth: 'none' }}
+    >
+      <CampaignsTable campaigns={campaigns} isLoading={isLoading} />
+      <div className="flex flex-col lg:flex-row gap-20 items-start justify-between">
+        <ListOfTokensTable />
+        <NewsSection />
       </div>
-      {isLoading ? <Spinner /> : <CampaignsListTable campaigns={campaigns} />}
-      <Button className="w-40" onClick={() => setIsFormVisible(true)}>
-        + Create campaign
-      </Button>
-      <Overlay
-        isVisible={isFormVisible}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: 'rgb(203 213 225 / 0.8)',
-        }}
-      >
-        <CreateCampaignForm setIsFormVisible={setIsFormVisible} />
-      </Overlay>
     </div>
   );
 };
