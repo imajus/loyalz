@@ -32,7 +32,7 @@ export const NewsSection = ({ isLoading }: PropTypes) => {
             className="p-3 border border-slate-300 w-full rounded-lg min-h-20 max-h-36 overflow-y-scroll"
             style={{ scrollbarWidth: 'none' }}
           >
-            latestNews
+            {latestNews}
           </span>
         )}
       </div>
