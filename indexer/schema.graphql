@@ -1,0 +1,26 @@
+type MultiTokenERC20_OwnershipTransferred {
+  id: ID!
+  previousOwner: String!
+  newOwner: String!
+}
+
+type MultiTokenERC20_TokenCreated {
+  id: ID!
+  name: String!
+  tokenAddress: String!
+}
+
+type MultiTokenERC20_TokensBurned {
+  id: ID!
+  name: String!
+  from: String!
+  amount: BigInt!
+}
+
+type MultiTokenERC20_TokensMinted {
+  id: ID!
+  name: String!
+  to: String!
+  amount: BigInt!
+}
+
