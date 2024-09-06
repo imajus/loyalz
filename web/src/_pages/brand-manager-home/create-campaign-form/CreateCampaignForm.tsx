@@ -1,8 +1,12 @@
+import { ethers } from 'ethers';
 import { CircleXIcon } from 'lucide-react';
-import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useEffect, useState } from 'react';
 
 import { Button } from '@/shared/components/shadcn/ui/button';
+import { useWeb3Auth } from '@/shared/hook';
 import { CreateCampaignInputs } from '@/shared/types';
+import { createCampaign } from '@/shared/utils/rollup';
+import { toastError } from '@/shared/utils/toast';
 
 import { emptyErrors } from './const';
 import { CreateCampaignErrors } from './types';
@@ -23,6 +27,22 @@ export const CreateCampaignForm = ({ setIsFormVisible }: PropTypes) => {
     otherAmount: 0,
   });
 
+  const [signer, setSigner] = useState<ethers.JsonRpcSigner | null>(null);
+  const { provider } = useWeb3Auth();
+
+  useEffect(() => {
+    if (!provider) return;
+    const init = async () => {
+      if (provider) {
+        const ethersProvider = new ethers.BrowserProvider(provider);
+        const signer = await ethersProvider.getSigner();
+        setSigner(signer);
+      }
+    };
+
+    void init();
+  }, [provider]);
+
   const [errors, setErrors] = useState<CreateCampaignErrors>(emptyErrors);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,6 +59,23 @@ export const CreateCampaignForm = ({ setIsFormVisible }: PropTypes) => {
     const { isValid, errors } = validateForm(formData);
     if (!isValid) {
       setErrors(errors);
+      return;
+    }
+
+    if (!signer) {
+      toastError('Can not create campaign');
+    } else {
+      const submit = async () => {
+        try {
+          await createCampaign(formData, signer);
+        } catch (e: any) {
+          console.error(`Campaign submission failed: ${e}`);
+          toastError('Campaign submission failed');
+        }
+        setIsFormVisible(false);
+      };
+
+      void submit();
       return;
     }
 
