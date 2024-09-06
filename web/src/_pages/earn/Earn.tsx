@@ -26,8 +26,7 @@ export const Earn = () => {
       try {
         setIsLoading(true);
         const campaigns = await listCampaigns();
-        const eligibleCampaigns = campaigns.filter((c) => c.active && c.reward);
-        setCampaigns(eligibleCampaigns);
+        setCampaigns(campaigns);
       } catch (e: any) {
         console.error(`Wallet balance initialization failed: ${e}`);
         setHasError(true);
