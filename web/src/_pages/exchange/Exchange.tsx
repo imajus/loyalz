@@ -21,7 +21,7 @@ export const Exchange = () => {
         setWalletBalance(() => [...walletBalance]);
 
         const campaigns = await listCampaigns();
-        const eligibleCampaigns = campaigns.filter((c) => c.reward && c.active);
+        const eligibleCampaigns = campaigns.filter((c) => c.reward);
         setCampaigns(eligibleCampaigns);
       } catch (e: any) {
         console.error(`Wallet balance initialization failed: ${e}`);
