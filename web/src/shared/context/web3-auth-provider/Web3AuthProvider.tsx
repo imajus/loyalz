@@ -100,6 +100,8 @@ export const Web3AuthProvider = ({ children }: PropTypes) => {
       if (!w3auth.connected) {
         const web3authProvider = await w3auth.connect();
         setProvider(web3authProvider);
+      } else {
+        setProvider(w3auth.provider);
       }
 
       const currentUser = getLocalUserInfo();
