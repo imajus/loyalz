@@ -1,7 +1,5 @@
 import { ethers } from "hardhat";
-
-
-import type { MultiTokenERC20, MintableBurnableERC20 } from "../../../../typechain-types";
+import type { MintableBurnableERC20 } from "../typechain-types/contracts/MintableBurnableERC20";
 
 async function main() {
   console.log("Deploying MultiTokenERC20 contract...");
@@ -59,7 +57,7 @@ async function main() {
 
 
   // Check balance
-  const tokenContract = await ethers.getContractAt("MintableBurnableERC20", tokenAddress) as MintableBurnableERC20;
+  const tokenContract = await ethers.getContractAt("MintableBurnableERC20", tokenAddress) as unknown as MintableBurnableERC20;
   const balance = await tokenContract.balanceOf(tokenAddress);
   console.log(`Balance of ${recipient}: ${ethers.formatEther(balance)} ${tokenSymbol}`);
 

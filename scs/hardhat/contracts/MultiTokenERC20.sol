@@ -8,7 +8,7 @@ import "./MintableBurnableERC20.sol";
 contract MultiTokenERC20 is Ownable {
     mapping(string => address) public tokens;
 
-    event TokenCreated(string indexed name, address indexed tokenAddress);
+    event TokenCreated(string name, address tokenAddress);
     event TokensMinted(string name, address to, uint256 amount);
     event TokensBurned(string name, address from, uint256 amount);
 
