@@ -71,7 +71,7 @@ export const Web3AuthProvider = ({ children }: PropTypes) => {
       setIsLoading?.((isLoading) => {
         if (isLoading) {
           //if web3auth taking more than a 30 seconds, stop loading spinner and display login page again
-
+          console.error('auth process took too long!');
           setIsError(true);
         }
 
