@@ -43,6 +43,15 @@ const initialWeb3AuthData = {
   isError: false,
 };
 
+const getXmtpClient = async (provider: IProvider) => {
+  const signer = await getSigner(provider);
+  const client = await Client.create(signer, {
+    env: (process.env.NEXT_PUBLIC_XMTP_ENV as XmtpEnv) ?? 'dev',
+  });
+  console.log(`XMTP client initialized at: ${client.address}`);
+  return client;
+};
+
 export const Web3AuthContext = createContext<Web3AuthData>(initialWeb3AuthData);
 
 export const Web3AuthProvider = ({ children }: PropTypes) => {
@@ -106,15 +115,15 @@ export const Web3AuthProvider = ({ children }: PropTypes) => {
         const web3authProvider = await w3auth.connect();
         setProvider(web3authProvider);
         if (web3authProvider) {
-          const signer = await getSigner(web3authProvider);
-          const client = await Client.create(signer, {
-            env: (process.env.NEXT_PUBLIC_XMTP_ENV as XmtpEnv) ?? 'dev',
-          });
-          console.log(`Client initialized at: ${client.address}`);
+          const client = await getXmtpClient(web3authProvider);
           setXmtpUser(client);
         }
       } else {
         setProvider(w3auth.provider);
+        if (w3auth.provider) {
+          const client = await getXmtpClient(w3auth.provider);
+          setXmtpUser(client);
+        }
       }
 
       const currentUser = getLocalUserInfo();
