@@ -18,9 +18,21 @@ const createCampaign = {
     if (inputs.otherToken) {
       REQUIRE(regex.test(inputs.otherToken), 'Token address value is wrong');
     }
+    if (inputs.reward) {
+      REQUIRE(!!inputs.otherToken, 'Collab token address is missing');
+      REQUIRE(!!inputs.otherAmount, 'Collab token address is missing');
+    }
     state.campaigns.push({
-      ...inputs,
       manager: msgSender,
+      name: inputs.name,
+      sku: inputs.sku,
+      mintToken: inputs.mintToken,
+      mintAmount: Number(inputs.mintAmount),
+      ...(inputs.reward && {
+        reward: inputs.reward,
+        otherToken: inputs.otherToken,
+        otherAmount: Number(inputs.otherAmount),
+      }),
       retailers: [],
     });
     return state;
@@ -70,7 +82,7 @@ const addReceipt = {
             campaign: id,
             customer: msgSender,
             token: campaign.mintToken,
-            amount: campaign.mintAmount * inputs.quantity,
+            amount: campaign.mintAmount * Number(inputs.quantity),
             timestamp: Date.now(),
           });
           return length - 1;
@@ -79,10 +91,10 @@ const addReceipt = {
       })
       .filter(Boolean);
     state.receipts.push({
-      id: inputs.id,
       customer: msgSender,
+      id: inputs.id,
       sku: inputs.sku,
-      quantity: inputs.quantity,
+      quantity: Number(inputs.quantity),
       mints,
     });
     return state;
@@ -106,14 +118,14 @@ const claimReward = {
         campaign: inputs.campaign,
         customer: inputs.customer,
         token: campaign.mintToken,
-        amount: campaign.mintAmount,
+        amount: Number(campaign.mintAmount),
         timestamp: Date.now(),
       },
       {
         campaign: inputs.campaign,
         customer: inputs.customer,
         token: campaign.otherToken,
-        amount: campaign.otherAmount,
+        amount: Number(campaign.otherAmount),
         timestamp: Date.now(),
       },
     );
