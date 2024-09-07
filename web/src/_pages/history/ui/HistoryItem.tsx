@@ -1,12 +1,13 @@
-import { TransactionItem } from '@/shared/types';
 import moment from 'moment';
+
+import { TransactionItem } from '@/shared/types';
 
 type PropTypes = {
   item: TransactionItem;
 };
 
 const getSum = (item: TransactionItem) => {
-  return `${item.type === 'burn' ? '' : '+'}${item.tokenAmount}`;
+  return `${item.type === 'burn' ? '-' : '+'}${item.tokenAmount}`;
 };
 
 const getEarnedText = (item: TransactionItem) => {
