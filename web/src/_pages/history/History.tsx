@@ -1,18 +1,20 @@
 'use client';
 
+import { sortBy } from 'lodash';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { MainWrapper } from '@/shared/components';
+import { GoBackButton, MainWrapper } from '@/shared/components';
 import { TransactionItem } from '@/shared/types';
 import { listBurns, listCampaigns, listMints } from '@/shared/utils/rollup';
 import { getBurnTransaction, getMintTransaction } from '@/shared/utils/token';
 
-import { sortBy } from 'lodash';
 import { HistoryItem } from './ui/HistoryItem';
 
 export const HistoryPage = () => {
   const [transactions, setTransactions] = useState<TransactionItem[]>([]);
   const [hasError, setHasError] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +40,9 @@ export const HistoryPage = () => {
         {transactions.map((item) => (
           <HistoryItem key={item.id} item={item} />
         ))}
+      </div>
+      <div className="flex items-center justify-center h-20 w-full">
+        <GoBackButton handleClick={() => router.push('/customer/wallet', { scroll: false })} />
       </div>
     </MainWrapper>
   );
