@@ -1,9 +1,9 @@
 import { HardhatUserConfig } from "hardhat/config";
-import "@nomicfoundation/hardhat-toolbox";
 import * as dotenv from "dotenv";
-import "@typechain/hardhat";
+import "@nomicfoundation/hardhat-toolbox";
 import "@nomicfoundation/hardhat-ethers";
-//require("@nomiclabs/hardhat-etherscan");
+import "@typechain/hardhat";
+
 dotenv.config();
 
 const config: HardhatUserConfig = {
@@ -11,10 +11,7 @@ const config: HardhatUserConfig = {
   networks: {
     morphHolesky: {
       url: 'https://rpc-quicknode-holesky.morphl2.io',
-      accounts:
-        process.env.PRIVATE_KEY !== undefined
-          ? [process.env.PRIVATE_KEY as string]
-          : [],
+      accounts: [process.env.PRIVATE_KEY as string]
     },
     chiliz_spicy: {
       url: 'https://spicy-rpc.chiliz.com',
@@ -22,22 +19,40 @@ const config: HardhatUserConfig = {
     },
     rskTestnet: {
       url: "https://rpc.testnet.rootstock.io/HTO2TWpdTGdGIBo3vgOe230Drz6lTW-T",
-      chainId: 31,
+      // chainId: 31,
       //gasPrice: 60000000,
       accounts: [process.env.PRIVATE_KEY as string]
     },
   },
   etherscan: {
     apiKey: {
-      morphTestnet: 'anything',
+      morphHolesky: '.',
+      chiliz_spicy: '.',
+      rskTestnet: '.',
     },
     customChains: [
       {
-        network: 'morphTestnet',
+        network: 'morphHolesky',
         chainId: 2810,
         urls: {
-          apiURL: 'https://explorer-api-holesky.morphl2.io/api? ',
+          apiURL: 'https://explorer-api-holesky.morphl2.io/api',
           browserURL: 'https://explorer-holesky.morphl2.io/',
+        },
+      },
+      {
+        network: 'chiliz_spicy',
+        chainId: 88882,
+        urls: {
+          apiURL: 'https://api.routescan.io/v2/network/testnet/evm/88882/etherscan',
+          browserURL: 'https://testnet.chiliscan.com/',
+        },
+      },
+      {
+        network: 'rskTestnet',
+        chainId: 31,
+        urls: {
+          apiURL: 'https://explorer.testnet.rsk.co/api',
+          browserURL: 'https://explorer.testnet.rsk.co/',
         },
       },
     ],
