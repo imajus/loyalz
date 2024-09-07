@@ -5,7 +5,6 @@ import { Button } from '@/shared/components/shadcn/ui/button';
 
 import { IndexedToken, Token } from '@/shared/types';
 import { blockchainName } from '@/shared/utils/blockchain';
-import { shortHash } from '@/shared/utils/token';
 import { CreateTokenForm } from './create-token-form/CreateTokenForm';
 import { TokensListTable } from './tables/TokensListTable';
 
@@ -23,7 +22,7 @@ export const ListOfTokens = () => {
         const { MultiTokenERC20_TokenCreated: createdTokens } = await response.json();
         setTokens(
           createdTokens.map(({ id, name }: IndexedToken) => ({
-            token: shortHash(name),
+            token: name,
             blockchain: blockchainName(id),
           })),
         );
