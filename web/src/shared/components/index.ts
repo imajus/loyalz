@@ -8,6 +8,7 @@ import { MainWrapper } from './main-wrapper/MainWrapper';
 import { Overlay } from './overlay/Overlay';
 import { ScannerQR } from './qr-scanner/ScannerQR';
 import { RequireAuth } from './require-auth/RequireAuth';
+import { RetailerUnAuthWrapper } from './retailer-unauth-wrapper/RetailerUnAuthWrapper';
 import { RootWrapper } from './root-wrapper/RootWrapper';
 import { Spinner } from './spinner/Spinner';
 import { Toast } from './toast/Toast';
@@ -22,6 +23,7 @@ export {
   MainWrapper,
   Overlay,
   RequireAuth,
+  RetailerUnAuthWrapper,
   RootWrapper,
   ScannerQR,
   Spinner,
