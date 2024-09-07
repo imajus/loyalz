@@ -5,18 +5,17 @@ import QrScanner from 'qr-scanner';
 import { useEffect, useState } from 'react';
 
 import { Frame, GoBackButton, MainWrapper, ScannerQR } from '@/shared/components';
-import { fetchReceiptData } from '@/shared/utils/fdo';
 
 import { Result } from './ui/Result';
 import { ScannerButton } from './ui/ScannerButton';
 
-void (async () => {
-  console.log(
-    await fetchReceiptData(
-      'https://consumer.oofd.kz/?i=2936414372&f=010100886168&s=3247.00&t=20240613T191146',
-    ),
-  );
-})();
+// void (async () => {
+//   console.log(
+//     await fetchReceiptData(
+//       'https://consumer.oofd.kz/?i=2936414372&f=010100886168&s=3247.00&t=20240613T191146',
+//     ),
+//   );
+// })();
 
 export const ScanReceiptQR = () => {
   const router = useRouter();

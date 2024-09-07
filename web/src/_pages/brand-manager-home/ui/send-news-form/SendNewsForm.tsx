@@ -29,7 +29,7 @@ export const SendNewsForm = () => {
       return;
     }
 
-    console.log({ formData });
+    // console.log({ formData });
 
     // const submit = async () => {
     //   try {
