@@ -5,7 +5,6 @@ import { ReactNode } from 'react';
 
 import { Button, Icon, RetailerUnAuthWrapper } from '@/shared/components';
 import { useWeb3Auth } from '@/shared/hook';
-import { toastInfo } from '@/shared/utils/toast';
 
 const Wrapper = ({ children }: { children: ReactNode }) => {
   return (
@@ -41,7 +40,6 @@ export const RetailerHome = () => {
         onClick={() => router.push('/retailer/scan-qr-exchange')}
         title="Scan QR for Exchange"
       />
-      <Button onClick={() => toastInfo('Share my ID')} title="Share my ID" />
     </Wrapper>
   );
 };
