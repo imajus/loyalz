@@ -268,8 +268,8 @@
       ]
     },
     "/home/denis/Workspaces/ethglobal/loyalz/scs/hardhat/contracts/MultiTokenERC20.sol": {
-      "lastModificationDate": 1725462791777,
-      "contentHash": "f46c1899dfcc396bdb32b68d58a8383e",
+      "lastModificationDate": 1725716167844,
+      "contentHash": "50bf279d63a99962fe384433b5f0d5d9",
       "sourceName": "contracts/MultiTokenERC20.sol",
       "solcConfig": {
         "version": "0.8.24",
