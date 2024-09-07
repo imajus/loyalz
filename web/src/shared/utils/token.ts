@@ -1,7 +1,4 @@
-import { calculateWalletBalance } from '@/_pages/wallet/utils';
-
 import { Campaign, CampaignState, TokenEvent, TransactionItem } from '../types';
-import { listBurns, listCampaigns, listMints } from './rollup';
 
 export const shortHash = (hash: string) => {
   return `${hash.slice(2, 4)}..${hash.slice(-2)}`;
@@ -85,18 +82,6 @@ export const getBurnTransaction = (
     type: 'burn',
     timestamp,
   };
-};
-
-export const getWalletBalance = async (shortenHashes = true) => {
-  const mints = await listMints();
-  const burns = await listBurns();
-  const campaigns = await listCampaigns();
-
-  const walletBalance = calculateWalletBalance(mints, burns).map((tr, idx) =>
-    getMintTransaction(tr, campaigns, idx, shortenHashes),
-  );
-
-  return walletBalance;
 };
 
 export const getTokensLeftForExchangingMint = (

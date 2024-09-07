@@ -1,8 +1,9 @@
 import { Frame, Icon } from '@/shared/components';
-import { TransactionItem } from '@/shared/types';
+
+import { WalletItem } from '../types';
 
 type PropTypes = {
-  item: TransactionItem;
+  item: WalletItem;
 };
 
 const icon =

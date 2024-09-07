@@ -4,14 +4,14 @@ import { useEffect, useState } from 'react';
 
 import { Button, MainWrapper } from '@/shared/components';
 import { useWeb3Auth } from '@/shared/hook';
-import { TransactionItem } from '@/shared/types';
-import { getWalletBalance } from '@/shared/utils/token';
 
+import { WalletItem } from './types';
 import { BalanceItem } from './ui/BalanceItem';
+import { getWalletBalance } from './utils';
 
 export const Wallet = () => {
   const router = useRouter();
-  const [walletBalance, setWalletBalance] = useState<TransactionItem[]>([]);
+  const [walletBalance, setWalletBalance] = useState<WalletItem[]>([]);
   const { logoutWeb3Auth, isError } = useWeb3Auth();
   const [hasError, setHasError] = useState(false);
 
@@ -33,7 +33,7 @@ export const Wallet = () => {
   return (
     <MainWrapper title="Wallet" page="wallet" isError={isError || hasError}>
       <div
-        className="grid m-5 gap-6 overflow-y-scroll overflow-x-hidden h-full pr-[1px]"
+        className="flex flex-col justify-start items-center m-5 gap-6 overflow-y-scroll overflow-x-hidden h-full pr-[1px]"
         style={{ scrollbarWidth: 'none', width: 'calc(100% - 40px)' }}
       >
         {walletBalance.map((item) => (
