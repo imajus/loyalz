@@ -21,7 +21,8 @@ const MultiTokenERC20 = {
     const tx = await contract.createToken(name, symbol);
     const receipt = await tx.wait();
     console.log(`Token created: ${name} (${symbol})`);
-    return receipt;
+    console.log(`Transaction hash: ${tx.hash}`);
+    return { receipt, transactionHash: tx.hash };
   },
 
   // Mint tokens
@@ -30,7 +31,8 @@ const MultiTokenERC20 = {
     const tx = await contract.mintTokens(tokenName, to, ethers.utils.parseEther(amount));
     const receipt = await tx.wait();
     console.log(`Minted ${amount} ${tokenName} tokens to ${to}`);
-    return receipt;
+    console.log(`Transaction hash: ${tx.hash}`);
+    return { receipt, transactionHash: tx.hash };
   },
 
   // Burn tokens
@@ -39,7 +41,8 @@ const MultiTokenERC20 = {
     const tx = await contract.burnTokens(tokenName, from, ethers.utils.parseEther(amount));
     const receipt = await tx.wait();
     console.log(`Burned ${amount} ${tokenName} tokens from ${from}`);
-    return receipt;
+    console.log(`Transaction hash: ${tx.hash}`);
+    return { receipt, transactionHash: tx.hash };
   },
 
   // Get token balance
