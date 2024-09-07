@@ -4,6 +4,8 @@ import { Earn } from './earn/Earn';
 import { Exchange } from './exchange/Exchange';
 import { HistoryPage } from './history/History';
 import { News } from './news/News';
+import { RetailerHome } from './retailer-home/RetailerHome';
+import { ScanQRExchange } from './scac-qr-exchange/ScanQRExchange';
 import { ScanReceiptQR } from './scan-receipt-qr/ScanReceiptQR';
 import { ShowQR } from './show-qr/ShowQR';
 import { Wallet } from './wallet/Wallet';
@@ -16,6 +18,8 @@ export {
   Exchange,
   HistoryPage,
   News,
+  RetailerHome,
+  ScanQRExchange,
   ScanReceiptQR,
   ShowQR,
   Wallet,
