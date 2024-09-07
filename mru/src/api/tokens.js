@@ -2,6 +2,7 @@ import { machine } from '../machine.js';
 import { makeActionHandler, server } from './server.js';
 import { ContractFactory } from 'ethers';
 
+
 server.get('/mints', (req, res) => {
   res.status(200).send(machine.state.mints);
 });
