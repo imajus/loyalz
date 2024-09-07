@@ -118,5 +118,11 @@ export type Campaign = {
 
 export type Token = {
   token: string;
-  blockchain: string;
+  blockchain: Blockchain;
 };
+
+export type Blockchain =
+  | 'MorphHoleskyTestnet'
+  | 'ChilizSpicyTestnet'
+  | 'RootstockTestnet'
+  | 'HederaTestnet';

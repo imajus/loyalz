@@ -2,10 +2,10 @@ import { CircleXIcon } from 'lucide-react';
 import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react';
 
 import { Button } from '@/shared/components/shadcn/ui/button';
-import { Token } from '@/shared/types';
+import { Blockchain, Token } from '@/shared/types';
 import { toastError } from '@/shared/utils/toast';
 
-import { emptyErrors } from './const';
+import { blockchains, emptyErrors } from './const';
 import { CreateTokenErrors } from './types';
 import { validateForm } from './utils';
 
@@ -16,12 +16,12 @@ type PropTypes = {
 export const CreateTokenForm = ({ setIsFormVisible }: PropTypes) => {
   const [formData, setFormData] = useState<Token>({
     token: '',
-    blockchain: '',
+    blockchain: 'MorphHoleskyTestnet',
   });
 
   const [errors, setErrors] = useState<CreateTokenErrors>(emptyErrors);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -77,13 +77,18 @@ export const CreateTokenForm = ({ setIsFormVisible }: PropTypes) => {
         <span className="pb-3 text-xs text-red-700">{errors.token}</span>
         <div className="grid grid-cols-2">
           <label>Blockchain *</label>
-          <input
-            className="text-black"
-            type="text"
-            name="blockchain"
+          <select
             value={formData.blockchain}
             onChange={handleChange}
-          />
+            className="grow py-0 pl-1 w-full rounded h-6 border border-black text-black outline-0"
+            name="blockchain"
+          >
+            {Object.keys(blockchains).map((id) => (
+              <option key={id} value={id}>
+                {blockchains[id as Blockchain]}
+              </option>
+            ))}
+          </select>
         </div>
         <span className="pb-3 text-xs text-red-700">{errors.blockchain}</span>
 
