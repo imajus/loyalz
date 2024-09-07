@@ -12,14 +12,14 @@ networks:
 - id: 2810 # Morph Holesky Testnet
   rpc_config:
     url: https://rpc-quicknode-holesky.morphl2.io
-  start_block: 7733089
+  start_block: 8156635
   contracts:
     - name: MultiTokenERC20
       address: 0x66D6B6483ec46abD950256880F39Ba56dc1b1a7f
 - id: 88882 # Chiliz Spicy Testnet
   rpc_config:
     url: https://spicy-rpc.chiliz.com
-  start_block: 17232781
+  start_block: 17375515
   contracts:
     - name: MultiTokenERC20
       address: 0x8c4F510229863854ecD6fB0d7161d1aB5336cc27
@@ -27,15 +27,15 @@ networks:
   rpc_config:
     url: https://rpc.testnet.rootstock.io/L6ZhwA295IZEj8TgDgtnlNnoVumEws-T
     initial_block_interval: 1500
-  start_block: 5498226
+  start_block: 5514993
   contracts:
     - name: MultiTokenERC20
       address: 0xaE7902b8050ef5204C74b5cbC5a2b91Ac6140D2d
-# - id: 296 # Hedera Testnet
-#   rpc_config:
-#     url: https://testnet.hashio.io/api
-#   start_block: 8795634
-#   contracts:
-#     - name: MultiTokenERC20
-#       address: 0x31d1042231fcD69d22c3076F841E5970f4a1603c
+- id: 296 # Hedera Testnet
+  rpc_config:
+    url: https://testnet.hashio.io/api
+  start_block: 8880882
+  contracts:
+    - name: MultiTokenERC20
+      address: 0xdfAab04Fbe10E5f9AfB653e797EA8AE31ECaB715
 rollback_on_reorg: false
