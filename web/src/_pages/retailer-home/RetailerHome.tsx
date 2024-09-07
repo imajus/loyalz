@@ -9,7 +9,7 @@ import { useWeb3Auth } from '@/shared/hook';
 const Wrapper = ({ children }: { children: ReactNode }) => {
   return (
     <RetailerUnAuthWrapper title="Menu">
-      <div className="w-full h-full flex flex-col justify-start items-start gap-7 pt-10">
+      <div className="w-full h-full flex flex-col justify-start items-center gap-7 pt-10">
         {children}
       </div>
     </RetailerUnAuthWrapper>
