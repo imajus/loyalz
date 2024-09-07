@@ -1,3 +1,5 @@
+import { WalletItem } from '@/_pages/wallet/types';
+
 import { Campaign, CampaignState, TokenEvent, TransactionItem } from '../types';
 
 export const shortHash = (hash: string) => {
@@ -86,7 +88,7 @@ export const getBurnTransaction = (
 
 export const getTokensLeftForExchangingMint = (
   mint: CampaignState,
-  walletBalance: TransactionItem[],
+  walletBalance: WalletItem[],
 ) => {
   const { mintToken, mintAmount, otherToken, otherAmount } = mint;
 

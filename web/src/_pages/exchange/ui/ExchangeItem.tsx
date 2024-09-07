@@ -1,11 +1,12 @@
+import { WalletItem } from '@/_pages/wallet/types';
 import { Button, Frame, Icon } from '@/shared/components';
-import { CampaignState, TransactionItem } from '@/shared/types';
+import { CampaignState } from '@/shared/types';
 import { toastInfo } from '@/shared/utils/toast';
 import { brandName, getTokensLeftForExchangingMint, tokenName } from '@/shared/utils/token';
 
 type PropTypes = {
   product: CampaignState;
-  walletBalance: TransactionItem[];
+  walletBalance: WalletItem[];
 };
 
 const icon =

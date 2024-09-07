@@ -3,15 +3,16 @@
 import { useEffect, useState } from 'react';
 
 import { MainWrapper } from '@/shared/components';
-import { CampaignState, TransactionItem } from '@/shared/types';
+import { CampaignState } from '@/shared/types';
 import { listCampaigns } from '@/shared/utils/rollup';
-import { getWalletBalance } from '@/shared/utils/token';
 
+import { WalletItem } from '../wallet/types';
+import { getWalletBalance } from '../wallet/utils';
 import { ExchangeItem } from './ui/ExchangeItem';
 
 export const Exchange = () => {
   const [hasError, setHasError] = useState(false);
-  const [walletBalance, setWalletBalance] = useState<TransactionItem[]>([]);
+  const [walletBalance, setWalletBalance] = useState<WalletItem[]>([]);
   const [campaigns, setCampaigns] = useState<CampaignState[]>([]);
 
   useEffect(() => {
