@@ -2,22 +2,30 @@
   "state": {
     "campaigns": [
       {
-        "manager": "0xF9934b9034FEdC3E22bA49e85c1847663EeF8d67",
-        "name": "Buy carrot get parrot",
-        "sku": "carrot",
-        "mintToken": "2810:0x90595F79db34931ABcb4ea63Ed02c6D5A7d335Eb",
-        "mintAmount": 1000,
+        "manager": "0xD392b72A6bf7E718f5Cf67A2b0F92b7ac48Fcfe0",
+        "name": "F1 Red Cow Racing",
+        "sku": "O1LJS",
+        "mintToken": "2810:0x4a68cb5b99b6e1db5745eeabde38c5b12aa0ce55",
+        "mintAmount": 5000,
         "retailers": []
       },
       {
-        "manager": "0xF9934b9034FEdC3E22bA49e85c1847663EeF8d67",
-        "name": "Get burger for Cola and carrot",
-        "sku": "cola",
-        "mintToken": "88882:0x9eEfF9f1C60e0B0d870A3946d13C321E97Eb475A",
-        "mintAmount": 100,
-        "reward": "burger",
-        "otherToken": "2810:0x90595F79db34931ABcb4ea63Ed02c6D5A7d335Eb",
-        "otherAmount": 1000,
+        "manager": "0xD392b72A6bf7E718f5Cf67A2b0F92b7ac48Fcfe0",
+        "name": "Rock with Muse",
+        "sku": "5088E",
+        "mintToken": "88882:0x7556403BaC4Bb71F09f3b3C2Fdb6f9C461CAe712",
+        "mintAmount": 1000,
+        "reward": "MUSE",
+        "otherToken": "2810:0x4a68cb5b99b6e1db5745eeabde38c5b12aa0ce55",
+        "otherAmount": 5000,
+        "retailers": []
+      },
+      {
+        "manager": "0xD392b72A6bf7E718f5Cf67A2b0F92b7ac48Fcfe0",
+        "name": "Red Cow Promotion",
+        "sku": "XXXX",
+        "mintToken": "2810:0x4a68cb5b99b6e1db5745eeabde38c5b12aa0ce55",
+        "mintAmount": 1000,
         "retailers": []
       }
     ],
@@ -25,61 +33,61 @@
       {
         "id": "0000000001",
         "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
-        "sku": "carrot",
+        "sku": "O1LJS",
         "quantity": 1,
         "mints": [0]
       },
       {
         "id": "0000000002",
         "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
-        "sku": "cola",
+        "sku": "5088E",
         "quantity": 1,
         "mints": [1]
+      },
+      {
+        "id": "0000000003",
+        "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
+        "sku": "XXXX",
+        "quantity": 1,
+        "mints": [2]
       }
     ],
     "mints": [
       {
         "campaign": 0,
         "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
-        "token": "2810:0x90595F79db34931ABcb4ea63Ed02c6D5A7d335Eb",
-        "amount": 1000,
-        "timestamp": 1725537237581
+        "token": "2810:0x4a68cb5b99b6e1db5745eeabde38c5b12aa0ce55",
+        "amount": 5000,
+        "timestamp": 1725237237581
       },
       {
         "campaign": 1,
         "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
-        "token": "88882:0x9eEfF9f1C60e0B0d870A3946d13C321E97Eb475A",
-        "amount": 100,
-        "timestamp": 1725537237582
-      },
-      {
-        "campaign": 0,
-        "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
-        "token": "2810:0x90595F79db34931ABcb4ea63Ed02c6D5A7d335Eb",
+        "token": "88882:0x7556403BaC4Bb71F09f3b3C2Fdb6f9C461CAe712",
         "amount": 1000,
-        "timestamp": 1725606181545
+        "timestamp": 1723537237582
       },
       {
         "campaign": 1,
         "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
-        "token": "88882:0x9eEfF9f1C60e0B0d870A3946d13C321E97Eb475A",
-        "amount": 100,
-        "timestamp": 1725636181545
+        "token": "2810:0x4a68cb5b99b6e1db5745eeabde38c5b12aa0ce55",
+        "amount": 1000,
+        "timestamp": 1725437237582
       }
     ],
     "burns": [
       {
         "campaign": 1,
         "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
-        "token": "2810:0x90595F79db34931ABcb4ea63Ed02c6D5A7d335Eb",
-        "amount": 1000,
+        "token": "2810:0x4a68cb5b99b6e1db5745eeabde38c5b12aa0ce55",
+        "amount": 5000,
         "timestamp": 1725545237583
       },
       {
         "campaign": 1,
         "customer": "0x270cbe321DABc63Ae01Bbbf0b4d7a9C5EDFEc378",
-        "token": "88882:0x9eEfF9f1C60e0B0d870A3946d13C321E97Eb475A",
-        "amount": 100,
+        "token": "88882:0x7556403BaC4Bb71F09f3b3C2Fdb6f9C461CAe712",
+        "amount": 1000,
         "timestamp": 1725547237584
       }
     ]
