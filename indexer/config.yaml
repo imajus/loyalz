@@ -31,11 +31,11 @@ networks:
   contracts:
     - name: MultiTokenERC20
       address: 0xaE7902b8050ef5204C74b5cbC5a2b91Ac6140D2d
-- id: 296 # Hedera Testnet
-  rpc_config:
-    url: https://testnet.hashio.io/api
-  start_block: 8795634
-  contracts:
-    - name: MultiTokenERC20
-      address: 0x31d1042231fcD69d22c3076F841E5970f4a1603c
+# - id: 296 # Hedera Testnet
+#   rpc_config:
+#     url: https://testnet.hashio.io/api
+#   start_block: 8795634
+#   contracts:
+#     - name: MultiTokenERC20
+#       address: 0x31d1042231fcD69d22c3076F841E5970f4a1603c
 rollback_on_reorg: false
