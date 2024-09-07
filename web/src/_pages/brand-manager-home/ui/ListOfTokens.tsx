@@ -1,19 +1,39 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { tokens } from '@/mock/tokens';
 import { Overlay, Spinner } from '@/shared/components';
 import { Button } from '@/shared/components/shadcn/ui/button';
 
+import { IndexedToken, Token } from '@/shared/types';
+import { blockchainName } from '@/shared/utils/blockchain';
+import { shortHash } from '@/shared/utils/token';
 import { CreateTokenForm } from './create-token-form/CreateTokenForm';
 import { TokensListTable } from './tables/TokensListTable';
 
-type PropTypes = {
-  isLoading: boolean;
-};
-
-export const ListOfTokens = ({ isLoading }: PropTypes) => {
+export const ListOfTokens = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [tokens, setTokens] = useState<Token[]>([]);
   const [isFormVisible, setIsFormVisible] = useState(false);
 
+  useEffect(() => {
+    void (async () => {
+      try {
+        const response = await fetch('https://loyalz-envio.majus.org/api/rest/created-tokens', {
+          method: 'GET',
+        });
+        const { MultiTokenERC20_TokenCreated: createdTokens } = await response.json();
+        setTokens(
+          createdTokens.map(({ id, name }: IndexedToken) => ({
+            token: shortHash(name),
+            blockchain: blockchainName(id),
+          })),
+        );
+        setIsLoading(false);
+        setIsLoading(false);
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  }, []);
   return (
     <div className="w-full flex flex-col gap-3">
       <div className="font-['Inter'] w-full flex justify-start">

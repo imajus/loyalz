@@ -120,3 +120,8 @@ export type Token = {
   token: string;
   blockchain: string;
 };
+
+export type IndexedToken = {
+  id: string;
+  name: string;
+};
