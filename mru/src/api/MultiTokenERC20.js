@@ -1,12 +1,11 @@
 const ethers = require('ethers');
-import { MultiTokenABI } from "src/abi/MultiTokenERC20";
-
+import MultiTokenERC20Definition from 'src/abi/MultiTokenERC20.json';
 
 // Replace with your contract's ABI
-const contractABI = MultiTokenABI;
+const contractABI = MultiTokenERC20Definition.abi;
 
 // Replace with your deployed contract address
-const contractAddress = "0xYourContractAddressHere";
+const contractAddress = '0xYourContractAddressHere';
 
 // Function to get a contract instance
 function getContractInstance(signer) {
@@ -28,7 +27,11 @@ const MultiTokenERC20 = {
   // Mint tokens
   mintTokens: async (signer, tokenName, to, amount) => {
     const contract = getContractInstance(signer);
-    const tx = await contract.mintTokens(tokenName, to, ethers.utils.parseEther(amount));
+    const tx = await contract.mintTokens(
+      tokenName,
+      to,
+      ethers.utils.parseEther(amount),
+    );
     const receipt = await tx.wait();
     console.log(`Minted ${amount} ${tokenName} tokens to ${to}`);
     console.log(`Transaction hash: ${tx.hash}`);
@@ -38,7 +41,11 @@ const MultiTokenERC20 = {
   // Burn tokens
   burnTokens: async (signer, tokenName, from, amount) => {
     const contract = getContractInstance(signer);
-    const tx = await contract.burnTokens(tokenName, from, ethers.utils.parseEther(amount));
+    const tx = await contract.burnTokens(
+      tokenName,
+      from,
+      ethers.utils.parseEther(amount),
+    );
     const receipt = await tx.wait();
     console.log(`Burned ${amount} ${tokenName} tokens from ${from}`);
     console.log(`Transaction hash: ${tx.hash}`);
@@ -61,7 +68,10 @@ const MultiTokenERC20 = {
   // Approve token burn
   approveTokenBurn: async (signer, tokenName, amount) => {
     const contract = getContractInstance(signer);
-    const tx = await contract.approveTokenBurn(tokenName, ethers.utils.parseEther(amount));
+    const tx = await contract.approveTokenBurn(
+      tokenName,
+      ethers.utils.parseEther(amount),
+    );
     const receipt = await tx.wait();
     console.log(`Approved burn of ${amount} ${tokenName} tokens`);
     return receipt;
