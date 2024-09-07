@@ -7,7 +7,6 @@ export const getUserInfo = async (web3auth: Web3Auth | null) => {
   if (!web3auth || !web3auth.connected) return null;
 
   const user = await web3auth.getUserInfo();
-  console.info({ user });
   return user;
 };
 
