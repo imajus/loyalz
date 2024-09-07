@@ -121,6 +121,11 @@ export type Token = {
   blockchain: Blockchain;
 };
 
+export type IndexedToken = {
+  id: string;
+  name: string;
+};
+
 export type Blockchain =
   | 'MorphHoleskyTestnet'
   | 'ChilizSpicyTestnet'

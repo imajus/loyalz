@@ -31,8 +31,8 @@ export const BrandManagerHome = () => {
       style={{ scrollbarWidth: 'none' }}
     >
       <CampaignsTable campaigns={campaigns} isLoading={isLoading} />
-      <div className="flex flex-col lg:flex-row gap-10 lg:gap-40 items-start justify-between">
-        <ListOfTokens isLoading={isLoading} />
+      <div className="flex flex-col lg:flex-row gap-40 items-start justify-between">
+        <ListOfTokens />
         <NewsSection isLoading={isLoading} />
       </div>
     </div>
