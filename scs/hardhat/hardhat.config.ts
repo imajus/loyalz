@@ -23,12 +23,17 @@ const config: HardhatUserConfig = {
       //gasPrice: 60000000,
       accounts: [process.env.PRIVATE_KEY as string]
     },
+    hederaTestnet: {
+      url: "https://testnet.hashio.io/api",
+      accounts: [process.env.PRIVATE_KEY as string]
+    },
   },
   etherscan: {
     apiKey: {
       morphHolesky: '.',
       chiliz_spicy: '.',
       rskTestnet: '.',
+      hederaTestnet: '.',
     },
     customChains: [
       {
@@ -53,6 +58,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: 'https://explorer.testnet.rsk.co/api',
           browserURL: 'https://explorer.testnet.rsk.co/',
+        },
+      },
+      {
+        network: 'hederaTestnet',
+        chainId: 296,
+        urls: {
+          apiURL: 'https://hashscan.io/testnet/api',
+          browserURL: 'https://hashscan.io/testnet/',
         },
       },
     ],
