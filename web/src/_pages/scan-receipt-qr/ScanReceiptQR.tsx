@@ -2,12 +2,12 @@
 
 import { useRouter } from 'next/navigation';
 import QrScanner from 'qr-scanner';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { Frame, GoBackButton, MainWrapper, ScannerQR } from '@/shared/components';
+import { GoBackButton, MainWrapper } from '@/shared/components';
+import { QRScanner } from '@/widgets';
 
 import { Result } from './ui/Result';
-import { ScannerButton } from './ui/ScannerButton';
 
 // void (async () => {
 //   console.log(
@@ -20,12 +20,6 @@ import { ScannerButton } from './ui/ScannerButton';
 export const ScanReceiptQR = () => {
   const router = useRouter();
   const [scannedResult, setScannedResult] = useState<string | undefined>();
-  const [isScannerOn, setIsScannerOn] = useState(false);
-
-  useEffect(() => {
-    if (!scannedResult) return;
-    setIsScannerOn(false);
-  }, [scannedResult]);
 
   const onScanSuccess = (result: QrScanner.ScanResult) => {
     const scannedData = result?.data;
@@ -38,26 +32,14 @@ export const ScanReceiptQR = () => {
     console.error(`Scanning QR failed:1 ${error}`);
   };
 
-  const handleScannerClick = () => {
-    setIsScannerOn(true);
-    setScannedResult('');
-  };
-
   return (
     <MainWrapper title="Scan QR" page="earn">
-      <div
-        className="grid gap-6 overflow-x-hidden h-full justify-center items-center"
-        style={{ scrollbarWidth: 'none' }}
-      >
-        <Frame isWidthFit>
-          {isScannerOn ? (
-            <ScannerQR onScanSuccess={onScanSuccess} onScanFail={onScanFail} />
-          ) : (
-            <ScannerButton onClick={handleScannerClick} />
-          )}
-        </Frame>
-      </div>
-
+      <QRScanner
+        scannedResult={scannedResult}
+        setScannedResult={setScannedResult}
+        onScanSuccess={onScanSuccess}
+        onScanFail={onScanFail}
+      />
       <Result scannedResult={scannedResult} />
 
       <div className="flex items-center justify-center h-20 w-full">
