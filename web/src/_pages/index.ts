@@ -1,4 +1,5 @@
 import { BrandManagerHome } from './brand-manager-home/BrandManagerHome';
+import { ConfirmExchange } from './confirm-exchange/ConfirmExchange';
 import { CustomerHome } from './customer-home/CustomerHome';
 import { Earn } from './earn/Earn';
 import { Exchange } from './exchange/Exchange';
@@ -13,6 +14,7 @@ import { Web3AuthPage } from './web-auth/Web3Auth';
 
 export {
   BrandManagerHome,
+  ConfirmExchange,
   CustomerHome,
   Earn,
   Exchange,
