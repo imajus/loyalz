@@ -4,18 +4,15 @@ import db, { Conversation, Message } from '../models/xmtp';
 import { loadMessages, saveConversation } from '../utils/xmtp';
 import { useWeb3Auth } from './useWeb3Auth/useWeb3Auth';
 
-export function useConversations(broadcastAddresses: string[]): Conversation[] {
+export function useConversations(): Conversation[] {
   const { xmtpUser } = useWeb3Auth();
 
   useEffect(() => {
     void (async () => {
       if (!xmtpUser) return;
       for (const xmtpConversation of await xmtpUser.conversations.list()) {
-        // TODO: filter by conversation.title instead
-        // if (broadcastAddresses.includes(xmtpConversation.peerAddress)) {
+        // TODO: filter by conversation.title
         await saveConversation(xmtpConversation);
-        console.log(broadcastAddresses);
-        // }
       }
     })();
   }, []);
@@ -25,9 +22,7 @@ export function useConversations(broadcastAddresses: string[]): Conversation[] {
       if (!xmtpUser) return;
       for await (const conversation of await xmtpUser.conversations.stream()) {
         // TODO: filter by conversation.title instead
-        // if (broadcastAddresses.includes(conversation.peerAddress)) {
         await saveConversation(conversation);
-        // }
       }
     })();
   }, []);

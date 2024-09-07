@@ -20,11 +20,10 @@ const appearsInMessageList = (message: Message): boolean => {
 
 export const News = () => {
   const { xmtpUser } = useWeb3Auth();
-  const conversations = useConversations(['']);
+  const conversations = useConversations();
   const messages = useMessages(conversations)?.filter(
     ({ senderAddress }) => senderAddress !== xmtpUser?.address,
   );
-  console.log(xmtpUser);
 
   return (
     <MainWrapper title="News" page="news">

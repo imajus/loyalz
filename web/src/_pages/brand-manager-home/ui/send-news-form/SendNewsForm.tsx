@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { Button } from '@/shared/components/shadcn/ui/button';
 import { useWeb3Auth } from '@/shared/hook';
+import { toastError } from '@/shared/utils/toast';
 import { allowedConsentList } from '@/shared/utils/xmtp';
 import { BroadcastClient } from '@xmtp/broadcast-sdk';
 import { emptyNewsErrors } from './const';
@@ -38,7 +39,6 @@ export const SendNewsForm = () => {
       try {
         if (xmtpUser) {
           const subscribers = (await allowedConsentList(xmtpUser)).map(({ value }) => value);
-          debugger;
           const broadcastClient = new BroadcastClient({
             client: xmtpUser,
             addresses: subscribers,
@@ -49,6 +49,7 @@ export const SendNewsForm = () => {
         }
       } catch (error) {
         console.error(error);
+        toastError('News submission failed');
       }
     };
 
