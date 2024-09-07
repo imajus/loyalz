@@ -12,7 +12,7 @@ import { getWalletBalance } from './utils';
 export const Wallet = () => {
   const router = useRouter();
   const [walletBalance, setWalletBalance] = useState<WalletItem[]>([]);
-  const { logoutWeb3Auth, isError } = useWeb3Auth();
+  const { isError } = useWeb3Auth();
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
@@ -49,13 +49,6 @@ export const Wallet = () => {
         <Button
           onClick={() => router.push('/customer/history', { scroll: false })}
           title="Transaction history"
-        />
-        <Button
-          onClick={async () => {
-            await logoutWeb3Auth?.();
-            router.push('/customer/earn', { scroll: false });
-          }}
-          title="Log out"
         />
       </div>
     </MainWrapper>
