@@ -16,7 +16,6 @@ type PropTypes = {
 export const CreateTokenForm = ({ setIsFormVisible }: PropTypes) => {
   const [formData, setFormData] = useState<Token>({
     token: '',
-    limit: 0,
     blockchain: '',
   });
 
@@ -76,17 +75,6 @@ export const CreateTokenForm = ({ setIsFormVisible }: PropTypes) => {
           />
         </div>
         <span className="pb-3 text-xs text-red-700">{errors.token}</span>
-        <div className="grid grid-cols-2">
-          <label>Limit *</label>
-          <input
-            className="text-black"
-            type="text"
-            name="limit"
-            value={formData.limit}
-            onChange={handleChange}
-          />
-        </div>
-        <span className="pb-3 text-xs text-red-700">{errors.limit}</span>
         <div className="grid grid-cols-2">
           <label>Blockchain *</label>
           <input

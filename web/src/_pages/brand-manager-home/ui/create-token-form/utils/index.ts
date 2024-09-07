@@ -11,15 +11,6 @@ export const validateForm = (data: Token) => {
     errors.token = 'Token is required';
     isValid = false;
   }
-  if (!data.limit) {
-    errors.limit = 'Limit is required';
-    isValid = false;
-  }
-
-  if (data.limit < 0) {
-    errors.limit = 'Limit cannot be negative';
-    isValid = false;
-  }
 
   if (!data.blockchain) {
     errors.blockchain = 'Blockchain is required';

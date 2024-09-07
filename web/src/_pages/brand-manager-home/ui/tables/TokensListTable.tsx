@@ -19,7 +19,6 @@ export const TokensListTable = ({ tokens }: PropTypes) => {
       <TableHeader>
         <TableRow className="sticky top-0 bg-white">
           <TableHead>Token</TableHead>
-          <TableHead>Limit</TableHead>
           <TableHead>Blockchain</TableHead>
         </TableRow>
       </TableHeader>
@@ -27,7 +26,6 @@ export const TokensListTable = ({ tokens }: PropTypes) => {
         {tokens.map((campaign, idx) => (
           <TableRow key={idx} className={classNames(idx % 2 === 1 && 'bg-slate-200')}>
             <TableCell>{campaign.token}</TableCell>
-            <TableCell>{campaign.limit}</TableCell>
             <TableCell>{campaign.blockchain}</TableCell>
           </TableRow>
         ))}

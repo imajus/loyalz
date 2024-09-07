@@ -118,6 +118,5 @@ export type Campaign = {
 
 export type Token = {
   token: string;
-  limit: number;
   blockchain: string;
 };
