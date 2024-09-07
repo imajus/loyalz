@@ -9,20 +9,20 @@ contracts:
     - event: TokensBurned(string name, address from, uint256 amount)
     - event: TokensMinted(string name, address to, uint256 amount) 
 networks:
-- id: 2810
+- id: 2810 # Morph Holesky Testnet
   rpc_config:
     url: https://rpc-quicknode-holesky.morphl2.io
   start_block: 7733089
   contracts:
     - name: MultiTokenERC20
-      address: 0x31d1042231fcD69d22c3076F841E5970f4a1603c
+      address: 0x843E6C6B9de4538cd5ce3C84722E5e76d39515E3
 - id: 88882 # Chiliz Spicy Testnet
   rpc_config:
     url: https://spicy-rpc.chiliz.com
   start_block: 17232781
   contracts:
     - name: MultiTokenERC20
-      address: 0x10bAc9115678D7B798B36b1D6Da68E0248873EBE
+      address: 0x0390Eeb6B08d02f4e392866502d161ad4105D2f3
 - id: 31 # Rootstock Testnet
   rpc_config:
     url: https://rpc.testnet.rootstock.io/L6ZhwA295IZEj8TgDgtnlNnoVumEws-T
@@ -30,7 +30,7 @@ networks:
   start_block: 5498226
   contracts:
     - name: MultiTokenERC20
-      address: 0x0390eeb6B08D02f4e392866502D161Ad4105D2f3
+      address: 0x3f9ab731bffd704cf21a6efc5050006071d1518b
 - id: 296 # Hedera Testnet
   rpc_config:
     url: https://testnet.hashio.io/api
