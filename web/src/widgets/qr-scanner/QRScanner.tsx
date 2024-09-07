@@ -1,3 +1,4 @@
+'use client';
 import QrScanner from 'qr-scanner';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
