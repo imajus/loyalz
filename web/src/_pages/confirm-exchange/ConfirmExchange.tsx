@@ -1,14 +1,33 @@
 'use client';
 import { ArrowRightIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { ReactNode } from 'react';
+import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
 
 import { Button, RetailerWrapper } from '@/shared/components';
 import { GreenEllipseWithPresent, RedEllipse } from '@/shared/icon';
 
-const Wrapper = ({ children }: { children: ReactNode }) => {
+import { ExchangeConfirmedMessage } from './ui/ExchangeConfirmedMessage';
+
+const Wrapper = ({
+  children,
+  isDone,
+  setIsDone,
+}: {
+  children: ReactNode;
+  isDone: boolean;
+  setIsDone: Dispatch<SetStateAction<boolean>>;
+}) => {
+  const doneMessage = (
+    <ExchangeConfirmedMessage
+      token="Pearls"
+      amount={100}
+      brand="Alpha"
+      handleBackClick={() => setIsDone(false)}
+    />
+  );
+
   return (
-    <RetailerWrapper title="Exchange">
+    <RetailerWrapper title="Done" DoneMessage={doneMessage} isDone={isDone}>
       <div className="w-full h-full flex flex-col justify-between items-center gap-7 pt-10">
         {children}
       </div>
@@ -34,10 +53,15 @@ const getTransactionText = (
 };
 
 export const ConfirmExchange = () => {
+  const [isDone, setIsDone] = useState(false);
   const router = useRouter();
 
+  const handleExchangeClick = () => {
+    setIsDone(true);
+  };
+
   return (
-    <Wrapper>
+    <Wrapper isDone={isDone} setIsDone={setIsDone}>
       <div className="w-full flex flex-col gap-3">
         <div className="flex flex-row items-center justify-center gap-3">
           <GreenEllipseWithPresent />
@@ -56,7 +80,7 @@ export const ConfirmExchange = () => {
       </div>
 
       <div className="flex items-center justify-center h-20 w-full gap-3">
-        <Button onClick={() => {}} btnSize="sm">
+        <Button onClick={handleExchangeClick} btnSize="sm">
           <span className="font-['Racing_Sans_One'] text-2xl">Exchange</span>
         </Button>
         <Button onClick={() => router.push('/retailer', { scroll: false })} btnSize="sm">
