@@ -6,9 +6,9 @@ import { ReactNode } from 'react';
 import { Button, Icon, RetailerWrapper } from '@/shared/components';
 import { useWeb3Auth } from '@/shared/hook';
 
-const Wrapper = ({ children }: { children: ReactNode }) => {
+const Wrapper = ({ children, isError }: { children: ReactNode; isError: boolean }) => {
   return (
-    <RetailerWrapper title="Menu">
+    <RetailerWrapper title="Menu" isError={isError}>
       <div className="w-full h-full flex flex-col justify-start items-center gap-7 pt-10">
         {children}
       </div>
@@ -17,19 +17,19 @@ const Wrapper = ({ children }: { children: ReactNode }) => {
 };
 
 export const RetailerHome = () => {
-  const { isLoggedIn, loginWeb3Auth, web3user } = useWeb3Auth();
+  const { isLoggedIn, loginWeb3Auth, web3user, isError } = useWeb3Auth();
   const router = useRouter();
 
   if (!isLoggedIn || !web3user) {
     return (
-      <Wrapper>
+      <Wrapper isError={isError}>
         <Button onClick={() => loginWeb3Auth?.()} title="Login" />
       </Wrapper>
     );
   }
 
   return (
-    <Wrapper>
+    <Wrapper isError={isError}>
       <div className="flex flex-col gap-3 items-center justify-center">
         <Icon src={web3user.profileImage} />
         <span className="font-bold">{web3user.name}</span>

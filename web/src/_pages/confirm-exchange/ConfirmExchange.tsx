@@ -10,11 +10,13 @@ import { ExchangeConfirmedMessage } from './ui/ExchangeConfirmedMessage';
 
 const Wrapper = ({
   children,
+  isError,
   isDone,
   setIsDone,
 }: {
   children: ReactNode;
   isDone: boolean;
+  isError?: boolean;
   setIsDone: Dispatch<SetStateAction<boolean>>;
 }) => {
   const doneMessage = (
@@ -27,7 +29,7 @@ const Wrapper = ({
   );
 
   return (
-    <RetailerWrapper title="Done" DoneMessage={doneMessage} isDone={isDone}>
+    <RetailerWrapper title="Done" DoneMessage={doneMessage} isDone={isDone} isError={isError}>
       <div className="w-full h-full flex flex-col justify-between items-center gap-7 pt-10">
         {children}
       </div>
