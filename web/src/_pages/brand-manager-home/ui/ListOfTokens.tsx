@@ -5,6 +5,7 @@ import { Button } from '@/shared/components/shadcn/ui/button';
 
 import { IndexedToken, Token } from '@/shared/types';
 import { blockchainName } from '@/shared/utils/blockchain';
+import { Indexer } from '@/shared/utils/indexer';
 import { CreateTokenForm } from './create-token-form/CreateTokenForm';
 import { TokensListTable } from './tables/TokensListTable';
 
@@ -33,6 +34,19 @@ export const ListOfTokens = () => {
       }
     })();
   }, []);
+
+  useEffect(() => {
+    void (async () => {
+      const indexer = new Indexer();
+      console.log('tokenCreatedAmount', await indexer.tokenCreatedAmount());
+      console.log('tokenMintedAmount', await indexer.tokenMintedAmount());
+      console.log('tokenBurnedAmount', await indexer.tokenBurnedAmount());
+      console.log('avgMintedAmountPerToken', await indexer.avgMintedAmountPerToken());
+      console.log('avgBurnedAmountPerToken', await indexer.avgBurnedAmountPerToken());
+      console.log('avgMintedBurnedRatioPerToken', await indexer.avgMintedBurnedRatioPerToken());
+    })();
+  }, []);
+
   return (
     <div className="w-full flex flex-col gap-3">
       <div className="font-['Inter'] w-full flex justify-start">
