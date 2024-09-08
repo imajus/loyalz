@@ -28,8 +28,6 @@ export const RetailerHome = () => {
     );
   }
 
-  console.log({ web3user });
-
   return (
     <Wrapper>
       <div className="flex flex-col gap-3 items-center justify-center">
