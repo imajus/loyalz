@@ -1,8 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { signActionInputs, submitRollupAction } from '@/shared/utils/rollup';
-import type { IProvider } from '@web3auth/base';
 import { ethers } from 'ethers';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { signActionInputs, submitRollupAction } from '@/shared/utils/rollup';
+
+import type { IProvider } from '@web3auth/base';
 const getChainId = async (provider: IProvider): Promise<any> => {
   try {
     const ethersProvider = new ethers.BrowserProvider(provider);
@@ -116,6 +117,7 @@ const sendRollupMessage = async (provider: IProvider): Promise<any> => {
     const ethersProvider = new ethers.BrowserProvider(provider);
     const signer = await ethersProvider.getSigner();
     return await submitRollupAction(
+      'addReceipt',
       'addReceipt',
       {
         id: String(Date.now()),
