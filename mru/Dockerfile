@@ -1,9 +1,4 @@
-FROM node:lts-bookworm-slim
-
-RUN npm install -g npm@latest
-
-# Install bun globally
-RUN npm install -g bun
+FROM oven/bun:latest
 
 WORKDIR /app
 
@@ -22,7 +17,7 @@ COPY stackr.config.ts .
 COPY src src
 
 # Install dependencies
-RUN npm install
+RUN bun install
 
 ENV VULCAN_RPC https://sepolia.vulcan.stf.xyz
 ENV L1_RPC https://rpc2.sepolia.org
@@ -33,4 +28,4 @@ ENV DOMAIN_VERSION 0.1.0
 ENV PORT 3210
 
 # Command to run the application
-CMD ["npm", "start"]
+CMD ["bun", "start"]
