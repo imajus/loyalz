@@ -15,7 +15,7 @@ type PropTypes = {
 
 export const TokensListTable = ({ tokens }: PropTypes) => {
   return (
-    <Table className="max-h-32 h-fit">
+    <Table className="max-h-[500px] h-fit">
       <TableHeader>
         <TableRow className="sticky top-0 bg-white">
           <TableHead>Token</TableHead>
