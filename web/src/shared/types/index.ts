@@ -95,7 +95,7 @@ export type AlterRetailerInputs = {
 export type AddReceiptInputs = {
   id: string;
   sku: string;
-  quantity: number;
+  quantity: string;
 };
 
 export type ClaimRewardInputs = {

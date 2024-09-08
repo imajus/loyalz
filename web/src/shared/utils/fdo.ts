@@ -1,10 +1,10 @@
-interface ReceiptData {
+type ReceiptData = {
   id: string;
   items: {
     sku: string;
     quantity: number;
   }[];
-}
+}[];
 
 export async function fetchReceiptData(link: string): Promise<ReceiptData> {
   link = link.replace(/^http:/, 'https:');
