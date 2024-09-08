@@ -3,11 +3,11 @@ import { ArrowRightIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
 
-import { Button, RetailerWrapper } from '@/shared/components';
-import { GreenEllipseWithPresent, RedEllipse } from '@/shared/icon';
+import { Button, Icon, RetailerWrapper } from '@/shared/components';
+import { GreenEllipseWithPresent } from '@/shared/icon';
 import { CampaignState } from '@/shared/types';
 import { listCampaigns } from '@/shared/utils/rollup';
-import { getToken } from '@/shared/utils/token';
+import { getToken, getTokenSrc } from '@/shared/utils/token';
 
 import { ExchangeConfirmedMessage } from './ui/ExchangeConfirmedMessage';
 
@@ -89,8 +89,8 @@ export const ConfirmExchange = () => {
           <ArrowRightIcon size={100} />
 
           <div className="flex flex-col gap-2">
-            {tokens.map((_, index) => (
-              <RedEllipse height={48} key={index} />
+            {tokens.map((item, index) => (
+              <Icon src={getTokenSrc(item.token)} key={index} />
             ))}
           </div>
         </div>

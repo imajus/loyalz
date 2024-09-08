@@ -103,3 +103,6 @@ export const getTokensLeftForExchangingMint = (
 };
 
 export const getToken = (token: string) => tokenMapping[token] || token;
+
+export const getTokenSrc = (token: string) =>
+  `https://n8n.majus.org/webhook/loyalz-cdn?kind=tokens&id=${token}`;
