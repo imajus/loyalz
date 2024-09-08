@@ -1,12 +1,20 @@
 import { IProvider } from '@web3auth/base';
 import { ContentTypeReadReceipt } from '@xmtp/content-type-read-receipt';
 import * as XMTP from '@xmtp/xmtp-js';
-import { Client } from '@xmtp/xmtp-js';
 import { Mutex } from 'async-mutex';
 // @ts-ignore
-import { ContentTypeId } from '@xmtp/xmtp-js';
+import { Client, ContentTypeId } from '@xmtp/xmtp-js';
 import { ethers } from 'ethers';
 import db, { Conversation, Message } from '../models/xmtp';
+
+export const getXmtpClient = async (provider: IProvider) => {
+  const signer = await getSigner(provider);
+  const client = await Client.create(signer, {
+    env: (process.env.NEXT_PUBLIC_XMTP_ENV as XMTP.XmtpEnv) ?? 'dev',
+  });
+  console.log(`XMTP client initialized at: ${client.address}`);
+  return client;
+};
 
 export const allowedConsentList = async (client: Client) => {
   // Fetch the consent list from the client
@@ -107,7 +115,7 @@ export async function saveConversation(xmtpConversation: XMTP.Conversation): Pro
   });
 }
 
-export async function process(
+export async function processMessage(
   conversation: Conversation,
   { contentType, message }: { contentType: ContentTypeId; message: Message },
 ) {
@@ -168,7 +176,7 @@ export async function saveMessage(
       isSending: false,
     };
 
-    await process(conversation, {
+    await processMessage(conversation, {
       contentType: decodedMessage.contentType,
       message,
     });

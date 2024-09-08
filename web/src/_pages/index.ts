@@ -3,7 +3,6 @@ import { CustomerHome } from './customer-home/CustomerHome';
 import { Earn } from './earn/Earn';
 import { Exchange } from './exchange/Exchange';
 import { HistoryPage } from './history/History';
-import { News } from './news/News';
 import { ScanReceiptQR } from './scan-receipt-qr/ScanReceiptQR';
 import { ShowQR } from './show-qr/ShowQR';
 import { Wallet } from './wallet/Wallet';
@@ -15,7 +14,6 @@ export {
   Earn,
   Exchange,
   HistoryPage,
-  News,
   ScanReceiptQR,
   ShowQR,
   Wallet,

@@ -1,11 +1,21 @@
+import { Client } from '@xmtp/xmtp-js';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import db, { Conversation, Message } from '../models/xmtp';
-import { loadMessages, saveConversation } from '../utils/xmtp';
+import { toastError } from '../utils/toast';
+import { getXmtpClient, loadMessages, saveConversation } from '../utils/xmtp';
 import { useWeb3Auth } from './useWeb3Auth/useWeb3Auth';
 
 export function useConversations(): Conversation[] {
-  const { xmtpUser } = useWeb3Auth();
+  const { provider } = useWeb3Auth();
+  const [xmtpUser, setXmtpUser] = useState<Client | null>(null);
+  useEffect(() => {
+    if (provider) {
+      getXmtpClient(provider)
+        .then((client) => setXmtpUser(client))
+        .catch((err) => toastError(err.message));
+    }
+  }, [provider]);
 
   useEffect(() => {
     void (async () => {
@@ -35,7 +45,15 @@ export function useConversations(): Conversation[] {
 }
 
 export function useMessages(conversations: Conversation[]): Message[] | undefined {
-  const { xmtpUser } = useWeb3Auth();
+  const { provider } = useWeb3Auth();
+  const [xmtpUser, setXmtpUser] = useState<Client | null>(null);
+  useEffect(() => {
+    if (provider) {
+      getXmtpClient(provider)
+        .then((client) => setXmtpUser(client))
+        .catch((err) => toastError(err.message));
+    }
+  }, [provider]);
 
   useEffect(() => {
     if (!xmtpUser) return;

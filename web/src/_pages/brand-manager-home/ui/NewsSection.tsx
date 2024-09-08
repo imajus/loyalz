@@ -1,10 +1,11 @@
 'use client';
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 
 import { news } from '@/mock/news';
 import { Spinner } from '@/shared/components';
 
-import { SendNewsForm } from './send-news-form/SendNewsForm';
+const SendNewsForm = dynamic(() => import('./send-news-form/SendNewsForm'), { ssr: false });
 
 type PropTypes = {
   isLoading: boolean;

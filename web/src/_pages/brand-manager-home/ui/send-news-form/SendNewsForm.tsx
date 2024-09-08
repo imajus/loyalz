@@ -1,10 +1,10 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
-
 import { Button } from '@/shared/components/shadcn/ui/button';
 import { useWeb3Auth } from '@/shared/hook';
 import { toastError } from '@/shared/utils/toast';
-import { allowedConsentList } from '@/shared/utils/xmtp';
+import { allowedConsentList, getXmtpClient } from '@/shared/utils/xmtp';
 import { BroadcastClient } from '@xmtp/broadcast-sdk';
+import { Client } from '@xmtp/xmtp-js';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { emptyNewsErrors } from './const';
 import { News, NewsErrors } from './types';
 import { validateForm } from './utils';
@@ -14,8 +14,15 @@ export const SendNewsForm = () => {
     text: '',
   });
   const [errors, setErrors] = useState<NewsErrors>(emptyNewsErrors);
-  const { xmtpUser } = useWeb3Auth();
-
+  const { provider } = useWeb3Auth();
+  const [xmtpUser, setXmtpUser] = useState<Client | null>(null);
+  useEffect(() => {
+    if (provider) {
+      getXmtpClient(provider)
+        .then((client) => setXmtpUser(client))
+        .catch((err) => toastError(err.message));
+    }
+  }, [provider]);
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({

@@ -8,10 +8,8 @@ import { SecuredPage, Web3User } from '@/shared/types';
 import { removeLeadingTrailingSlashes } from '@/shared/utils';
 import { getLocalUserInfo, storeUserInfo } from '@/shared/utils/localStorage';
 import { getUserInfo, getUserIsAuthenticated } from '@/shared/utils/web3Auth';
-import { getSigner } from '@/shared/utils/xmtp';
 import { IProvider, WEB3AUTH_NETWORK } from '@web3auth/base';
 import { Web3Auth } from '@web3auth/modal';
-import { Client, XmtpEnv } from '@xmtp/xmtp-js';
 
 type PropTypes = {
   children: ReactNode;
@@ -21,7 +19,6 @@ type Web3AuthData = {
   web3auth: Web3Auth | null;
   isLoggedIn: boolean;
   web3user: Web3User | null;
-  xmtpUser: Client | null;
   isLoading: boolean;
   setIsLoading?: Dispatch<SetStateAction<boolean>>;
   setIsLoggedIn?: Dispatch<SetStateAction<boolean>>;
@@ -36,20 +33,10 @@ type Web3AuthData = {
 const initialWeb3AuthData = {
   web3auth: null,
   web3user: null,
-  xmtpUser: null,
   isLoggedIn: false,
   provider: null,
   isLoading: false,
   isError: false,
-};
-
-const getXmtpClient = async (provider: IProvider) => {
-  const signer = await getSigner(provider);
-  const client = await Client.create(signer, {
-    env: (process.env.NEXT_PUBLIC_XMTP_ENV as XmtpEnv) ?? 'dev',
-  });
-  console.log(`XMTP client initialized at: ${client.address}`);
-  return client;
 };
 
 export const Web3AuthContext = createContext<Web3AuthData>(initialWeb3AuthData);
@@ -58,7 +45,6 @@ export const Web3AuthProvider = ({ children }: PropTypes) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isError, setIsError] = useState(false);
   const [web3user, setWeb3user] = useState<Web3User | null>(null);
-  const [xmtpUser, setXmtpUser] = useState<Client | null>(null);
   const [web3auth, setWeb3auth] = useState<Web3Auth | null>(null);
   const [provider, setProvider] = useState<IProvider | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -114,16 +100,8 @@ export const Web3AuthProvider = ({ children }: PropTypes) => {
       if (!w3auth.connected) {
         const web3authProvider = await w3auth.connect();
         setProvider(web3authProvider);
-        if (web3authProvider) {
-          const client = await getXmtpClient(web3authProvider);
-          setXmtpUser(client);
-        }
       } else {
         setProvider(w3auth.provider);
-        if (w3auth.provider) {
-          const client = await getXmtpClient(w3auth.provider);
-          setXmtpUser(client);
-        }
       }
 
       const currentUser = getLocalUserInfo();
@@ -160,7 +138,6 @@ export const Web3AuthProvider = ({ children }: PropTypes) => {
   const web3AuthData: Web3AuthData = {
     web3auth,
     web3user,
-    xmtpUser,
     isLoggedIn,
     isLoading,
     isError,
