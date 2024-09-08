@@ -1,12 +1,14 @@
 'use client';
+import { ethers } from 'ethers';
 import { ArrowRightIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { Button, Icon, RetailerWrapper } from '@/shared/components';
+import { useWeb3Auth } from '@/shared/hook';
 import { GreenEllipseWithPresent } from '@/shared/icon';
-import { CampaignState } from '@/shared/types';
-import { listCampaigns } from '@/shared/utils/rollup';
+import { CampaignState, ClaimRewardInputs } from '@/shared/types';
+import { claimReward, listCampaigns } from '@/shared/utils/rollup';
 import { getToken, getTokenSrc } from '@/shared/utils/token';
 
 import { ExchangeConfirmedMessage } from './ui/ExchangeConfirmedMessage';
@@ -28,6 +30,7 @@ export const ConfirmExchange = () => {
   const router = useRouter();
   const [campaign, setCampaign] = useState<CampaignState>();
   const [tokens, setTokens] = useState<{ token: string; amount: number }[]>([]);
+  const { provider } = useWeb3Auth();
 
   useEffect(() => {
     const init = async () => {
@@ -48,9 +51,18 @@ export const ConfirmExchange = () => {
     void init();
   }, []);
 
-  const handleExchangeClick = () => {
+  const handleExchangeClick = async () => {
     setIsDone(true);
-    // claimReward()
+    const claimInputs: ClaimRewardInputs = {
+      campaign: 1,
+      customer: '0xD392b72A6bf7E718f5Cf67A2b0F92b7ac48Fcfe0',
+    };
+
+    if (!provider) return;
+    const ethersProvider = new ethers.BrowserProvider(provider);
+    const signer = await ethersProvider.getSigner();
+
+    void claimReward(claimInputs, signer);
   };
 
   const doneMessage = (
