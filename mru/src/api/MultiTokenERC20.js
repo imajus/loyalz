@@ -9,21 +9,25 @@ const CHAIN_DATA = {
     rpc: 'https://rpc-quicknode-holesky.morphl2.io',
     address: '0x66D6B6483ec46abD950256880F39Ba56dc1b1a7f',
     explorer: 'https://explorer-holesky.morphl2.io/tx',
+    block: 8156635,
   },
   '88882': {
     rpc: 'https://spicy-rpc.chiliz.com',
     address: '0x8c4F510229863854ecD6fB0d7161d1aB5336cc27',
     explorer: 'https://testnet.chiliscan.com/tx',
+    block: 17375515,
   },
   '31': {
     rpc: 'https://rpc.testnet.rootstock.io/L6ZhwA295IZEj8TgDgtnlNnoVumEws-T',
     address: '0xaE7902b8050ef5204C74b5cbC5a2b91Ac6140D2d',
     explorer: 'https://explorer.testnet.rsk.co/tx',
+    block: 5514993,
   },
   '296': {
     rpc: 'https://testnet.hashio.io/api',
     address: '0xdfAab04Fbe10E5f9AfB653e797EA8AE31ECaB715',
     explorer: 'https://hashscan.io/testnet/tx',
+    block: 8880882,
   },
 };
 
@@ -97,12 +101,26 @@ export const MultiTokenERC20 = {
     return ethers.formatEther(balance);
   },
 
+  // getTokenName: async (chainId, address) => {
+  //   //TODO: Implement
+  //   return {
+  //     '88882:0x7556403BaC4Bb71F09f3b3C2Fdb6f9C461CAe712': 'RCC',
+  //     '2810:0x4a68cb5b99b6e1db5745eeabde38c5b12aa0ce55': 'RCRC',
+  //   }[`${chainId}:${address}`];
+  // },
+
   getTokenName: async (chainId, address) => {
-    //TODO: Implement
-    return {
-      '88882:0x7556403BaC4Bb71F09f3b3C2Fdb6f9C461CAe712': 'RCC',
-      '2810:0x4a68cb5b99b6e1db5745eeabde38c5b12aa0ce55': 'RCRC',
-    }[`${chainId}:${address}`];
+    const contract = getContractInstance(chainId);
+    const filter = contract.filters.TokenCreated();
+    const logs = await contract.queryFilter(
+      filter,
+      CHAIN_DATA[chainId].block,
+      'latest',
+    );
+    // @ts-ignore
+    const item = logs.find((log) => log.args.tokenAddress === address);
+    // @ts-ignore
+    return item.args.name;
   },
 
   // Get token address
