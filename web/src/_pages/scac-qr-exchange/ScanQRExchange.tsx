@@ -23,6 +23,7 @@ export const ScanQRExchange = () => {
   const onScanSuccess = (result: QrScanner.ScanResult) => {
     const scannedData = result?.data;
     setScannedResult(scannedData);
+    router.push('/retailer/confirm', { scroll: false });
   };
 
   const onScanFail = (err: string | Error) => {
