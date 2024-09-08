@@ -46,7 +46,7 @@ export class Indexer {
     return data;
   }
 
-  async tokenCreatedAmount() {
+  async tokenCreatedNumber() {
     const { MultiTokenERC20_TokenCreated_aggregate: data } = await this.fetch(`
       query MyQuery {
         MultiTokenERC20_TokenCreated_aggregate {

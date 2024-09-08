@@ -38,7 +38,7 @@ export const ListOfTokens = () => {
   useEffect(() => {
     void (async () => {
       const indexer = new Indexer();
-      console.log('tokenCreatedAmount', await indexer.tokenCreatedAmount());
+      console.log('tokenCreatedNumber', await indexer.tokenCreatedNumber());
       console.log('tokenMintedAmount', await indexer.tokenMintedAmount());
       console.log('tokenBurnedAmount', await indexer.tokenBurnedAmount());
       console.log('avgMintedAmountPerToken', await indexer.avgMintedAmountPerToken());
