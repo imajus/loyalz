@@ -3,6 +3,7 @@ import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'reac
 
 import { Button } from '@/shared/components/shadcn/ui/button';
 import { Blockchain, Token } from '@/shared/types';
+import { createToken } from '@/shared/utils/rollup';
 import { toastError } from '@/shared/utils/toast';
 
 import { blockchains, emptyErrors } from './const';
@@ -38,9 +39,9 @@ export const CreateTokenForm = ({ setIsFormVisible }: PropTypes) => {
       return;
     }
 
-    const submit = () => {
+    const submit = async () => {
       try {
-        // await createCampaign(formData, signer);
+        await createToken(formData.blockchain, formData.token);
       } catch (e: any) {
         console.error(`Token submission failed: ${e}`);
         toastError('Token submission failed');

@@ -97,11 +97,7 @@ export async function listBurns(): Promise<TokenEvent[]> {
   return res.json();
 }
 
-export async function createToken(
-  chainId: string,
-  symbol: string,
-  allowance: bigint,
-): Promise<string> {
+export async function createToken(chainId: string, symbol: string): Promise<string> {
   const res = await fetch(`${BASE_URL}/tokens`, {
     method: 'POST',
     headers: {
@@ -110,7 +106,6 @@ export async function createToken(
     body: JSON.stringify({
       chainId,
       symbol,
-      allowance: String(allowance),
     }),
   });
   return res.json();
