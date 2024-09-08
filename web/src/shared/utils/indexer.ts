@@ -142,6 +142,7 @@ export class Indexer {
       new Set([...Object.keys(mintedTokens), ...Object.keys(burnedTokens)]),
     );
     const ratios = tokenNames.reduce((acc, name) => {
+      //@ts-ignore
       if (burnedTokens[name]?.amount) {
         //@ts-ignore
         return acc + (mintedTokens[name]?.amount || 0n) / burnedTokens[name]?.amount;
