@@ -1,5 +1,5 @@
 import { WalletItem } from '@/_pages/wallet/types';
-import { tokenMapping } from '@/shared/const';
+import { managersMapping, tokenMapping } from '@/shared/const';
 
 import { Campaign, CampaignState, TokenEvent, TransactionItem } from '../types';
 
@@ -103,6 +103,7 @@ export const getTokensLeftForExchangingMint = (
 };
 
 export const getToken = (token: string) => tokenMapping[token] || token;
+export const getManager = (manager: string) => managersMapping[manager] || manager;
 
 export const getTokenSrc = (token: string) =>
   `https://n8n.majus.org/webhook/loyalz-cdn?kind=tokens&id=${token}`;

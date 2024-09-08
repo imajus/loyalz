@@ -28,3 +28,7 @@ export const tokenMapping: { [key: string]: string } = {
   '88882:0x7556403BaC4Bb71F09f3b3C2Fdb6f9C461CAe712': 'RCC',
   '2810:0x4a68cb5b99b6e1db5745eeabde38c5b12aa0ce55': 'RCRC',
 };
+
+export const managersMapping: { [key: string]: string } = {
+  '0xD392b72A6bf7E718f5Cf67A2b0F92b7ac48Fcfe0': 'Red Cow',
+};
