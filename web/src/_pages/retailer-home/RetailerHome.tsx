@@ -3,16 +3,16 @@
 import { useRouter } from 'next/navigation';
 import { ReactNode } from 'react';
 
-import { Button, Icon, RetailerUnAuthWrapper } from '@/shared/components';
+import { Button, Icon, RetailerWrapper } from '@/shared/components';
 import { useWeb3Auth } from '@/shared/hook';
 
 const Wrapper = ({ children }: { children: ReactNode }) => {
   return (
-    <RetailerUnAuthWrapper title="Menu">
+    <RetailerWrapper title="Menu">
       <div className="w-full h-full flex flex-col justify-start items-center gap-7 pt-10">
         {children}
       </div>
-    </RetailerUnAuthWrapper>
+    </RetailerWrapper>
   );
 };
 

@@ -12,12 +12,7 @@ type PropTypes = {
   isLoading?: boolean;
 };
 
-export const RetailerUnAuthWrapper = ({
-  title,
-  children,
-  isLoading,
-  isError = false,
-}: PropTypes) => {
+export const RetailerWrapper = ({ title, children, isLoading, isError = false }: PropTypes) => {
   const [hasError, setHasError] = useState(isError);
 
   useEffect(() => {

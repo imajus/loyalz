@@ -3,16 +3,16 @@ import { useRouter } from 'next/navigation';
 import QrScanner from 'qr-scanner';
 import { ReactNode, useState } from 'react';
 
-import { GoBackButton, RetailerUnAuthWrapper } from '@/shared/components';
+import { GoBackButton, RetailerWrapper } from '@/shared/components';
 import { QRScanner } from '@/widgets';
 
 const Wrapper = ({ children }: { children: ReactNode }) => {
   return (
-    <RetailerUnAuthWrapper title="Menu">
+    <RetailerWrapper title="Menu">
       <div className="w-full flex flex-col justify-between items-center gap-7 pt-10">
         {children}
       </div>
-    </RetailerUnAuthWrapper>
+    </RetailerWrapper>
   );
 };
 

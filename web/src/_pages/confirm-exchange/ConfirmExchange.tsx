@@ -3,16 +3,16 @@ import { ArrowRightIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { ReactNode } from 'react';
 
-import { Button, RetailerUnAuthWrapper } from '@/shared/components';
+import { Button, RetailerWrapper } from '@/shared/components';
 import { GreenEllipseWithPresent, RedEllipse } from '@/shared/icon';
 
 const Wrapper = ({ children }: { children: ReactNode }) => {
   return (
-    <RetailerUnAuthWrapper title="Exchange">
+    <RetailerWrapper title="Exchange">
       <div className="w-full h-full flex flex-col justify-between items-center gap-7 pt-10">
         {children}
       </div>
-    </RetailerUnAuthWrapper>
+    </RetailerWrapper>
   );
 };
 
