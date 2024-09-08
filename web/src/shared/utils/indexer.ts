@@ -1,8 +1,14 @@
+type Tokens = {
+  amount: bigint;
+  count: bigint;
+  name: string;
+};
+
 export class Indexer {
   url: string;
   headers: { 'x-hasura-admin-secret': string; 'Content-Type': string };
 
-  constructor(url = process.env.NEXT_PUBLIC_HASURA_URL || 'http://localhost:8080') {
+  constructor(url = process.env.NEXT_PUBLIC_HASURA_URL || 'https://loyalz-envio.majus.org') {
     this.url = `${url}/v1/graphql`;
     this.headers = {
       'x-hasura-admin-secret': 'testing',
@@ -11,7 +17,7 @@ export class Indexer {
   }
 
   groupByName(data: any) {
-    const tokens: any[] = [];
+    const tokens: Tokens[] = [];
     //@ts-ignore
     data.forEach(({ name, amount }) => {
       tokens[name] = {
@@ -135,10 +141,14 @@ export class Indexer {
     const tokenNames = Array.from(
       new Set([...Object.keys(mintedTokens), ...Object.keys(burnedTokens)]),
     );
-    return tokenNames.map((name) => ({
-      name,
+    const ratios = tokenNames.reduce((acc, name) => {
+      if (burnedTokens[name]?.amount) {
+        //@ts-ignore
+        return acc + (mintedTokens[name]?.amount || 0n) / burnedTokens[name]?.amount;
+      }
       //@ts-ignore
-      ratio: `${mintedTokens[name]?.amount} / ${burnedTokens[name]?.amount}`,
-    }));
+      return acc + (mintedTokens[name]?.amount || 0n);
+    }, 0n);
+    return ratios / BigInt(tokenNames.length);
   }
 }
