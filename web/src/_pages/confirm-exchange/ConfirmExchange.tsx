@@ -61,7 +61,8 @@ export const ConfirmExchange = () => {
   useEffect(() => {
     const init = async () => {
       const campaigns = await listCampaigns();
-      setCampaign(campaigns?.[1] || campaigns?.[0]);
+      const campaign = campaigns?.[1] || campaigns?.[0];
+      setCampaign(campaign);
 
       if (!campaign) return;
       const tokens = [{ token: campaign.mintToken, amount: campaign.mintAmount }];
