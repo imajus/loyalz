@@ -28,9 +28,14 @@ export const signActionInputs = async (name: string, inputs: object, signer: Sig
   return signer.signTypedData(domain, schema.types, inputs);
 };
 
-export const submitRollupAction = async (name: string, inputs: object, signer: JsonRpcSigner) => {
+export const submitRollupAction = async (
+  name: string,
+  path: string,
+  inputs: object,
+  signer: JsonRpcSigner,
+) => {
   const signature = await signActionInputs(name, inputs, signer);
-  const res = await fetch(`${BASE_URL}/action/${name}`, {
+  const res = await fetch(`${BASE_URL}/${path}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -58,15 +63,15 @@ export async function listCampaigns(): Promise<CampaignState[]> {
 }
 
 export async function createCampaign(inputs: CreateCampaignInputs, signer: JsonRpcSigner) {
-  return submitRollupAction('createCampaign', inputs, signer);
+  return submitRollupAction('createCampaign', 'action/createCampaign', inputs, signer);
 }
 
 export async function whitelistRetailer(inputs: AlterRetailerInputs, signer: JsonRpcSigner) {
-  return submitRollupAction('whitelistRetailer', inputs, signer);
+  return submitRollupAction('whitelistRetailer', 'action/whitelistRetailer', inputs, signer);
 }
 
 export async function delistRetailer(inputs: AlterRetailerInputs, signer: JsonRpcSigner) {
-  return submitRollupAction('delistRetailer', inputs, signer);
+  return submitRollupAction('delistRetailer', 'action/delistRetailer', inputs, signer);
 }
 
 /* Receipts */
@@ -77,7 +82,7 @@ export async function listReceipts(): Promise<ReceiptState[]> {
 }
 
 export async function addReceipt(inputs: AddReceiptInputs, signer: JsonRpcSigner) {
-  return submitRollupAction('addReceipt', inputs, signer);
+  return submitRollupAction('addReceipt', 'mints', inputs, signer);
 }
 
 /* Tokens */
@@ -112,5 +117,5 @@ export async function createToken(
 }
 
 export async function claimReward(inputs: ClaimRewardInputs, signer: JsonRpcSigner) {
-  return submitRollupAction('claimReward', inputs, signer);
+  return submitRollupAction('claimReward', 'burns', inputs, signer);
 }

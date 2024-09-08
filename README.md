@@ -43,7 +43,7 @@ Our smart contract was deployed to the following blockchains:
 - [Morph Holesky Testnet](https://explorer-holesky.morphl2.io/address/0x66D6B6483ec46abD950256880F39Ba56dc1b1a7f)
 - [Chiliz Spicy Testnet](https://testnet.chiliscan.com/address/0x8c4F510229863854ecD6fB0d7161d1aB5336cc27)
 - [Rootstock Testnet](https://explorer.testnet.rootstock.io/address/0xaE7902b8050ef5204C74b5cbC5a2b91Ac6140D2d)
-- [Hedera Testnet](https://hashscan.io/testnet/contract/0.0.4823852)
+- [Hedera Testnet](https://hashscan.io/testnet/contract/0xdfAab04Fbe10E5f9AfB653e797EA8AE31ECaB715)
 
 # Resources
 
