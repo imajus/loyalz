@@ -1,4 +1,5 @@
 import { WalletItem } from '@/_pages/wallet/types';
+import { tokenMapping } from '@/shared/const';
 
 import { Campaign, CampaignState, TokenEvent, TransactionItem } from '../types';
 
@@ -100,3 +101,5 @@ export const getTokensLeftForExchangingMint = (
 
   return { tokensLeft: Math.max(0, tokensLeft), otherTokensLeft: Math.max(0, otherTokensLeft) };
 };
+
+export const getToken = (token: string) => tokenMapping[token] || token;

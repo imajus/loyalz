@@ -1,10 +1,13 @@
 'use client';
 import { ArrowRightIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
+import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
 
 import { Button, RetailerWrapper } from '@/shared/components';
 import { GreenEllipseWithPresent, RedEllipse } from '@/shared/icon';
+import { CampaignState } from '@/shared/types';
+import { listCampaigns } from '@/shared/utils/rollup';
+import { getToken } from '@/shared/utils/token';
 
 import { ExchangeConfirmedMessage } from './ui/ExchangeConfirmedMessage';
 
@@ -37,26 +40,41 @@ const Wrapper = ({
   );
 };
 
-const tokens = [
-  { token: 'Pearls', amount: 1500 },
-  { token: 'Diamonds', amount: 100 },
-];
-const gift = 'Teddy Bear';
+const getTransactionText = (campaign: CampaignState | undefined) => {
+  if (!campaign) {
+    return '';
+  }
 
-const getTransactionText = (
-  gift: string,
-  tokens: {
-    token: string;
-    amount: number;
-  }[],
-) => {
-  const tokenExchanged = tokens.map((it) => `${it.amount} ${it.token}`).join(', ');
-  return `You will give a ${gift} for ${tokenExchanged}`;
+  if (!campaign.otherToken) {
+    return `You will give a ${campaign.reward} for ${campaign.mintAmount} ${getToken(campaign.mintToken)}`;
+  }
+
+  return `You will give a ${campaign.reward} for ${campaign.mintAmount} ${getToken(campaign.mintToken)} and ${campaign.otherAmount} ${getToken(campaign.otherToken)}`;
 };
 
 export const ConfirmExchange = () => {
   const [isDone, setIsDone] = useState(false);
   const router = useRouter();
+  const [campaign, setCampaign] = useState<CampaignState>();
+  const [tokens, setTokens] = useState<{ token: string; amount: number }[]>([]);
+
+  useEffect(() => {
+    const init = async () => {
+      const campaigns = await listCampaigns();
+      setCampaign(campaigns?.[1] || campaigns?.[0]);
+
+      if (!campaign) return;
+      const tokens = [{ token: campaign.mintToken, amount: campaign.mintAmount }];
+
+      if (campaign.otherToken && campaign.otherAmount) {
+        tokens.push({ token: campaign.otherToken, amount: campaign.otherAmount });
+      }
+
+      setTokens(tokens);
+    };
+
+    void init();
+  }, []);
 
   const handleExchangeClick = () => {
     setIsDone(true);
@@ -77,7 +95,7 @@ export const ConfirmExchange = () => {
         </div>
 
         <span className="font-['Radio_Canada] text-[35px] text-center">
-          {getTransactionText(gift, tokens)}
+          {getTransactionText(campaign)}
         </span>
       </div>
 
